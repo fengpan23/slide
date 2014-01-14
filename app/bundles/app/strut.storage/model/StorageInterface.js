@@ -63,8 +63,11 @@ function(StorageProviders) {
 			}
 		},
 
-		load: function(identifier) {
-			return this.currentProvider().getContents(identifier, {json: true});
+		load: function(identifier, cb) {
+			if (!cb) {
+				cb = {json: true};
+			};
+			return this.currentProvider().getContents(identifier, cb);
 			// release currently loaded attachments from the AttachmentCache
 			// start loading all attachments for the given identifier?
 		},

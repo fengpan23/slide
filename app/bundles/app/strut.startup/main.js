@@ -4,6 +4,7 @@ define(['strut/editor/EditorView',
         'lls/contrib/URLCache'],
 function(EditorView, EditorModel, lls, URLCache) {
 	var registry = null;
+	var editModel = null;
 
 
 	function restoreLastPresentation(model) {
@@ -89,20 +90,33 @@ function(EditorView, EditorModel, lls, URLCache) {
 	}
 
 	var editorStartup = {
-		run: function() {
-			var model;
-    		initializeStorage().then(function() {
-    			restoreLastPresentation(model);
-				$(window).unload(function() {
-					localStorage.setItem('Strut_sessionMeta', JSON.stringify(window.sessionMeta));
-				});
-    		}, function(err) {
-				// Just continue with LocalStorage?
-				// fail?
-				console.error(err);
-			}).done();
-
-			model = loadEditor();
+		run: function(deck) {
+			while(!editModel){
+				editModel = loadEditor();
+			}
+			if(deck){
+				initializeStorage().then(function() {
+					editModel.importPresentation(deck);
+					$(window).unload(function() {
+						localStorage.setItem('Strut_sessionMeta', JSON.stringify(window.sessionMeta));
+					});
+				}, function(err) {
+					// Just continue with LocalStorage?
+					// fail?
+					console.error(err);
+				}).done();
+			}else{
+				initializeStorage().then(function() {
+					restoreLastPresentation(editModel);
+					$(window).unload(function() {
+						localStorage.setItem('Strut_sessionMeta', JSON.stringify(window.sessionMeta));
+					});
+				}, function(err) {
+					// Just continue with LocalStorage?
+					// fail?
+					console.error(err);
+				}).done();
+			}
 		}
 	};
 

@@ -16,11 +16,16 @@ define(function() {
 			// var identifier = exportable.identifier();
 			if (!this.storageInterface.ready()) return;
 			
+			var temp = this.storageInterface.currentProviderId();
+			this.storageInterface.selectProvider('largelocalstorage');
 			this.exportables.forEach(function(exportable) {
 				var data = exportable.export();
 				var identifier = exportable.identifier();
 				this.storageInterface.store(identifier, data);
 			}, this);
+			if(temp){
+				this.storageInterface.selectProvider(temp);
+			};
 		},
 
 		save: function() {
