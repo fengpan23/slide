@@ -118,6 +118,7 @@ define(["common/Calcium",
 				if (activeSlide !== undefined) {
 					activeSlide.unselectComponents();
 				}
+				this.set("_id", rawObj._id);
 				this.set("activeSlide", undefined);
 				this.set("background", rawObj.background);
 				this.set("fileName", rawObj.fileName);
