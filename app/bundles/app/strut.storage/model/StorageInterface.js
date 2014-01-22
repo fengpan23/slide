@@ -48,7 +48,14 @@ function(StorageProviders) {
 		currentProviderId: function() {
 			return this._providers._currentProviderId;
 		},
-
+	/*
+		
+			currentDeckId: function(deck_id){
+				this.currentProvider().currentDeckId(deck_id);			
+			},
+	*/
+		
+		
 		on: function() {
 			return this._providers.on.apply(this._providers, arguments);
 		},

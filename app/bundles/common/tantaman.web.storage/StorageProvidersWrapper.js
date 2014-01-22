@@ -44,21 +44,30 @@ function(Backbone) {
 
 		selectProvider: function(providerId) {
 			if (providerId != this._currentProviderId) {
-				this.currentProvider().bg();
+				//this.currentProvider().bg();
 				this._currentProviderId = providerId;
-				this.trigger('change:currentProvider');
+				// this.trigger('change:currentProvider');
 			}
 		},
 
 		providerNames: function() {
 			var result = [];
 
-			for (var id in this.providers) {
+			for(var id in this.providers) {
 				result.push({
 					name: this.providers[id].name,
 					id: id
 				});
 			}
+			
+			/*only current  Provider at open and save 
+				if(this._currentProviderId in this.providers) {
+					result.push({
+						name: this.providers[this._currentProviderId].name,
+						id: this._currentProviderId
+					});
+				}
+			*/
 
 			return result;
 		},

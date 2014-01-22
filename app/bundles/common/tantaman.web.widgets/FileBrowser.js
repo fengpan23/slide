@@ -12,7 +12,7 @@ function(Backbone, empty) {
 
 		initialize: function() {
 			this.render = this.render.bind(this);
-			this.storageInterface.on("change:currentProvider", this.render);
+			// this.storageInterface.on("change:currentProvider", this.render);
 
 			this.template = JST['tantaman.web.widgets/FileBrowser'];
 

@@ -34,9 +34,9 @@ define(["./ComponentView", './Mixers'],
 
 				var url = this.model.getURL();
 				if (url) {
-					$img = $("<img src=" + url + "></img>");	
+					$img = $('<img src="' + url + '"></img>');
 				} else {
-					$img = $("<img></img>");	
+					$img = $("<img></img>");
 				}
 				
 				$img.load(function() {
@@ -45,6 +45,21 @@ define(["./ComponentView", './Mixers'],
 				$img.error(function() {
 					return _this.remove();
 				});
+				
+//				image.src = val;
+//				if(image.complete){
+//					image.src = val;
+//					console.log('complete width:'+image.width+', complete height: '+image.height);
+//					return image;
+//				}else{
+//					image.onload=function(){
+//						console.log('onload width:'+image.width+', onload height: '+image.height);
+//					};
+//					image.src = val;
+//					console.log(image);
+//					return image;
+//				}
+				
 				this.$img = $img;
 				return this.$el;
 			},
@@ -62,8 +77,16 @@ define(["./ComponentView", './Mixers'],
 			 */
 			_finishRender: function($img) {
 				var height, naturalHeight, naturalWidth, scale, width;
-				naturalWidth = $img[0].naturalWidth;
-				naturalHeight = $img[0].naturalHeight;
+				if(this.model.get("height")){
+					naturalHeight = this.model.get("height");
+					if(this.model.get("width")){
+						naturalWidth = this.model.get("width");
+					}
+				}else{
+					naturalWidth = $img[0].naturalWidth;
+					naturalHeight = $img[0].naturalHeight;
+				}
+				
 				if (this.model.get("imageType") === "SVG") {
 					$img.css({
 						width: "100%",

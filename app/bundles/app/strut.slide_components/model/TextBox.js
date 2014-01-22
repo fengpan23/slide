@@ -8,9 +8,12 @@ define(['strut/deck/Component'],
 			else {
 				var text = '<font';
 				for (var style in attrs) {
-					if (style == 'size') continue;
-					else text += " ";
-
+					if (style == 'size'){
+						//text += ' style="font-size:'+ attrs[style] + 'px;"';
+						continue;
+					}else{
+						text += " ";
+					}
 					text += style + '="' + attrs[style] + '"';
 				}
 				return text + '>Text</font>'

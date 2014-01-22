@@ -1,12 +1,11 @@
-define(['./RemoteStorageProvider'],
-function(RemoteStorageProvider) {
+define(['./RemoteStorageProvider'], function(RemoteStorageProvider) {
 	var service = new RemoteStorageProvider();
 
 	return {
-		initialize: function(registry) {
+		initialize : function(registry) {
 			registry.register({
-				interfaces: 'tantaman.web.StorageProvider'
+				interfaces : 'tantaman.web.StorageProvider'
 			}, service);
 		}
 	};
-});
+}); 

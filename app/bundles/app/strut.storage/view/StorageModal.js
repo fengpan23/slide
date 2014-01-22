@@ -17,7 +17,7 @@ function(Backbone, FileBrowser) {
 			this.template = JST['strut.storage/StorageModal'];
 
 			this.storageInterface.on('change:providers', this.render, this);
-			this.storageInterface.on('change:currentProvider', this._providerChanged, this);
+			// this.storageInterface.on('change:currentProvider', this._providerSelected, this);
 			this.fileBrowser = new FileBrowser(this.storageInterface, this.editorModel);
 		},
 
@@ -42,7 +42,7 @@ function(Backbone, FileBrowser) {
 				tabs: providerNames
 			}));
 
-			this._providerChanged();
+			
 			this.$el.find('.tabContent').append(this.fileBrowser.$el);
 		},
 
@@ -51,8 +51,9 @@ function(Backbone, FileBrowser) {
 			this.title(title);
 			this.fileBrowser.render();
 			this.$el.modal('show');
+			this._providerSelected();
 		},
-
+/*
 		_providerChanged: function() {
 			if (this.$lastProviderTab) {
 				this.$lastProviderTab.removeClass('active');
@@ -64,6 +65,7 @@ function(Backbone, FileBrowser) {
 
 			this.$lastProviderTab.addClass('active');
 		},
+*/
 
 		__title: function() { return 'none'; },
 
@@ -80,6 +82,7 @@ function(Backbone, FileBrowser) {
 				function(result, err) {
 					if (!err) {
 						self.$el.modal('hide');
+						//self.storageInterface.selectProvider('largelocalstorage');
 					} else {
 						// display the err
 					}
@@ -90,7 +93,18 @@ function(Backbone, FileBrowser) {
 		_providerSelected: function(e) {
 			// change the storage interface's selected
 			// storage provider
-			this.storageInterface.selectProvider(e.target.dataset.provider);
+			if(e){
+				this.storageInterface.selectProvider(e.target.dataset.provider);
+			}
+			if (this.$lastProviderTab) {
+				this.$lastProviderTab.removeClass('active');
+			}
+
+			this.$lastProviderTab = 
+				this.$el.find('[data-provider="' + 
+					this.storageInterface.currentProviderId() + '"]').parent();
+
+			this.$lastProviderTab.addClass('active');
 		},
 
 		constructor: function AbstractStorageModal() {

@@ -24,7 +24,7 @@
 
 		<link rel="shortcut icon" href="img/strut-icon.png">
 		<link rel="apple-touch-icon-precomposed" href="img/strut-touch.png">
-		<script type="text/javascript" src="preview_export/download_assist/swfobject.js"></script>
+		<!-- <script type="text/javascript" src="preview_export/download_assist/swfobject.js"></script> -->
 	</head>
 	<body class="bg-default">
 		<!--[IF IE]>
@@ -112,14 +112,14 @@
     		s.src = src;
     		head.appendChild(s);
 		}
-
-		if (window.location.href.indexOf("preview=true") == -1) {
-			window.dlSupported = 'download' in document.createElement('a');
-			window.hasFlash = swfobject.hasFlashPlayerVersion(9);
-			if (!dlSupported && window.hasFlash) {
-				appendScript('preview_export/download_assist/downloadify.min.js');
-			}
-		}
+// 
+		// if (window.location.href.indexOf("preview=true") == -1) {
+			// // window.dlSupported = 'download' in document.createElement('a');
+			// // window.hasFlash = swfobject.hasFlashPlayerVersion(9);
+			// if (!dlSupported && window.hasFlash) {
+				// // appendScript('preview_export/download_assist/downloadify.min.js');
+			// }
+		// }
 		</script>
 		<!-- build:js scripts/amd-app.js -->
     	<script type="text/javascript" data-main="scripts/main" src="scripts/libs/require.js"></script>

@@ -5,7 +5,6 @@ define(["Q",
     "use strict";
 
     function RemoteStorageProvider() {
-    	this.imp = localStorage;
         this.name = "Remote Storage";
         this.id = "remotestorage";
         this.deck = new DeckModel();
@@ -27,6 +26,10 @@ define(["Q",
         ready: function() {
 			return true;
 		},
+		
+		currentDeckId: function(id){
+			 this.deck.set('_id', id);
+		},
 
 		bg: function() {
 
@@ -34,15 +37,15 @@ define(["Q",
 		
 		ls: function(path, regex) {
 			// Paths are currently ignored
-			var numFiles = this.impl.length;
+			//var numFiles = this.impl.length;
 			var fnames = [];
-			for (var i = 0; i < numFiles; ++i) {
-				var fname = this.impl.key(i);
-				if (fname.indexOf(prefix) == 0 &&
-					(regex == null || regex.exec(fname) != null)) {
-					fnames.push(fname.substring(prefix.length));
-				}
-			}
+			// for (var i = 0; i < numFiles; ++i) {
+				// var fname = this.impl.key(i);
+				// if (fname.indexOf(prefix) == 0 &&
+					// (regex == null || regex.exec(fname) != null)) {
+					// fnames.push(fname.substring(prefix.length));
+				// }
+			// }
 
 			return Q(fnames);
 		},
@@ -74,25 +77,27 @@ define(["Q",
             console.log(fname);
             console.log(this.deck);
             if (data.id) {
-                this.deck.set('_id', data.id);
+//                this.deck.set('_id', data.id);
+                this.deck.set('_id', null);
             } else {
-                this.deck.set('_id', data._id);
+                this.deck.set('_id', this.deck.get('_id'));
             }
             this.deck.set('fileName', fname);
             this.deck.set('slides', data.slides);
             this.deck.set('activeSlide', data.activeSlide);
             this.deck.set('background', data.background);
             this.deck.set('picture', data.picture);
-            this.deck.save({
-                success: function() {
-                    cb();
+            var self = this;
+            this.deck.save(null, {
+                success: function(deck) {
+                	self.deck.set('_id',deck.id);
                 },
                 error: function(err) {
                     cb(err);
                 }
             });
 
-            return this;
+            return Q(true);
         }
 
     };

@@ -10,7 +10,10 @@ function() {
 	return {
 		save: function(storageInterface, model, filename, cb) {
 			if (storageInterface.ready())
-				storageInterface.savePresentation(filename, model.exportPresentation(filename), cb);
+				storageInterface.savePresentation(filename, model.exportPresentation(filename));
+				if(cb){
+					cb(null);
+				}
 		},
 
 		open: function(storageInterface, model, filename, cb) {
@@ -40,6 +43,7 @@ function() {
 			// prezzer here.
 			saveCurrentPresentation(options.storageInterface, options.model)
 			.then(function() {
+				//options.storageInterface.currentDeckId(null);
 				options.model.newPresentation();
 			}, function(error) {
 				// Error saving old presentation...

@@ -1,6 +1,6 @@
 {{#attributes}}
 {{> ComponentContainer}}
-<img src="{{../uri}}"></img>
+<img src="{{../uri}}" width="{{width}}" height="{{height}}"></img>
 </div>
 </div>
 {{/attributes}}

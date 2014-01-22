@@ -1,7 +1,8 @@
 var express = require('express'),
     path = require('path'),
     http = require('http'),
-    deck = require('./server/api/decks');
+	deck = require('./server/api/test');
+//	deck = require('./server/api/decks');
 
 var app = express();
 

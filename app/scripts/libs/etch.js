@@ -469,7 +469,13 @@ define(['libs/backbone'], function(Backbone) {
       });
 
       this.model.trigger('change:size', this.model, this.model.get('size'), {});
-      editorModel.set({position: {x: e.pageX - 15, y: overrideY || (e.pageY - 80)}});
+      //make sure Tool in a row  
+      if($editor[0].offsetWidth === 3){
+      	e.pageX = innerWidth -430;
+      }else if((innerWidth -  e.pageX) < $editor[0].offsetWidth){
+      	e.pageX = innerWidth -$editor[0].offsetWidth;
+      }
+      editorModel.set({position: {x: e.pageX - 5, y: overrideY-15 || (e.pageY - 80)}});
     }
   });
 

@@ -15,9 +15,10 @@ define(function() {
 		to1_0: function(rawDeck) {
 			if (rawDeck.deckVersion == '1.0')
 				return;
-
+			
 			rawDeck.deckVersion = '1.0';
-
+			return;
+			
 			fixBackgroundAndSurface(rawDeck);
 
 			rawDeck.slides.forEach(function(slide) {

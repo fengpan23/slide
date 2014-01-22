@@ -1,27 +1,25 @@
 var mongo = require('mongodb');
-
 var Server = mongo.Server,
     Db = mongo.Db,
     BSON = mongo.BSONPure;
-
 	//192.168.2.86
 var server = new Server('127.0.0.1', 27017, {
     auto_reconnect: true
 });
 
-var db = new Db('deckdb', server, {
+ var db = new Db('deckdb', server, {
     safe: true
 });
 
 db.open(function(err, db) {
     if (!err) {
         console.log("Connected to 'deckdb' database");
-        db.collection('decks', {
+         db.collection('decks', {
             safe: true
         }, function(err, collection) {
             if (err) {
                 console.log("The 'decks' collection doesn't exist. Creating it with sample data...");
-            // } else {
+//            } else 
                 populateDB();
             }
         });

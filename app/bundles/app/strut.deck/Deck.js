@@ -121,7 +121,7 @@ define(["common/Calcium",
 				this.set("_id", rawObj._id);
 				this.set("activeSlide", undefined);
 				this.set("background", rawObj.background);
-				this.set("fileName", rawObj.fileName);
+				this.set("fileName", rawObj.filename);
 				this.set('surface', rawObj.surface);
 				this.set('customStylesheet', rawObj.customStylesheet);
 				this.set('deckVersion', rawObj.deckVersion);
@@ -131,7 +131,8 @@ define(["common/Calcium",
 				this.undoHistory.clear();
 
 				// TODO: go through and dispose of all old slides...?
-
+				console.log(rawObj.slides);
+				console.log(slides);
 				slides.reset(rawObj.slides);
 
 				bgs.deck = this;
