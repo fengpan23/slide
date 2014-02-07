@@ -47,7 +47,7 @@
 }
 
 .slideDrawer {
-	white-space: normal;
+	/*white-space: nowrap;*/
 }
 
 .slideSnapshot > .overlay {

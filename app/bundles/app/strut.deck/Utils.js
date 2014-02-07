@@ -29,7 +29,7 @@ define(function() {
 		},
 
 		isImg: function(bg) {
-			return bg && bg.indexOf('img:') == 0;
+			return bg && bg.indexOf('data:image') == 0;
 		},
 
 		getImgUrl: function(bg) {
@@ -101,6 +101,7 @@ define(function() {
 		},
 
 		removeCurrentBackground: function($el) {
+			$el.css('background-image', '');
 			var bgs = this.getCurrentBackgrounds($el);
 			if (bgs) {
 				bgs.forEach(function(bg) {
@@ -114,10 +115,14 @@ define(function() {
 		applyBackground: function($el, slide, deck, opts) {
 			this.removeCurrentBackground($el);
 			var bg = this.slideBackground(slide, deck, opts);
-			if (bg.indexOf('img:') == 0) {
-				$el.css('background-image', 'url(' + bg.substring(4) + ')');
-			} else {
+			if (bg.indexOf('data:image') == 0) {
+				//bg = bg.replace(/[\r\n]/g, "");
+				$el.css('background-image', 'url(' + bg + ')');
+			} else if(bg.indexOf('#') == 0){
+				$el.css('background-color', bg);
+			}else {
 				$el.css('background-image', '');
+				$el.css('background-color', '');
 				$el.addClass(bg);
 			}
 		}

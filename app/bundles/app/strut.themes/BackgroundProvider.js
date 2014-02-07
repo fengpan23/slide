@@ -122,9 +122,9 @@ function(View, DeckUtils, ItemImportModal, ColorChooserModal, lang) {
 			var obj = this._pickObj(allSlides);
 			// TODO: we really have to fix this bastard.
 			if (this._attr == 'Background') {
-				obj.set('background', 'img:' + src);
+				obj.set('background', src);
 			} else {
-				obj.set('surface', 'img:' + src);
+				obj.set('surface', src);
 			}
 		},
 

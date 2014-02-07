@@ -71,8 +71,12 @@ define(["./ComponentView", "libs/etch",
 			scale: function(e, deltas) {
 				var currSize, sign;
 				currSize = this.model.get("size");
+				if(!currSize){
+					currSize = this.$el.css("font-size").replace("px",'');
+				}
 				sign = deltas.dx - this._lastDx > 0 ? 1 : -1;
-				this.model.set("size", currSize + Math.round(sign * Math.sqrt(Math.abs(deltas.dx - this._lastDx))));
+				this._increment = Math.round(sign * Math.sqrt(Math.abs(deltas.dx - this._lastDx)));
+				this.model.set("size", this._increment + parseInt(currSize));
 				return this._lastDx = deltas.dx;
 			},
 
@@ -82,6 +86,7 @@ define(["./ComponentView", "libs/etch",
 			scaleStop: function() {
 				var cmd = ComponentCommands.TextScale(this._initialSize, this.model);
 				undoHistory.push(cmd);
+				this.editCompleted();
 			},
 
 			/**
@@ -234,14 +239,35 @@ define(["./ComponentView", "libs/etch",
 					if (value) {
 						if (key === "decoration" || key === "align") {
 							key = "text" + key.substring(0, 1).toUpperCase() + key.substr(1);
-						} else if (key !== "color") {
+						} else if (key === "size") {
+							//var selectedtext = this._getSelectedText();
 							key = "font" + key.substr(0, 1).toUpperCase() + key.substr(1);
+							var _this = this;
+							$("font,span", $(".content", this.$el)).each(function(i,n){
+								var currentsize =  $(n).css("font-size");
+								var temp= currentsize.substring(0, currentsize.length-2);
+								$(n).css("font-size", parseInt(temp) + _this._increment);
+							});
 						}
-						this.$el.css(key, style);
+						//this.$el.css(key, style);
 					}
 				}
 			},
-
+			
+			/**
+			 * 
+			 */
+			_getSelectedText: function(){
+				 var txt = "";
+			    if (window.getSelection) {
+			        txt = window.getSelection();
+			    } else if (window.document.getSelection) {
+			        txt = window.document.getSelection();
+			    } else if (window.document.selection) {
+			        txt = window.document.selection.createRange().text;
+			    }
+			    return txt;
+			},
 			/**
 			 * React on component's text change. Update html contents of the text box.
 			 *
@@ -251,6 +277,7 @@ define(["./ComponentView", "libs/etch",
 			 */
 			_textChanged: function(model, text) {
 				this.$textEl.html(text);
+				
 			},
 
 			_handlePaste: function(elem, e) {
@@ -270,7 +297,24 @@ define(["./ComponentView", "libs/etch",
 
 				e.preventDefault();
 			},
-
+			
+			/**
+			 * because the component are no the same with ppt textBox.
+			 * if the component model is align center correct X coord 
+			 * 
+			 */
+			_correctX: function() {
+				if(this.model.get("alignment") && this.model.get("alignment") === "center"){
+			        var currentObj = $('<span>').hide().appendTo(document.body);
+			        $(currentObj).html(this.model.get("text"));
+			        var textwidth = currentObj.width();
+			        var correctX = this.model.get("x") + (this.model.get("width") - textwidth)/2
+					this.model.set("x", correctX);
+			        currentObj.remove();
+			        this.model.set("alignment",'');
+				}
+		    },
+		    
 			/**
 			 * Render element based on component model.
 			 *
@@ -284,9 +328,10 @@ define(["./ComponentView", "libs/etch",
 					self._handlePaste(this, e);
 				});
 				this.$textEl.html(this.model.get("text"));
+				this._correctX();
 				this.$el.css({
 					// fontFamily: this.model.get("family"),
-					fontSize: this.model.get("size"),
+//					fontSize: this.model.get("size"),
 					// fontWeight: this.model.get("weight"),
 					// fontStyle: this.model.get("style"),
 					// color: "#" + this.model.get("color"),

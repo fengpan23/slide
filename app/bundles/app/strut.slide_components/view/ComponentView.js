@@ -618,6 +618,7 @@ define(["libs/backbone",
 			scaleStop: function() {
 				var cmd = new ComponentCommands.Scale(this._initialScale, this.model);
 				undoHistory.push(cmd);
+				
 			},
 
 			/**

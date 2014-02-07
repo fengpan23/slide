@@ -222,6 +222,7 @@ define(['libs/backbone'], function(Backbone) {
     },
 
     setFontSize: function(e) {
+    	e.preventDefault();
       var textBox = this.model.get('editableModel');
       var value = extractValue(e);
 

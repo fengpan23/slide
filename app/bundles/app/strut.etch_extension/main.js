@@ -5,7 +5,7 @@ function(etch) {
         default: [
             '<group>', 'bold', 'italic', '</group>',
             '<group>', 'unordered-list', 'ordered-list', '</group>',
-            '<group>', 'justify-left', 'justify-center', '</group>',
+            '<group>', 'justify-left', 'justify-center', 'justify-right','</group>',
             '<group>', 'link', '</group>',
             'font-family', 'font-size',
             '<group>', 'color', '</group>',

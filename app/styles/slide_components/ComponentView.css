@@ -33,7 +33,7 @@
 	-webkit-transform-origin: 50% 50%;
 	-moz-transform-origin: 50% 50%;
 	transform-origin: 50% 50%;
-	white-space: nowrap;
+	/*white-space: nowrap;*/
 }
 
 .component .content-scale:not(.svg) {
@@ -59,7 +59,6 @@
 .component .topLabel {
 	position: absolute;
 	left: 30%;
-	top: -25px;
 }
 
 .component .topLabel .skewx {
@@ -100,8 +99,8 @@
 
 .component .rightLabel {
 	position: absolute;
-	right: -45px;
-	top: 50%;
+	left: 50%;
+	top: -28px;
 	cursor: n-resize;
 }
 
@@ -183,8 +182,8 @@
 .component .close-btn-red-20 {
 	display: none;
 	position: absolute;
-	top: 0px;
-	left: -7px;
+	top: -10px;
+	left: -10px;
 }
 
 .component:hover .close-btn-red-20 {

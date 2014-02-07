@@ -36,7 +36,9 @@ function(Backbone, Imgup) {
 			this.cb = cb;
 			return this.$el.modal('show');
 		},
-		okClicked: function() {
+		okClicked: function(e) {
+			e.stopPropagation();
+			e.preventDefault();
 			if (!this.$el.find(".ok").hasClass("disabled")) {
 				if (this.file != null) {
 					this.cb({
@@ -82,16 +84,24 @@ function(Backbone, Imgup) {
 		_fileChosen: function(f) {
 			if (!f.type.match('image.*'))
 				return;
-
+			
 			this.item.src = '';
 			var _this = this;
+			
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				_this.src = e.target.result; // reader's return value after read.
+            };
+            // run after file selected, because e.target block thread
+            reader.readAsDataURL(f);
+            
 
 			if (this.options.hasStorage()) {
 				var url = URL.createObjectURL(f);
 				this.$input.val(url);
 				this.item.src = url;
 				URL.revokeObjectURL(url);
-				this.file = f;
+//				this.file = f;
 			} else {
 				this._switchToProgress();
 

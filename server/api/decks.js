@@ -19,7 +19,7 @@ db.open(function(err, db) {
         }, function(err, collection) {
             if (err) {
                 console.log("The 'decks' collection doesn't exist. Creating it with sample data...");
-//            } else 
+         //  } else{
                 populateDB();
             }
         });
@@ -30,6 +30,7 @@ exports.findById = function(req, res) {
     var id = req.params.id;
     console.log('Retrieving deck:' + id);
     db.collection('decks', function(err, collection) {
+    	console.log(id);
         collection.findOne({
             '_id': new BSON.ObjectID(id)
         }, function(err, item) {

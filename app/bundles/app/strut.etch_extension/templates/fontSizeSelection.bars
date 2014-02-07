@@ -1,6 +1,7 @@
 <div class="btn-group">
-	<a class="btn btn-small btn-inverse dropdown-toggle" data-toggle="dropdown" title="Choose the font size"><span class="text fontSizeReadout">72</span>
-		<span class="caret"></span></a>
+	<button class="btn btn-small btn-inverse dropdown-toggle" data-toggle="dropdown" title="Choose the font size"><span class="text fontSizeReadout">72</span>
+		<span class="caret"></span>
+	</button>
 	<ul class="dropdown-menu menuBarOption" data-option="fontSize">
 		<li>
                   <a href="#" data-value="144">144</a>

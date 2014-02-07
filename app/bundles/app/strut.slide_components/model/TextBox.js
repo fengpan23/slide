@@ -9,7 +9,7 @@ define(['strut/deck/Component'],
 				var text = '<font';
 				for (var style in attrs) {
 					if (style == 'size'){
-						//text += ' style="font-size:'+ attrs[style] + 'px;"';
+						text += ' style="font-size:'+ attrs[style] + 'px;"';
 						continue;
 					}else{
 						text += " ";
