@@ -42,6 +42,9 @@ define(["libs/backbone",
 					"deltadragStart span[data-delta='scale']": "scaleStart",
 					"deltadrag span[data-delta='scale']": "scale",
 					"deltadragStop span[data-delta='scale']": "scaleStop",
+					"deltadragStart span[data-delta='width']": "widthStart",
+					"deltadrag span[data-delta='width']": "width",
+					"deltadragStop span[data-delta='width']": "widthStop",
 					'destroyed': 'remove',
 					'click .align': 'center'
 				}
@@ -68,6 +71,7 @@ define(["libs/backbone",
 				this.model.on("change:rotate", this._setUpdatedTransform, this);
 				this.model.on("change:scale", this._setUpdatedTransform, this);
 				this.model.on('change:customClasses', this._updateCustomClasses, this);
+				this.model.on('change:width', this._setcontentWidth, this);
 
 				this.model.on("dragStart", this.dragStart, this);
 				this.model.on("drag", this.drag, this);
@@ -96,6 +100,12 @@ define(["libs/backbone",
 			 */
 			_colorChanged: function(model, color) {
 				this.$el.css("color", "#" + color);
+			},
+			/**
+			 * React on content width.
+			 */
+			_setcontentWidth: function(model, width){
+				this.$content.css("width", width);
 			},
 
 
@@ -396,6 +406,30 @@ define(["libs/backbone",
 				var cmd = new ComponentCommands.Move(origPos, this.model);
 				undoHistory.push(cmd);
 			},
+			
+			/**
+			 * Event:width transformation started.
+			 */
+			widthStart: function(){
+				return this._initialWidth = this.model.get("width") || this.$content.css("width") || 144;
+			}, 
+			/**
+			 * Event: width transformation is in progress.
+			 *
+			 * @param {Event} e
+			 * @param {{dx: number, dy: number}} deltas
+			 */
+			width: function(e, deltas) {
+				this.model.setFloat("width", this._initialWidth + deltas.dx);
+			},
+
+			/**
+			 * Event: width transformation stopped.
+			 */
+			widthStop: function() {
+				var cmd = new ComponentCommands.whidth(this._initialWidth, this.model);
+				undoHistory.push(cmd);
+			},
 
 			/**
 			 * Event: SkewX transformation started.
@@ -599,6 +633,7 @@ define(["libs/backbone",
 				});
 				this.$content = this.$el.find(".content");
 				this.$content.addClass(this.model.customClasses());
+				this.$content.css("width", this.model.get("width"));
 				this.$contentScale = this.$el.find(".content-scale");
 				this._selectionChanged(this.model, this.model.get("selected"));
 				this.$xInput = this.$el.find("[data-option='x']");

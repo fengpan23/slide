@@ -47,7 +47,8 @@
 }
 
 .slideDrawer {
-	/*white-space: nowrap;*/
+	word-wrap: break-word;
+	/*white-space: pre-wrap;*/
 }
 
 .slideSnapshot > .overlay {

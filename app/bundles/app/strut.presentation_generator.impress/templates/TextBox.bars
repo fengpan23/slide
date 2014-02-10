@@ -1,6 +1,6 @@
 {{#attributes}}
 {{> ComponentContainer}}
-<div class="antialias">
+<div class="antialias" style="width:{{{width}}}px;">
 {{{text}}}
 </div>
 </div>

@@ -124,6 +124,8 @@ define(["./ComponentView", './Mixers'],
 					return false;
 				});
 				this.$content.append($img);
+				//at image mode hide the width label
+//				$('.rightLabel', this.$content.parent().parent()).hide();
 				if (this.model.get("imageType") === "SVG") {
 					$img.parent().addClass("svg");
 					return $img.parent().parent().addClass("svg");

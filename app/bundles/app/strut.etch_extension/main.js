@@ -3,7 +3,7 @@ function(etch) {
     'use strict';
     _.extend(etch.config.buttonClasses, {
         default: [
-            '<group>', 'bold', 'italic', '</group>',
+            '<group>', 'bold', 'italic', 'underline', '</group>',
             '<group>', 'unordered-list', 'ordered-list', '</group>',
             '<group>', 'justify-left', 'justify-center', 'justify-right','</group>',
             '<group>', 'link', '</group>',

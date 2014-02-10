@@ -135,6 +135,9 @@ define(function() {
 		Scale: function(initial, component) {
 			return new BaseCommand(initial, component, 'scale', 'Scale');
 		},
+		whidth: function(initial, component) {
+			return new BaseCommand(initial, component, 'whidth', 'Whidth');
+		},
 		TextScale: function(initial, component) {
 			return new BaseCommand(initial, component, 'size', 'Scale');
 		},

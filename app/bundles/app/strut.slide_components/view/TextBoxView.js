@@ -328,7 +328,8 @@ define(["./ComponentView", "libs/etch",
 					self._handlePaste(this, e);
 				});
 				this.$textEl.html(this.model.get("text"));
-				this._correctX();
+				//this._correctX();
+				$('.rightLabel', this.$content.parent().parent()).show();
 				this.$el.css({
 					// fontFamily: this.model.get("family"),
 //					fontSize: this.model.get("size"),

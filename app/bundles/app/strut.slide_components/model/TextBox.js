@@ -9,14 +9,14 @@ define(['strut/deck/Component'],
 				var text = '<font';
 				for (var style in attrs) {
 					if (style == 'size'){
-						text += ' style="font-size:'+ attrs[style] + 'px;"';
+						text += ' style="font-size:'+ 72 + 'px;"';
 						continue;
 					}else{
 						text += " ";
 					}
 					text += style + '="' + attrs[style] + '"';
 				}
-				return text + '>Text</font>'
+				return text + '>双击添加文本</font>'
 			}
 		}
 
@@ -34,8 +34,10 @@ define(['strut/deck/Component'],
 						this.set('size', this._opts.fontStyles.size);
 					delete this._opts;
 					this.set('text', text);
-					if (!this.get('size'))
+					if (!this.get('size')){
 						this.set('size', 72);
+					}
+					this.set('width', 440);
 				}
 			},
 

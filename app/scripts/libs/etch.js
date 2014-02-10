@@ -232,6 +232,19 @@ define(['libs/backbone'], function(Backbone) {
       // whenever that changes.
       // so that way we have the correct font readouts when someone
       // uses the scale control
+      /**
+       * fontSize only support 1-7.
+       */
+      var currentText = document.all ? document.selection.createRange().text : window.getSelection();
+     // currentText  = currentText.getRangeAt(0);
+      if(currentText.toString() === currentText.focusNode.nodeValue){
+    	  $(currentText.focusNode.parentNode).css("font-size",value);
+      }else{
+    	  document.execCommand('fontSize', false, value);
+    	  $(currentText.focusNode.parentNode).css("font-size",value);
+    	  $(currentText.focusNode.parentNode).removeAttr("size");
+      }
+      
       this.$el.find(".fontSizeBtn .text").text(value);
       Backbone.trigger('etch:state', {
         size: value
@@ -472,11 +485,11 @@ define(['libs/backbone'], function(Backbone) {
       this.model.trigger('change:size', this.model, this.model.get('size'), {});
       //make sure Tool in a row  
       if($editor[0].offsetWidth === 3){
-      	e.pageX = innerWidth -430;
+      	e.pageX = innerWidth -520;
       }else if((innerWidth -  e.pageX) < $editor[0].offsetWidth){
       	e.pageX = innerWidth -$editor[0].offsetWidth;
       }
-      editorModel.set({position: {x: e.pageX - 5, y: overrideY-15 || (e.pageY - 80)}});
+      editorModel.set({position: {x: e.pageX - 15, y: (e.pageY - 80) > 0 ? (e.pageY - 80) : (overrideY-15)}});
     }
   });
 

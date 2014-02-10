@@ -33,7 +33,8 @@
 	-webkit-transform-origin: 50% 50%;
 	-moz-transform-origin: 50% 50%;
 	transform-origin: 50% 50%;
-	/*white-space: nowrap;*/
+	word-wrap:break-word;
+	/*white-space: pre-wrap;*/
 }
 
 .component .content-scale:not(.svg) {
@@ -56,12 +57,13 @@
 	visibility: visible;
 }
 
-.component .topLabel {
+.component .downLabel {
 	position: absolute;
-	left: 30%;
+	left: 10%;
+	top: 100%;
 }
 
-.component .topLabel .skewx {
+.component .downLabel .skewx {
 	cursor: w-resize;
 }
 
@@ -72,7 +74,7 @@
 .component .leftLabel {
 	position: absolute;
 	left: -45px;
-	top: 40%;
+	top: 60%;
 	transform: rotate(-90deg);
 	-moz-transform: rotate(-90deg);
 	-webkit-transform: rotate(-90deg);
@@ -82,26 +84,29 @@
 	cursor: s-resize;
 }
 
-.component .leftLabel .rotates {
-	cursor: s-resize;
-}
-
 .component .scale {
 	position: absolute;
 	right: -35px;
 	bottom: -25px;
 	cursor: se-resize;
-	font-size: 40px;
+	font-size: 25px;
 	transform: rotate(45deg);
 	-moz-transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
 }
 
-.component .rightLabel {
+.component .topLabel {
 	position: absolute;
 	left: 50%;
 	top: -28px;
-	cursor: n-resize;
+	cursor: -resize;
+}
+
+.component .rightLabel {
+	position: absolute;
+	right: -21.5px;
+	top: 40%;
+	cursor: e-resize;
 }
 
 .component .positioningCtrls {

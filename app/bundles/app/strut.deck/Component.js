@@ -4,8 +4,8 @@
 define(["./SpatialObject"], function(SpatialObject) {
 	var defaultScale, defaults;
 	defaults = {
-		x: config.slide.size.width / 3,
-		y: config.slide.size.height / 3
+		x: config.slide.size.width / 3.3,
+		y: config.slide.size.height / 5
 	};
 
 	defaultScale = {
