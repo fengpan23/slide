@@ -8,8 +8,9 @@ function() {
 	}
 
 	return {
-		save: function(storageInterface, model, filename, cb) {
+		save_as: function(storageInterface, model, filename, cb) {
 			if (storageInterface.ready())
+				model._manualSaver.save();  //when save as another save current
 				storageInterface.savePresentation(filename, model.exportPresentation(filename));
 				if(cb){
 					cb(null);

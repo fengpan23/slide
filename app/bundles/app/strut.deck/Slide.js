@@ -39,7 +39,7 @@ define(["libs/backbone",
 			 */
 			initialize: function() {
 				var components, hydratedComps;
-				components = this.get("components");2
+				components = this.get("components");
 				if (components === undefined) {
 					this.set("components", []);
 				} else {

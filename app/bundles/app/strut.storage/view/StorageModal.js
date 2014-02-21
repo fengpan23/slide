@@ -67,9 +67,11 @@ function(Backbone, FileBrowser) {
 		},
 */
 
-		__title: function() { return 'none'; },
+		__title: function() { return this.$el.find('.title').html(); },
 
-		_okClicked: function() {
+		_okClicked: function(e) {
+			e.stopPropagation();
+			e.preventDefault();
 			if (this.actionHandler) {
 				if (this.fileBrowser.fileName() == "") {
 					// Present some message..

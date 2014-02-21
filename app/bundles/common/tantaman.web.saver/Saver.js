@@ -20,6 +20,7 @@ define(function() {
 			this.storageInterface.selectProvider('largelocalstorage');
 			this.exportables.forEach(function(exportable) {
 				var data = exportable.export();
+				console.log(data);
 				var identifier = exportable.identifier();
 				this.storageInterface.store(identifier, data);
 			}, this);

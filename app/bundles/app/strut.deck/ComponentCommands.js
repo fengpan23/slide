@@ -118,6 +118,41 @@ define(function() {
 		},
 		name: "Move"
 	};
+	
+	/**
+	 * Moves component from one location to another.
+	 *
+	 * @class Move
+	 * @param {number} startLoc
+	 * @param {Component} component
+	 */
+	TableAdjust = function(startLoc, component) {
+		this.startLoc = startLoc;
+		this.component = component;
+		this.endLoc = {
+			table: this.component.get("table"),
+			width: this.component.get("width"),
+			height: this.component.get("height")
+		};
+		return this;
+	};
+	TableAdjust.prototype = {
+		"do": function() {
+			if (this.component.slide) {
+				this.component.slide.set('active', true);
+			}
+			this.component.set(this.endLoc);
+			this.component.set('selected', true);
+		},
+		undo: function() {
+			if (this.component.slide) {
+				this.component.slide.set('active', true);
+			}
+			this.component.set(this.startLoc);
+			this.component.set('selected', true);
+		},
+		name: "TableAdjust"
+	};
 
 	return {
 		Add: Add,
@@ -135,12 +170,16 @@ define(function() {
 		Scale: function(initial, component) {
 			return new BaseCommand(initial, component, 'scale', 'Scale');
 		},
-		whidth: function(initial, component) {
-			return new BaseCommand(initial, component, 'whidth', 'Whidth');
+		Width: function(initial, component) {
+			return new BaseCommand(initial, component, 'width', 'Width');
+		},
+		Height: function(initial, component) {
+			return new BaseCommand(initial, component, 'height', 'Height');
 		},
 		TextScale: function(initial, component) {
 			return new BaseCommand(initial, component, 'size', 'Scale');
 		},
+		TableAdjust: TableAdjust,
 		Text: function(initial, component) {
 			return new BaseCommand(initial, component, 'text', 'Text');
 		}

@@ -11,6 +11,7 @@
 	save_as: '保存为...',
 	new_: '新建',
 	text: '文本',
+	table: '表格',
 	image: '图片',
 	video: '视频',
 	website: '网页',

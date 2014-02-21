@@ -15,7 +15,9 @@ function(Backbone, CodeMirror) {
 			this.template = JST['tantaman.web.widgets/CodeEditor'];
 		},
 
-		saveCode: function() {
+		saveCode: function(e) {
+			e.stopPropagation();
+			e.preventDefault();
 			var code = this.mirror.getValue();
 			this._saveCb(code);
 		},
@@ -34,11 +36,15 @@ function(Backbone, CodeMirror) {
 				this.mirror.setValue(code);
 		},
 
-		hide: function() {
+		hide: function(e) {
+			e.stopPropagation();
+			e.preventDefault();
 			this.$el.modal('hide');
 		},
 
-		_hidden: function() {
+		_hidden: function(e) {
+			e.stopPropagation();
+			e.preventDefault();
 			this.$input.val('');
 		},
 

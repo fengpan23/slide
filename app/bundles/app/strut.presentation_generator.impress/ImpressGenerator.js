@@ -26,6 +26,9 @@ function(Handlebars, Math2, marked, DeckUtils) {
 					case "TextBox":
 						result = JST["strut.presentation_generator.impress/TextBox"](_this.convertTextBoxData(componentModel));
 						break;
+					case "Table":
+						result = JST["strut.presentation_generator.impress/Table"](_this.convertTextBoxData(componentModel));
+						break;
 					case "Video":
 						if (componentModel.get("videoType") === "html5") {
 							result = JST["strut.presentation_generator.impress/Video"](componentModel);

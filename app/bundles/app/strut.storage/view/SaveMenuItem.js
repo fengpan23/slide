@@ -18,7 +18,8 @@ function(Backbone, ActionHandlers, ErrorModal, lang) {
 			if (fileName == null) {
 				this.saveAsModal.show(ActionHandlers.save, lang.save_as);
 			} else {
-				ActionHandlers.save(this.storageInterface, this.model, fileName, ErrorModal.show);
+				this.model._manualSaver.save();
+				//ActionHandlers.save(this.storageInterface, this.model, fileName, ErrorModal.show);
 			}
 		},
 

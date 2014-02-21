@@ -49,6 +49,12 @@ img[src=""] {
   display: none;
 }
 
+table {
+	table-layout:fixed;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
 
 a {
   cursor: pointer;

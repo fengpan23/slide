@@ -131,8 +131,6 @@ define(["common/Calcium",
 				this.undoHistory.clear();
 
 				// TODO: go through and dispose of all old slides...?
-				console.log(rawObj.slides);
-				console.log(slides);
 				slides.reset(rawObj.slides);
 
 				bgs.deck = this;

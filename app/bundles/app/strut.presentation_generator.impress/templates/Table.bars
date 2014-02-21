@@ -1,0 +1,8 @@
+{{#attributes}}
+{{> ComponentContainer}}
+<div class="antialias" style="width:{{{width}}}px;">
+{{{table}}}
+</div>
+</div>
+</div>
+{{/attributes}}

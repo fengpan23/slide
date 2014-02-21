@@ -1,5 +1,5 @@
 define(['./ExitSaver', './TimedSaver', './Saver'],
-function(ExitSaver, TimedSaver) {
+function(ExitSaver, TimedSaver, Saver) {
 	/*
 	service will be an auto-saver factory
 	so you can get new instance of the auto saver.

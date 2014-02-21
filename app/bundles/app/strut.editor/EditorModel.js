@@ -55,6 +55,7 @@ define(['libs/backbone',
 						}
 					});
 					this._timedSaver = savers.timedSaver(this.exportable, 20000, storageInterface);
+					this._manualSaver = savers.manualSaver(this.exportable, storageInterface);
 				}
 
 				this.clipboard = new Clipboard();

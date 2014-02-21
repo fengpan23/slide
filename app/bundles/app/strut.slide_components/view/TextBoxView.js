@@ -6,7 +6,7 @@ define(["./ComponentView", "libs/etch",
 		'use strict';
 		var undoHistory = CmdListFactory.managedInstance('editor');
 		var styles;
-		styles = ["family", "size", "weight", "style", "color", "decoration", "align"];
+		styles = ["background", "family", "size", "weight", "style", "color", "decoration", "align"];
 
 		/**
 		 * @class TextBoxView
@@ -26,7 +26,10 @@ define(["./ComponentView", "libs/etch",
 				parentEvents = ComponentView.prototype.events();
 				myEvents = {
 					"editComplete": "editCompleted",
-					"mouseup": "mouseup"
+					"mouseup": "mouseup",
+					"deltadragStart span[data-delta='width']": "widthStart",
+					"deltadrag span[data-delta='width']": "width",
+					"deltadragStop span[data-delta='width']": "widthStop"
 				};
 				return _.extend(parentEvents, myEvents);
 			},
@@ -42,6 +45,7 @@ define(["./ComponentView", "libs/etch",
 					this.model.on("change:" + style, this._styleChanged, this);
 				}
 				this.model.on("change:text", this._textChanged, this);
+				this.model.on('change:width', this._setcontentWidth, this);
 				this._lastDx = 0;
 				this.keydown = this.keydown.bind(this);
 
@@ -53,6 +57,37 @@ define(["./ComponentView", "libs/etch",
 				// $(document).bind("keydown", this.keydown);
 
 				this.model.on("edit", this.edit, this);
+			},
+			
+			/**
+			 * Event:width transformation started.
+			 */
+			widthStart: function(){
+				return this._initialWidth = this.model.get("width") || this.$content.css("width") || 144;
+			}, 
+			/**
+			 * Event: width transformation is in progress.
+			 *
+			 * @param {Event} e
+			 * @param {{dx: number, dy: number}} deltas
+			 */
+			width: function(e, deltas) {
+				this.model.setFloat("width", this._initialWidth + deltas.dx);
+			},
+
+			/**
+			 * Event: width transformation stopped.
+			 */
+			widthStop: function() {
+				var cmd = new ComponentCommands.Width(this._initialWidth, this.model);
+				undoHistory.push(cmd);
+			},
+			
+			/**
+			 * React on content width.
+			 */
+			_setcontentWidth: function(model, width){
+				this.$content.css("width", width);
 			},
 
 			/**
@@ -248,6 +283,8 @@ define(["./ComponentView", "libs/etch",
 								var temp= currentsize.substring(0, currentsize.length-2);
 								$(n).css("font-size", parseInt(temp) + _this._increment);
 							});
+						}else if(key === "background"){
+							var tm = this;
 						}
 						//this.$el.css(key, style);
 					}
@@ -329,6 +366,7 @@ define(["./ComponentView", "libs/etch",
 				});
 				this.$textEl.html(this.model.get("text"));
 				//this._correctX();
+				this.$content.css('background',this.model.get("background"));
 				$('.rightLabel', this.$content.parent().parent()).show();
 				this.$el.css({
 					// fontFamily: this.model.get("family"),
