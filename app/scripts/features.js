@@ -15,7 +15,7 @@ define([
 	 'strut/presentation_generator/handouts/main',
 	 'strut/presentation_generator/impress-mobile/main',
 	'strut/presentation_generator/main',
-	'tantaman/web/saver/main',
+//	'tantaman/web/saver/main',
 	'strut/slide_editor/main',
 	'strut/transition_editor/main',
 	'strut/slide_components/main',

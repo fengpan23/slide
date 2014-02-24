@@ -1,0 +1,28 @@
+<div class="caption">This is HTML5 video with custom controls</div>
+<div class="control">
+	<div class="topControl">
+		<div class="videoProgress">
+			<span class="bufferBar"></span>
+			<span class="timeBar"></span>
+		</div>
+		<div class="time">
+			<span class="current"></span> / 
+			<span class="duration"></span> 
+		</div>
+	</div>
+	
+	<div class="btmControl">
+		<div class="btnPlay btn" title="Play/Pause video"></div>
+		<div class="btnStop btn" title="Stop video"></div>
+		<div class="spdText btn">Speed: </div>
+		<div class="btnx1 btn text selected" title="Normal speed">x1</div>
+		<div class="btnx3 btn text" title="Fast forward x3">x3</div>
+		<div class="btnFS btn" title="Switch to full screen"></div>
+		<div class="volume" title="Set volume">
+			<span class="volumeBar"></span>
+		</div>
+		<div class="sound sound2 btn" title="Mute/Unmute sound"></div>
+	</div>
+	
+</div>
+<div class="loading"></div>

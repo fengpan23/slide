@@ -5,8 +5,8 @@
  */
 define([ 'libs/backbone',
          './DeltaDragControl', 
-         "strut/deck/ComponentCommands", 
-         "tantaman/web/undo_support/CmdListFactory",
+         'strut/deck/ComponentCommands', 
+         'tantaman/web/undo_support/CmdListFactory',
          'css!styles/widgets/tableAdjust.css' ], 
 function(Backbone, DeltaDragControl, ComponentCommands, CmdListFactory) {
 	'use strict';

@@ -1,5 +1,5 @@
-define(["./ComponentView", './Mixers'],
-	function(ComponentView, Mixers) {
+define(["./ComponentView", "tantaman/web/widgets/VideoControl", './Mixers'],
+	function(ComponentView, VideoControl, Mixers) {
 		var Html5, Youtube, result, types;
 
 		/**
@@ -13,7 +13,7 @@ define(["./ComponentView", './Mixers'],
 			 * Initialize VideoView.Html5 component view.
 			 */
 			initialize: function() {
-				return ComponentView.prototype.initialize.apply(this, arguments);
+				ComponentView.prototype.initialize.apply(this, arguments);
 			},
 
 			/**
@@ -25,12 +25,14 @@ define(["./ComponentView", './Mixers'],
 				var $video,
 					_this = this;
 				ComponentView.prototype.render.call(this);
+				$videoContainer =$("<div></div>");
 				$video = $("<video controls></video>");
 				$video.append("<source preload='metadata' src='" + (this.model.get("src")) + "' type='" + (this.model.get("srcType")) + "' />");
 				$video.bind("loadedmetadata", function() {
 					_this._finishRender($(this));
 				});
 				this.$el.find(".content").append($video);
+				var videoControl = new VideoControl({$el: this.$el});
 				return this.$el;
 			},
 
