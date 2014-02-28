@@ -58,13 +58,14 @@ function(Backbone, DeltaDragControl, empty) {
 		
 		updatebar: function(x) {
 			var progress = $('.videoProgress');
-			
+			 var timeObj = $('.time');
 			//calculate drag position
 			//and update video currenttime
 			//as well as progress bar
 			var maxduration = this.video[0].duration;
 			var position = x - progress.offset().left;
-			var percentage = 100 * position / progress.width();
+			var timeLeft = timeObj.offset().left;
+			var percentage = 100 * position / (timeLeft - progress.offset().left);
 			if(percentage > 100) {
 				percentage = 100;
 			}

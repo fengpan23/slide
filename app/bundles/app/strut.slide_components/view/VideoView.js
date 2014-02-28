@@ -32,7 +32,9 @@ define(["./ComponentView", "tantaman/web/widgets/VideoControl", './Mixers'],
 					_this._finishRender($(this));
 				});
 				this.$el.find(".content").append($video);
+				console.time('new VideoControl');
 				var videoControl = new VideoControl({$el: this.$el});
+				console.timeEnd('new VideoControl');
 				return this.$el;
 			},
 

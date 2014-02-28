@@ -48,7 +48,6 @@ require.config({
 		'strut/well_context_buttons' : '../bundles/app/strut.well_context_buttons',
 		'strut/config' : '../bundles/app/strut.config',
 		'strut/transition_editor' : '../bundles/app/strut.transition_editor',
-		'strut/right_menu' : '../bundles/app/strut.right_menu',
 
 		'tantaman/web' : '../bundles/common/tantaman.web',
 		'tantaman/web/local_storage' : '../bundles/common/tantaman.web.local_storage',
@@ -58,7 +57,8 @@ require.config({
 		'tantaman/web/undo_support' : '../bundles/common/tantaman.web.undo_support',
 		'tantaman/web/interactions' : '../bundles/common/tantaman.web.interactions',
 		'tantaman/web/widgets' : '../bundles/common/tantaman.web.widgets',
-		'tantaman/web/css_manip' : '../bundles/common/tantaman.web.css_manip'
+		'tantaman/web/css_manip' : '../bundles/common/tantaman.web.css_manip',
+		'tantaman/web/right_menu' : '../bundles/common/tantaman.web.right_menu'
 		// end build - rmap
 	},
 

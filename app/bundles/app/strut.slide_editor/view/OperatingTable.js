@@ -72,10 +72,10 @@ function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
 
 			this.$el.addClass((this._deck.get('surface') || 'bg-default'));
 			
-			var rigthmenu = this._registry.getBest('strut.right_menu');
-			if(rigthmenu){
-				rigthmenu.operatingTable(this.$el);
-			}
+//			var rigthmenu = this._registry.getBest('strut.right_menu');
+//			if(rigthmenu){
+//				rigthmenu.operatingTable(this.$el);
+//			}
 			return this;
 		},
 

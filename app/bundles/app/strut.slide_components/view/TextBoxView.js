@@ -1,8 +1,10 @@
 define(["./ComponentView", "libs/etch",
 	"strut/deck/ComponentCommands",
 	"tantaman/web/undo_support/CmdListFactory",
-	"tantaman/web/interactions/TouchBridge"],
-	function(ComponentView, etch, ComponentCommands, CmdListFactory, TouchBridge) {
+	"tantaman/web/interactions/TouchBridge",
+	"tantaman/web/widgets/RightMenu",
+	'lang'],
+	function(ComponentView, etch, ComponentCommands, CmdListFactory, TouchBridge, RightMenu, lang) {
 		'use strict';
 		var undoHistory = CmdListFactory.managedInstance('editor');
 		var styles;
@@ -44,11 +46,16 @@ define(["./ComponentView", "libs/etch",
 					style = styles[_i];
 					this.model.on("change:" + style, this._styleChanged, this);
 				}
+				this._rightMenu = this._rightMenu.bind(this);
+//				this._bgColorHandler = this._bgColorHandler.bind(this);
+				
 				this.model.on("change:text", this._textChanged, this);
 				this.model.on('change:width', this._setcontentWidth, this);
+				this.$el.on("contextmenu", this._rightMenu);
+//				this.rightList = [{title: lang.setbgcolor, handler: this._bgColorHandler},{title: "add", handler: this._addelse}];
+				this.rightMenu = new RightMenu({model: this.model});
 				this._lastDx = 0;
 				this.keydown = this.keydown.bind(this);
-
 				this.dblclicked = this.dblclicked.bind(this);
 				TouchBridge.on.dblclick(this.$el, this.dblclicked);
 
@@ -57,6 +64,42 @@ define(["./ComponentView", "libs/etch",
 				// $(document).bind("keydown", this.keydown);
 
 				this.model.on("edit", this.edit, this);
+			},
+			
+//			_bgColorHandler: function(options, e) {
+//				this.rightMenu.dispose();
+//				var self = this;
+//				var $colorPicker =  $("#rightMenuPicker");
+//					$colorPicker.css({
+//						"top": e.clientX,
+//						"left": e.clientY,
+//						"z-index": 2000
+//					});
+//					$colorPicker.spectrum({
+//						flat: true,
+//						showSelectionPalette: true,
+//		          		localStorageKey: 'strut.colorChooser',
+//		          		showPalette: true,
+//		          		chooseText: "Alright",
+//		          		theme: 'sp-dark',
+//		          		showButtons: true,
+//		          		palette: [],
+//		          		clickoutFiresChange: true,
+//		          		beforeShow: function() {
+//		          			self.rightMenu.$el.find('RightMenu').hide();
+//						},
+//		          		move: function(color) {
+//		          			self.model.set('background', color.toHexString());
+//		          		},
+//		          		hide: function() {
+//							var temp = 1;
+//						}
+//					});
+//					$colorPicker.spectrum("hide");
+//			},
+			
+			_addelse: function(option) {
+				var temp = option;
 			},
 			
 			/**
@@ -145,8 +188,9 @@ define(["./ComponentView", "libs/etch",
 				this.$textEl.attr("contenteditable", true);
 				if (e != null) {
 					this._initialText = this.$textEl.html();
+					console.time('etch.editableInit');
 					etch.editableInit.call(this, e, this.model.get("y") * this.dragScale + 35);
-
+					console.timeEnd('etch.editableInit');
 					// Focus editor and select all text.
 					if (!this.editing) {
 						this.$textEl.get(0).focus();
@@ -255,6 +299,23 @@ define(["./ComponentView", "libs/etch",
 					this.editCompleted();
 				}
 			},
+			
+			/**
+			 * right menu function option
+			 * @param nothing
+			 * @private
+			 */
+			_rightMenu: function(e) {
+				//DOTO: param collection {background color, ....}
+				//DOTO: 
+//				this.rightMenu.render();
+				if(this.rightMenu){
+					this.rightMenu.show(e);
+					return false;
+				}else{
+					return ture;
+				}
+			},
 
 			/**
 			 * React on component style change. Update CSS classes of the element.
@@ -284,7 +345,7 @@ define(["./ComponentView", "libs/etch",
 								$(n).css("font-size", parseInt(temp) + _this._increment);
 							});
 						}else if(key === "background"){
-							var tm = this;
+							this.$content.css('background',this.model.get("background"));
 						}
 						//this.$el.css(key, style);
 					}
@@ -314,7 +375,6 @@ define(["./ComponentView", "libs/etch",
 			 */
 			_textChanged: function(model, text) {
 				this.$textEl.html(text);
-				
 			},
 
 			_handlePaste: function(elem, e) {
@@ -334,23 +394,6 @@ define(["./ComponentView", "libs/etch",
 
 				e.preventDefault();
 			},
-			
-			/**
-			 * because the component are no the same with ppt textBox.
-			 * if the component model is align center correct X coord 
-			 * 
-			 */
-			_correctX: function() {
-				if(this.model.get("alignment") && this.model.get("alignment") === "center"){
-			        var currentObj = $('<span>').hide().appendTo(document.body);
-			        $(currentObj).html(this.model.get("text"));
-			        var textwidth = currentObj.width();
-			        var correctX = this.model.get("x") + (this.model.get("width") - textwidth)/2
-					this.model.set("x", correctX);
-			        currentObj.remove();
-			        this.model.set("alignment",'');
-				}
-		    },
 		    
 			/**
 			 * Render element based on component model.
@@ -365,7 +408,6 @@ define(["./ComponentView", "libs/etch",
 					self._handlePaste(this, e);
 				});
 				this.$textEl.html(this.model.get("text"));
-				//this._correctX();
 				this.$content.css('background',this.model.get("background"));
 				$('.rightLabel', this.$content.parent().parent()).show();
 				this.$el.css({

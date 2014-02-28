@@ -11,6 +11,7 @@ define({
 	save_as: 'Save as...',
 	new_: 'New',
 	text: 'Text',
+	table: 'Table',
 	image: 'Image',
 	video: 'Video',
 	website: 'Website',

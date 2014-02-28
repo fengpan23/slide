@@ -63,10 +63,12 @@ define(["./ComponentView", "libs/etch",
 			
 			tableAdjustInit: function(){
 				if(!this.tableEdit){
+					console.time('tableAdjust');
 					this.tableAdjust = new TableAdjust({
 						$el: this.$el,
 						model: this.model
 					});
+					console.timeEnd('tableAdjust');
 					this.tableEdit = true;
 				}
 			},

@@ -33,6 +33,7 @@
 		explain: '导出JSON格式的课件到本地硬盘.',
 		click_below: '点击图标下载'
 	},
+	setbgcolor: '设置背景',
 	background: '背景',
 	surface: '表层',
 	invalid_filename: '无效文件名',

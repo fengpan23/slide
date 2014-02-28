@@ -7,7 +7,7 @@ var express = require('express'),
 var app = express();
 
 app.configure(function () {
-    app.set('port', process.env.PORT || 3000);
+    app.set('port', process.env.PORT || 5858);
     app.use(express.logger('dev'));  /* 'default', 'short', 'tiny', 'dev' */
     app.use(express.bodyParser({limit: '50mb'})), //parses request body and populates req.body   Request Entity limit 5mb
     app.use(express.methodOverride()); //checks req.body for HTTP method overrides

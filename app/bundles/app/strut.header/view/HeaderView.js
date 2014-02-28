@@ -2,7 +2,7 @@ define(['libs/backbone',
 		'strut/logo_button/LogoView',
 		'strut/presentation_generator/view/PreviewButton',
 		'./ThemeProviderView',
-		'./Tablets',
+//		'./Tablets',
 		'css!styles/header/header.css'],
 function(Backbone, LogoView, PreviewButton, ThemeProviderView, Tablets, empty) {
 	return Backbone.View.extend({
@@ -17,7 +17,7 @@ function(Backbone, LogoView, PreviewButton, ThemeProviderView, Tablets, empty) {
 
 			this.model.editorModel().on('change:activeMode', this._modeChanged, this);
 
-			this._tablets = new Tablets(this.model.editorModel());
+//			this._tablets = new Tablets(this.model.editorModel());
 		},
 
 		_modeChanged: function(model, value) {
@@ -51,8 +51,8 @@ function(Backbone, LogoView, PreviewButton, ThemeProviderView, Tablets, empty) {
 			var $themeButtons = this.$el.find('.theme-buttons');
 			$themeButtons.append(this._themeProviderView.render().$el);
 
-			this._tablets.render();
-			this.$el.append(this._tablets.$el);
+//			this._tablets.render();
+//			this.$el.append(this._tablets.$el);
 
 			return this;
 		},

@@ -1,5 +1,5 @@
 define(function() {
-	var Add, Remove, Move;
+	var Add, Remove, Move, TableAdjust;
 
 	/**
 	 * Base command class for simple attribute changing actions.

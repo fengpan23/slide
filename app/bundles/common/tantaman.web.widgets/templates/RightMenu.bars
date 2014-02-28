@@ -1,0 +1,7 @@
+<div id="RightMenu">
+    <ul class="rightmenu">
+    </ul>
+</div>
+<div id="RightColorPicker" style="display: none;">
+	<input id="menuColorPicker" style="display: none;">
+</div>
