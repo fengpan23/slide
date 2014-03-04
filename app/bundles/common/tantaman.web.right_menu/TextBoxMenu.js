@@ -5,6 +5,10 @@ define(["./Menu", "lang"],function(Menu, lang) {
 			hander: this._setBgColor,
 			model: options.model
 		},{
+			title: lang.setLineSpacing,
+			hander: this._setLineSpacing,
+			model: options.model
+		},{
 			title: "add....",
 			hander: this.add,
 			model: options.model
@@ -12,6 +16,7 @@ define(["./Menu", "lang"],function(Menu, lang) {
 		
 		this.$el = $('<ul class="rightmenu"></ul>');
 		options.model.bind('spectrum:hide', this._hideSpectrum, this);
+		options.model.bind('lineSpacing:hide', this._hideLineSpacing, this);
 		
 		for(var li in menulist){
 			this.$el.append(new Menu(menulist[li]));
@@ -22,6 +27,22 @@ define(["./Menu", "lang"],function(Menu, lang) {
 		render: function() {
 			return this;
 		},
+		
+		_setLineSpacing: function() {
+			var self = this;
+			$('.lineSpacing').show();
+			$('.lineSpacing').find('a').each(function() {
+				$(this).off('click').on('click', function(e) {
+					log(parseFloat(e.currentTarget.innerHTML));
+					self.model.set('lineSpacing', e.currentTarget.innerHTML === 'normal' ? 'normal' : parseFloat(e.currentTarget.innerHTML));
+				});
+			})
+		},
+		
+		_hideLineSpacing: function() {
+			$('.lineSpacing').hide();
+		},
+		
 		_setBgColor: function() {
 			var self = this;
 			this.$menuColorPicker = $('#menuColorPicker');
@@ -33,13 +54,13 @@ define(["./Menu", "lang"],function(Menu, lang) {
 				showSelectionPalette: true,
           		localStorageKey: 'strut.colorChooser',
           		showInitial: true,
-          		 showInput: true,
+          		showInput: true,
 				chooseText: "Alright",
           		theme: 'sp-dark',
           		showButtons: true,
           		clickoutFiresChange: true,
           		beforeShow: function() {
-          			$('#RightColorPicker').show();
+          			$('#rightColorPicker').show();
 				},
           		move: function(color) {
           			self.model.set('background', color.toHexString());
@@ -48,7 +69,7 @@ define(["./Menu", "lang"],function(Menu, lang) {
 		},
 		
 		_hideSpectrum : function() {
-			$('#RightColorPicker').hide();
+			$('#rightColorPicker').hide();
 		},
 		
 		add: function() {

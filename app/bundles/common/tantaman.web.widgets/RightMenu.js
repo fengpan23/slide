@@ -1,8 +1,9 @@
-define([ 'libs/backbone', "tantaman/web/right_menu/TextBoxMenu",
-		'css!styles/widgets/rightMenu.css' ], function(Backbone, TextBoxMenu,
-		empty) {
+define([ 'libs/backbone',
+         "tantaman/web/right_menu/TextBoxMenu",
+         'css!styles/widgets/rightMenu.css' ], 
+function(Backbone, TextBoxMenu,	empty) {
 	return Backbone.View.extend({
-		className : "rightMenu hide",
+		className : "rightMenuModal hide",
 		events : {
 			'click' : 'dispose',
 			'mouseleave' : 'timeDispose',
@@ -10,84 +11,66 @@ define([ 'libs/backbone', "tantaman/web/right_menu/TextBoxMenu",
 		},
 
 		initialize : function() {
+			if($('#modals').find('.rightMenuModal').size() > 0){
+				this.$el = $('#modals').find('.rightMenuModal');
+				return;
+			}
 			this.model = this.options.model;
 			delete this.options;
 			$('#modals').append(this.$el);
 			this.$el.html(JST['tantaman.web.widgets/RightMenu']);
-			this.render();
 		},
 
 		/**
 		 */
 		render : function() {
+			this.$el.find("#rightMenu").empty();
 			if (this.model.get('type') === 'TextBox') {
 				var menuItem = new TextBoxMenu({
 					model : this.model
 				});
 			}
-			this.$el.find("#RightMenu").append(menuItem.render().$el);
+			this.$el.find("#rightMenu").append(menuItem.render().$el);
 		},
 
 		show : function(event) {
+			this.$el.show();
+			this.$el.find('#rightMenu').show();
 			this.$el.css("z-index", 5000);
 			this.$el.css({
 				position : 'absolute',
 				top : event.clientY + "px",
 				left : event.clientX + "px"
 			});
-			// this._setWidth(aUl[0]);
-
-			// maxWidth = aDoc[0] - oMenu.offsetWidth;
-			// maxHeight = aDoc[1] - oMenu.offsetHeight;
-
-			// oMenu.offsetTop > maxHeight && (oMenu.style.top = maxHeight +
-			// "px");
-			// oMenu.offsetLeft > maxWidth && (oMenu.style.left = maxWidth +
-			// "px");
+			this._displayArea(event);
 			var _this = this;
-			$('body').bind('mousedown.rightMenu', function(e) {
+			$('body').bind('mousedown #rightMenu', function(e) {
 				var target = e.target || e.srcElement;
-				if ($(target).not('.RightColorPicker *, #RightMenu *, .sp-container *').size()) {
+				if ($(target).not('.rightColorPicker *, #rightMenu *, .sp-container *, .lineSpacing *').size()) {
 					_this.model.trigger('spectrum:hide', null);
+					_this.model.trigger('lineSpacing:hide', null);
 					_this.dispose();
-					$(this).unbind('mousedown.rightMenu');
+					$(this).unbind('mousedown #rightMenu');
 				}
 			});
-//			this._rightMeunSize();
-			this.$el.show();
-			this.$el.find('#RightMenu').show();
 		},
-
-		_displayArea : function() {
-			var getOffset = {
-				top : function(obj) {
-					return obj.offsetTop
-							+ (obj.offsetParent ? arguments
-									.callee(obj.offsetParent) : 0)
-				},
-				left : function(obj) {
-					return obj.offsetLeft
-							+ (obj.offsetParent ? arguments
-									.callee(obj.offsetParent) : 0)
-				}
-			};
-		},
-
-		_rightMeunSize : function() {
-			var temp = this.$el.width();
-			var temp1 = this.$el.height();
-			// var offsetWidth = this.$el.offsetWidth();
-			// var offsetHeight = this.$eloffsetHeight();
-			// maxWidth = 0;
-			// for (i = 0; i < obj.children.length; i++){
-			// var oLi = obj.children[i];
-			// var iWidth = oLi.clientWidth - parseInt(oLi.currentStyle ?
-			// oLi.currentStyle["paddingLeft"] :
-			// getComputedStyle(oLi,null)["paddingLeft"]) * 2
-			// if (iWidth > maxWidth) maxWidth = iWidth;
-			// }
-			// for (i = 0; i < obj.children.length; i++)
-			// obj.children[i].style.width = maxWidth + "px";
+		
+		/**
+		 * correct display position
+		 * @param current event    get the current mouse position
+		 */
+		_displayArea : function(e) {
+			var pos = {top: e.clientY, left: e.clientX};
+			if(($('body').width() - e.clientX) < this.$el.get(0).scrollWidth){
+				pos.left = e.clientX - this.$el.get(0).scrollWidth;	
+			}
+			if(($('body').height() - e.clientY) < this.$el.get(0).scrollHeight){
+				pos.top = e.clientY - this.$el.get(0).scrollHeight;	
+			}
+			this.$el.css({
+				top : pos.top + "px",
+				left : pos.left + "px"
+			});
 		},
 
 		timeDispose : function() {
@@ -102,7 +85,7 @@ define([ 'libs/backbone', "tantaman/web/right_menu/TextBoxMenu",
 		},
 
 		dispose : function() {
-			this.$el.find('#RightMenu').hide();
+			this.$el.find('#rightMenu').hide();
 		},
 
 		constructor : function RightMenu() {

@@ -34,6 +34,7 @@
 		click_below: '点击图标下载'
 	},
 	setbgcolor: '设置背景',
+	setLineSpacing: '设置行间距',
 	background: '背景',
 	surface: '表层',
 	invalid_filename: '无效文件名',

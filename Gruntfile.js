@@ -22,7 +22,7 @@ module.exports = function (grunt) {
     };
 
     var barstaskdef = {
-                files: {
+            files: {
                     "app/scripts/compiled-templates.js": [
                     "app/bundles/**/templates/*.bars"
                 ]

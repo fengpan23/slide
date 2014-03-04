@@ -47,13 +47,11 @@ define(["./ComponentView", "libs/etch",
 					this.model.on("change:" + style, this._styleChanged, this);
 				}
 				this._rightMenu = this._rightMenu.bind(this);
-//				this._bgColorHandler = this._bgColorHandler.bind(this);
 				
 				this.model.on("change:text", this._textChanged, this);
 				this.model.on('change:width', this._setcontentWidth, this);
+				this.model.on('change:lineSpacing', this._lineSpacingChanged, this);
 				this.$el.on("contextmenu", this._rightMenu);
-//				this.rightList = [{title: lang.setbgcolor, handler: this._bgColorHandler},{title: "add", handler: this._addelse}];
-				this.rightMenu = new RightMenu({model: this.model});
 				this._lastDx = 0;
 				this.keydown = this.keydown.bind(this);
 				this.dblclicked = this.dblclicked.bind(this);
@@ -66,40 +64,8 @@ define(["./ComponentView", "libs/etch",
 				this.model.on("edit", this.edit, this);
 			},
 			
-//			_bgColorHandler: function(options, e) {
-//				this.rightMenu.dispose();
-//				var self = this;
-//				var $colorPicker =  $("#rightMenuPicker");
-//					$colorPicker.css({
-//						"top": e.clientX,
-//						"left": e.clientY,
-//						"z-index": 2000
-//					});
-//					$colorPicker.spectrum({
-//						flat: true,
-//						showSelectionPalette: true,
-//		          		localStorageKey: 'strut.colorChooser',
-//		          		showPalette: true,
-//		          		chooseText: "Alright",
-//		          		theme: 'sp-dark',
-//		          		showButtons: true,
-//		          		palette: [],
-//		          		clickoutFiresChange: true,
-//		          		beforeShow: function() {
-//		          			self.rightMenu.$el.find('RightMenu').hide();
-//						},
-//		          		move: function(color) {
-//		          			self.model.set('background', color.toHexString());
-//		          		},
-//		          		hide: function() {
-//							var temp = 1;
-//						}
-//					});
-//					$colorPicker.spectrum("hide");
-//			},
-			
-			_addelse: function(option) {
-				var temp = option;
+			_lineSpacingChanged: function() {
+				this.$content.css("line-height", this.model.get('lineSpacing') || 'normal');
 			},
 			
 			/**
@@ -306,11 +272,10 @@ define(["./ComponentView", "libs/etch",
 			 * @private
 			 */
 			_rightMenu: function(e) {
-				//DOTO: param collection {background color, ....}
-				//DOTO: 
-//				this.rightMenu.render();
-				if(this.rightMenu){
-					this.rightMenu.show(e);
+				var menu = new RightMenu({model: this.model});
+				if(menu){
+					menu.render();
+					menu.show(e);
 					return false;
 				}else{
 					return ture;
@@ -409,6 +374,7 @@ define(["./ComponentView", "libs/etch",
 				});
 				this.$textEl.html(this.model.get("text"));
 				this.$content.css('background',this.model.get("background"));
+				this.$content.css("line-height", this.model.get('lineSpacing') || 'normal');
 				$('.rightLabel', this.$content.parent().parent()).show();
 				this.$el.css({
 					// fontFamily: this.model.get("family"),
