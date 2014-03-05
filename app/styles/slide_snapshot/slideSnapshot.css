@@ -78,3 +78,7 @@ transform-origin: 0 0;
 position: absolute;
 line-height: normal;
 }
+
+.slideDrawer .componentContainer li{
+line-height: 3em;
+}

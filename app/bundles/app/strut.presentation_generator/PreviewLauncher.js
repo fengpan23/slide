@@ -14,7 +14,7 @@ define(function() {
 			this._editorModel.trigger('launch:preview', null);
 
 			var previewStr = generator.generate(this._editorModel.deck());
-
+			log(previewStr.length/1024/1024 + 'MB');
 			localStorage.setItem('preview-string', previewStr);
 			localStorage.setItem('preview-config', JSON.stringify({
 				surface: this._editorModel.deck().get('surface')
