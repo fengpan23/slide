@@ -8,7 +8,7 @@ define(function() {
 	'use strict';
 
 	var routes = {
-		upload: 'https://api.imgur.com/3/upload'
+		upload: 'img'
 	};
 
 	function UploadHandler(xhr) {

@@ -82,7 +82,7 @@ define(["Q",
             } else {
                 this.deck.set('_id', this.deck.get('_id'));
             }
-            this.deck.set('fileName', fname);
+            this.deck.set('filename', fname);
             this.deck.set('slides', data.slides);
             this.deck.set('activeSlide', data.activeSlide);
             this.deck.set('background', data.background);

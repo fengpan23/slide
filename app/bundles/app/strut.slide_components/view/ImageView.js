@@ -46,20 +46,6 @@ define(["./ComponentView", './Mixers'],
 					return _this.remove();
 				});
 				
-//				image.src = val;
-//				if(image.complete){
-//					image.src = val;
-//					console.log('complete width:'+image.width+', complete height: '+image.height);
-//					return image;
-//				}else{
-//					image.onload=function(){
-//						console.log('onload width:'+image.width+', onload height: '+image.height);
-//					};
-//					image.src = val;
-//					console.log(image);
-//					return image;
-//				}
-				
 				this.$img = $img;
 				return this.$el;
 			},
@@ -124,8 +110,6 @@ define(["./ComponentView", './Mixers'],
 					return false;
 				});
 				this.$content.append($img);
-				//at image mode hide the width label
-//				$('.rightLabel', this.$content.parent().parent()).hide();
 				if (this.model.get("imageType") === "SVG") {
 					$img.parent().addClass("svg");
 					return $img.parent().parent().addClass("svg");

@@ -45,7 +45,7 @@ function(Backbone, empty) {
 		},
 
 		_fileChosen: function(e) {
-			this.$el.trigger('fileChosen', e.currentTarget.dataset.fileName);
+			this.$el.trigger('fileChosen', e.currentTarget.dataset.filename);
 		},
 
 		_deleteClicked: function(e) {

@@ -104,7 +104,7 @@ define(['libs/backbone',
 				num += 1;
 				window.sessionMeta.num = num;
 				this.importPresentation({
-	        		fileName: name,
+	        		filename: name,
 	        		slides: []
 	      		});
 				this._deck.create();
@@ -129,7 +129,7 @@ define(['libs/backbone',
 				this.storageInterface.revokeAllAttachmentURLs();
 				// deck disposes iteself on import?
 				// TODO: purge URL cache
-				console.log('New file name: ' + rawObj.fileName);
+				console.log('New file name: ' + rawObj.filename);
 				this._deck.import(rawObj);
 			},
 
@@ -139,7 +139,7 @@ define(['libs/backbone',
 
 			exportPresentation: function(filename) {
 				if (filename)
-					this._deck.set('fileName', filename);
+					this._deck.set('filename', filename);
 				var genid = this._deck.get('__genid');
 
 				if (genid == null) genid = 0;
@@ -149,15 +149,36 @@ define(['libs/backbone',
 				// A higher genid means its a newer version of the presentation.
 				this._deck.set('__genid', genid);
 				var obj = this._deck.toJSON(false, true);
-				return obj;
+				//TODO: current the img src to url
+				return this._convertsURL(obj);
 			},
+			
+			//Converts a local url to the server url
+			_convertsURL: function(obj) {
+				for(var i in obj.slides){
+					for(var j in obj.slides[i].components){
+						console.log(typeof obj.slides[i].components[j].src);
+						if(obj.slides[i].components[j].type === 'Image' && typeof obj.slides[i].components[j].src === 'object'){
+							obj.slides[i].components[j].src = window.location.protocol + '//' + window.location.host  + '/img/'+ obj.slides[i].components[j].src.docKey + '/' + obj.slides[i].components[j].src.attachKey;
+						}
+					}
+				}
+				for(var i in obj.activeSlide){
+					for(var j in obj.activeSlide[i].components){
+						if(obj.activeSlide[i].components[j].type === 'Image' && typeof obj.slides[i].components[j].src === 'object'){
+							obj.activeSlide[i].components[j].src = window.location.protocol + '//' + window.location.host  + '/img/'+ obj.activeSlide[i].components[j].src.docKey + '/' + obj.activeSlide[i].components[j].src.attachKey;
+						}
+					}
+				}
+				return obj;
+			}, 
 
 			fileName: function() {
-				var fname = this._deck.get('fileName');
+				var fname = this._deck.get('filename');
 				if (fname == null) {
 					// TODO...
 					fname = 'presentation-unnamed';
-					this._deck.set('fileName', fname);
+					this._deck.set('filename', fname);
 				}
 
 				return fname;

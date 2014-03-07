@@ -101,15 +101,15 @@ function(Backbone, Imgup) {
 				this.$input.val(url);
 				this.item.src = url;
 				URL.revokeObjectURL(url);
-//				this.file = f;
-			} else {
+				this.file = f;
+//			} else {
 				this._switchToProgress();
 
 				imgup.upload(f).progress(function(ratio) {
 					_this._updateProgress(ratio);
 				}).then(function(result) {
 					_this._switchToThumbnail();
-					_this.$input.val(result.data.link);
+//					_this.$input.val(result.data.link);
 					_this.urlChanged({
 						which: -1
 					});

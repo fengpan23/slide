@@ -46,7 +46,7 @@ function(EditorView, EditorModel, lls, URLCache) {
 	}
 
 	function restoreExitSave(exitSavedPres, exitsaveData, storage) {
-		var promise = storage.store(exitSavedPres.fileName, exitsaveData, {json: false});
+		var promise = storage.store(exitSavedPres.filename, exitsaveData, {json: false});
 		localStorage.setItem('strut-exitsave', '');
 		return promise;
 	}

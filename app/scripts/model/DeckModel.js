@@ -9,7 +9,7 @@ define([
     var DeckModel = Backbone.Model.extend({
         defaults: {
             _id: null,
-            fileName: "",
+            filename: "",
             slides: "",
             activeSlide: "",
             background: "",
@@ -23,7 +23,7 @@ define([
         initialize: function () {
             this.validators = {};
 
-            this.validators.fileName = function (value) {
+            this.validators.filename = function (value) {
                 return value.length > 0 ? {
                     isValid: true
                 } : {

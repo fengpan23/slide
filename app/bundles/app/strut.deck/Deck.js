@@ -121,7 +121,7 @@ define(["common/Calcium",
 				this.set("_id", rawObj._id);
 				this.set("activeSlide", undefined);
 				this.set("background", rawObj.background);
-				this.set("fileName", rawObj.filename);
+				this.set("filename", rawObj.filename);
 				this.set('surface', rawObj.surface);
 				this.set('customStylesheet', rawObj.customStylesheet);
 				this.set('deckVersion', rawObj.deckVersion);

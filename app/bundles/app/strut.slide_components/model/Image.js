@@ -14,12 +14,10 @@ define(['strut/deck/Component',
 				Component.prototype.initialize.apply(this, arguments);
 				this.registry = window.serviceRegistry;
 				this.set('type', 'Image');
-
 				var src = this.get('src');
-
 				var self = this;
+				this.storageInterface = this.registry.getBest('strut.StorageInterface');
 				if (typeof src === 'object') {
-					this.storageInterface = this.registry.getBest('strut.StorageInterface');
 					this.set('imageType', ''); // TODO
 					this.storageInterface.getAttachmentURL(src.docKey, src.attachKey)
 					.then(function(uri) {
@@ -29,9 +27,20 @@ define(['strut/deck/Component',
 					}, function(err) {
 						console.error(err);
 					}).done();
-				} else {
+				} else if(typeof src === 'string' && src.indexOf('base64,') > 11){
 					this.uri = src;
+				}else {
 					this.set('imageType', FileUtils.imageType(src));
+					var imgname = src.split('/')
+					this.storageInterface.getAttachmentURL(imgname[imgname.length - 2], imgname[imgname.length - 1])
+					.then(function(uri) {
+						self.uri = uri;
+						self.trigger('change:uri', self, uri);
+						self.trigger('change', self);
+					}, function(err) {
+						console.error(err);
+					}).done();
+//					this.uri = src;
 				}
 			},
 
