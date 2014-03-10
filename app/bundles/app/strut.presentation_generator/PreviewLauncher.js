@@ -23,27 +23,48 @@ define(function() {
 			var self = this;
 			window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;  
 			window.requestFileSystem(window.TEMPORARY, 5*1024*1024 , function(fs) {
-				fs.root.getFile('_preview.txt', {create: true}, function(fileEntry) {
-					
-				    fileEntry.createWriter(function(fileWriter) {
+			
+		      fs.root.getFile('_previousView.txt', {create: true}, function(fileEntry) {
+					fileEntry.createWriter(function(fileWriter) {
 				    	fileWriter.onwriteend = function(e) {
 				    		console.log('Write completed.');
+				    		fileEntry.moveTo(fs.root, '_presentView.txt');
 				    	};
 				    	fileWriter.onerror = function(e) {
 				    		console.log('Write failed: ' + e.toString());
 				    	};
-				    	console.log(self.previewStr);
 				    	var blob = new Blob([self.previewStr], {type: 'text/plain'});
 				    	fileWriter.write(blob);
-				    }, function(err) {
-						console.log(err)
-					});
-				}, function(err) {
-					  console.log(err)
-				});
-			}, function(err) {
-				console.log('window.requestFileSystem fail' + err);
-			});
+				    }, errorHandler);
+		      }, errorHandler);
+			}, errorHandler);
+			
+			var errorHandler = function(e) {
+				 var msg = '';
+
+				  switch (e.code) {
+				    case FileError.QUOTA_EXCEEDED_ERR:
+				      msg = 'QUOTA_EXCEEDED_ERR';
+				      break;
+				    case FileError.NOT_FOUND_ERR:
+				      msg = 'NOT_FOUND_ERR';
+				      break;
+				    case FileError.SECURITY_ERR:
+				      msg = 'SECURITY_ERR';
+				      break;
+				    case FileError.INVALID_MODIFICATION_ERR:
+				      msg = 'INVALID_MODIFICATION_ERR';
+				      break;
+				    case FileError.INVALID_STATE_ERR:
+				      msg = 'INVALID_STATE_ERR';
+				      break;
+				    default:
+				      msg = 'Unknown Error';
+				      break;
+				  };
+
+				  console.log('Error: ' + msg);
+			}
 			
 			localStorage.setItem('preview-config', JSON.stringify({
 				surface: this._editorModel.deck().get('surface')
