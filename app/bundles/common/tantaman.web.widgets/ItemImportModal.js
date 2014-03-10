@@ -95,21 +95,22 @@ function(Backbone, Imgup) {
             // run after file selected, because e.target block thread
             reader.readAsDataURL(f);
             
-
+            //use all image as data base64
 			if (this.options.hasStorage()) {
 				var url = URL.createObjectURL(f);
 				this.$input.val(url);
 				this.item.src = url;
 				URL.revokeObjectURL(url);
-				this.file = f;
-//			} else {
+//				this.file = f;
+			} else {
+				alert('img up load have some problem with storage');
 				this._switchToProgress();
 
 				imgup.upload(f).progress(function(ratio) {
 					_this._updateProgress(ratio);
 				}).then(function(result) {
 					_this._switchToThumbnail();
-//					_this.$input.val(result.data.link);
+					_this.$input.val(result.data.link);
 					_this.urlChanged({
 						which: -1
 					});
