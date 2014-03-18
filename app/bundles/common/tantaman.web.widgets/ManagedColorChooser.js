@@ -46,7 +46,8 @@ function(Backbone, Utils) {
 			if (opts && opts.top != null && opts.left != null) {
 				this.$el.css({
 					top: opts.top,
-					left: opts.left
+					left: opts.left,
+					zIndex: opts.zIndex
 				});
 			}
 

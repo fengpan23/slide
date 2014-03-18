@@ -36,9 +36,15 @@
 	setbgcolor: '设置背景',
 	setLineSpacing: '设置行间距',
 	background: '背景',
-	surface: '表层',
+	surface: '底色',
 	invalid_filename: '无效文件名',
 	new_presentation: '新课件',
-	name: 'Name',
-	create_presentation: 'Create Presentation'
+	insert_L: '左侧插入列',
+	insert_R: '右侧插入列',
+	insert_T: '上方插入行',
+	insert_U: '下方插入行',
+	delete_R: '删除此行',
+	delete_L: '删除此列',
+	name: '课件名',
+	create_presentation: '创建演示'
 });

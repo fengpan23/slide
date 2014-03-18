@@ -1,7 +1,8 @@
 define([ 'libs/backbone',
          "tantaman/web/right_menu/TextBoxMenu",
+         "tantaman/web/right_menu/TableMenu",
          'css!styles/widgets/rightMenu.css' ], 
-function(Backbone, TextBoxMenu,	empty) {
+function(Backbone, TextBoxMenu,	TableMenu, empty) {
 	return Backbone.View.extend({
 		className : "rightMenuModal hide",
 		events : {
@@ -23,11 +24,17 @@ function(Backbone, TextBoxMenu,	empty) {
 
 		/**
 		 */
-		render : function() {
+		render : function($target) {
 			this.$el.find("#rightMenu").empty();
-			if (this.model.get('type') === 'TextBox') {
+			var menuType = this.model.get('type');
+			if(menuType=== 'TextBox') {
 				var menuItem = new TextBoxMenu({
 					model : this.model
+				});
+			}else if(menuType=== 'Table'){
+				var menuItem = new TableMenu({
+					model : this.model,
+					$target : $target
 				});
 			}
 			this.$el.find("#rightMenu").append(menuItem.render().$el);

@@ -72,7 +72,7 @@ define([
                     console.log(err.stack);
                 }
             });
-			storageInterface.selectProvider("largelocalstorage");
+//			storageInterface.selectProvider("largelocalstorage");
         },
 /* 
         home: function() {

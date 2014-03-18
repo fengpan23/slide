@@ -14,12 +14,13 @@ function(Backbone, ActionHandlers, ErrorModal, lang) {
 		},
 
 		save: function() {
-			fileName = this.model.fileName();
+			this.storageInterface.selectProvider("remotestorage");
+			var fileName = this.model.fileName();
 			if (fileName == null) {
 				this.saveAsModal.show(ActionHandlers.save, lang.save_as);
 			} else {
-				this.model._manualSaver.save();
-				//ActionHandlers.save(this.storageInterface, this.model, fileName, ErrorModal.show);
+//				this.model._manualSaver.save();
+				ActionHandlers.save(this.storageInterface, this.model, fileName, ErrorModal.show);
 			}
 		},
 

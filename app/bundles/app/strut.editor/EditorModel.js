@@ -23,6 +23,7 @@ define(['libs/backbone',
 				// is there a better way to do this?
 				window.uiTestAcc = this;
 				this.hasStorage = this.hasStorage.bind(this);
+				this.currentDeckId = this.currentDeckId.bind(this);
 
 				this._fontState = window.sessionMeta.fontState || {};
 				this._deck = new Deck();
@@ -126,7 +127,7 @@ define(['libs/backbone',
 			},
 
 			importPresentation: function(rawObj) {
-				this.storageInterface.revokeAllAttachmentURLs();
+//				this.storageInterface.revokeAllAttachmentURLs();
 				// deck disposes iteself on import?
 				// TODO: purge URL cache
 				console.log('New file name: ' + rawObj.filename);
@@ -165,6 +166,10 @@ define(['libs/backbone',
 
 			deck: function() {
 				return this._deck;
+			},
+			
+			currentDeckId: function(deckId) {
+				return this._deck.set('_id', deckId);
 			},
 
 			cannedTransition: function(c) {

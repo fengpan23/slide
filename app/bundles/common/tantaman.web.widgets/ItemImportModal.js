@@ -34,7 +34,8 @@ function(Backbone, Imgup) {
 		},
 		show: function(cb) {
 			this.cb = cb;
-			return this.$el.modal('show');
+			this.$el.modal('show');
+			this.$input.focus();
 		},
 		okClicked: function(e) {
 			e.stopPropagation();

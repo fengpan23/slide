@@ -50,6 +50,7 @@ define(['./view/ComponentButton',
 					componentType: 'Table',
 					icon: 'icon-th',
 					name: lang.table,
+					componentClass: 'hidden-phone',
 					editorModel: editorModel
 				}));
 
@@ -59,6 +60,7 @@ define(['./view/ComponentButton',
 					name: lang.image,
 					tag: 'img',
 					title: lang.insert_image,
+					componentClass: 'hidden-phone',
 					editorModel: editorModel,
 					hasStorage: editorModel.hasStorage,
 					browsable: true
@@ -70,6 +72,7 @@ define(['./view/ComponentButton',
 					name: lang.video,
 					tag: 'video',
 					title: lang.insert_video,
+					componentClass: 'hidden-phone',
 					editorModel: editorModel,
 					ignoreErrors: true
 				}));
@@ -80,13 +83,14 @@ define(['./view/ComponentButton',
 					name: lang.website,
 					tag: 'iframe',
 					title: lang.insert_website,
+					componentClass: 'hidden-phone',
 					editorModel: editorModel
 				}));
 
 				buttons.push(new ShapesDropdown(
 					availableShapes,
 					JST['strut.slide_components/ShapesDropdown'],
-					{class: 'group-dropdown',
+					{class: 'group-dropdown hidden-phone',
 						editorModel: editorModel}
 				));
 

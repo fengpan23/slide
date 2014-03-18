@@ -3,12 +3,14 @@
 	<h3 class="title">{{title}}</h3>
 </div>
 <div class="modal-body" style="overflow: hidden">
+	{{!--
 	<ul class="nav nav-tabs">
 		{{#tabs}}
 			<li class="providerTab"><a data-provider="{{id}}">{{name}}</a></li>
 		{{/tabs}}
 	</ul>
-	<div class="tabContent">
+	--}}
+	<div class="tabContent" style="max-height: 370px; overflow: auto">
 	</div>
 </div>
 <div class="modal-footer">

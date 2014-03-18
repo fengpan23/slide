@@ -1,5 +1,5 @@
-define(['libs/backbone', 'tantaman/web/widgets/FileBrowser', 'css!styles/storage/storageModal.css'],
-function(Backbone, FileBrowser) {
+define(['libs/backbone', 'tantaman/web/widgets/FileBrowser', 'lang', 'css!styles/storage/storageModal.css'],
+function(Backbone, FileBrowser, lang) {
 	return Backbone.View.extend({
 		className: "storageModal modal hide",
 		events: {
@@ -41,7 +41,6 @@ function(Backbone, FileBrowser) {
 				title: this.__title(),
 				tabs: providerNames
 			}));
-
 			
 			this.$el.find('.tabContent').append(this.fileBrowser.$el);
 		},
@@ -75,6 +74,7 @@ function(Backbone, FileBrowser) {
 			if (this.actionHandler) {
 				if (this.fileBrowser.fileName() == "") {
 					// Present some message..
+					this.$el.find(".errors").html(JST['tantaman.web.widgets/List']({errors: lang.invalid_filename}));
 					return;
 				}
 

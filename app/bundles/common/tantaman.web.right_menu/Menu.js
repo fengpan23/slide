@@ -1,8 +1,8 @@
 define(function() {
 	function Menu(options) {
 		this.$el = $('<li><a>' + options.title + '</a></li>');
-		this.$el.click(function() {
-			options.hander();
+		this.$el.click(function(e) {
+			options.hander(e);
 		});
 		
 		return this.$el;

@@ -9,7 +9,8 @@ function(Backbone, FileUtils, lang) {
 			/*
 			TODO: handle browsers that can't do the download attribute.  Safari?
 			*/
-			this._dlSupported = window.dlSupported;
+//			this._dlSupported = window.dlSupported;
+			this._dlSupported = 'download' in document.createElement('a');
 
 			this.$el.html('<div class="alert alert-info">' + lang.strut_exporter_json.explain + '</div>');
 			if (this._dlSupported) {

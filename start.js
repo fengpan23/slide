@@ -22,6 +22,7 @@ app.get('/decks/:id', deck.findById);
 app.post('/decks', deck.addDeck);
 app.put('/decks/:id', deck.updateDeck);
 app.delete('/decks/:id', deck.deleteDeck);
+app.get('/search/:filename', deck.findByName);
 
 //app.get('/img/*/*.(jpg|png|jpeg){1}', function(req, res, next){
 //	var realpath = __dirname + '/static' + url.parse(req.url).pathname;

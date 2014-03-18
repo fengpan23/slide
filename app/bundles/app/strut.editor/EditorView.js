@@ -46,7 +46,7 @@ function(Backbone, Header, CustomBgStylesheet, InputRequestModal, lang) {
 				}
 					
 				return {
-					errors: [lang.invalid_filename]
+					errors: lang.invalid_filename
 				};
 			}, 'presentation-' + num);
 		},

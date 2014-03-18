@@ -32,7 +32,7 @@ function(ComponentView, Mixers, ManagedColorChooser) {
 		// Or maintain outer node here?
 		render: function() {
 			ComponentView.prototype.render.call(this);
-			var obj = this.model.get('markup')
+			var obj = this.model.get('markup');
 			this.$object = $(obj);
 
 			var scale = this.model.get('scale');
@@ -86,6 +86,7 @@ function(ComponentView, Mixers, ManagedColorChooser) {
 				colorChooser.show({
 					left: this.model.get('x') + this.model.get('scale').width,
 					top: this.model.get('y') - 5,
+					zIndex: 1000,
 					move: this._updateFill,
 					appendTo: '.operatingTable > .slideContainer'
 				});

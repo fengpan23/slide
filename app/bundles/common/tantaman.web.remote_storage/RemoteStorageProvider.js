@@ -73,15 +73,13 @@ define(["Q",
         },
 
         setContents: function(fname, data, cb) {
-            console.log(data);
-            console.log(fname);
-            console.log(this.deck);
-            if (data.id) {
+//            if (data.id) {
 //                this.deck.set('_id', data.id);
-                this.deck.set('_id', null);
-            } else {
-                this.deck.set('_id', this.deck.get('_id'));
-            }
+//            } else {
+//                this.deck.set('_id', null);
+////                this.deck.set('_id', this.deck.get('_id'));
+//            }
+            this.deck.set('_id', data._id);
             this.deck.set('filename', fname);
             this.deck.set('slides', data.slides);
             this.deck.set('activeSlide', data.activeSlide);
@@ -90,14 +88,19 @@ define(["Q",
             var self = this;
             this.deck.save(null, {
                 success: function(deck) {
+                	var XMLHttp = new XMLHttpRequest();
+                	var url = "http://3a.sc.lxpt.cn/index.php?option=com_lxedu&task=api.getSlideShowId&format=json&id=" +deck.id;
+                	XMLHttp.open('get', url);  
+                	XMLHttp.send(null);
                 	self.deck.set('_id',deck.id);
+                	cb(deck.id);
+                	alert("保存成功！");
                 },
                 error: function(err) {
                     cb(err);
                 }
             });
-
-            return Q(true);
+            return Q(this.deck.get('_id'));
         }
 
     };

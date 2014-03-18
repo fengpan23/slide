@@ -1,3 +1,4 @@
+<div class="errors alert-error"></div>
 <input type="text" class="fileName"></input>
 <ul class="nav nav-pills nav-stacked">
 	{{#files}}

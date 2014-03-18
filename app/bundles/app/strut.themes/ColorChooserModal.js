@@ -27,7 +27,9 @@ function(Backbone) {
 			this.$el.modal('hide');
 		},
 
-		_apply: function() {
+		_apply: function(e) {
+			e.stopPropagation();
+			e.preventDefault();
 			var c = typeof this._color == 'string' ? this._color : this._color.toHexString();
 			this._$colorChooser.spectrum('set', this._color);
 			this._cb(c);

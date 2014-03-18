@@ -301,14 +301,20 @@ define(["./ComponentView", "libs/etch",
 						if (key === "decoration" || key === "align") {
 							key = "text" + key.substring(0, 1).toUpperCase() + key.substr(1);
 						} else if (key === "size") {
-							//var selectedtext = this._getSelectedText();
+							//adjust the font-size remove height 
+							//Height is just for normal display conversion data
+							if(this.model.get('height')){
+								this.$content.css('height', '');
+								this.model.set('height', null)
+							}
 							key = "font" + key.substr(0, 1).toUpperCase() + key.substr(1);
 							var _this = this;
-							$("font,span", $(".content", this.$el)).each(function(i,n){
+							$("font,span", this.$content).each(function(i,n){
 								var currentsize =  $(n).css("font-size");
 								var temp= currentsize.substring(0, currentsize.length-2);
 								$(n).css("font-size", parseInt(temp) + _this._increment);
 							});
+							
 						}else if(key === "background"){
 							this.$content.css('background',this.model.get("background"));
 						}
@@ -317,20 +323,6 @@ define(["./ComponentView", "libs/etch",
 				}
 			},
 			
-			/**
-			 * 
-			 */
-			_getSelectedText: function(){
-				 var txt = "";
-			    if (window.getSelection) {
-			        txt = window.getSelection();
-			    } else if (window.document.getSelection) {
-			        txt = window.document.getSelection();
-			    } else if (window.document.selection) {
-			        txt = window.document.selection.createRange().text;
-			    }
-			    return txt;
-			},
 			/**
 			 * React on component's text change. Update html contents of the text box.
 			 *

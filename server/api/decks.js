@@ -54,7 +54,7 @@ exports.findAll = function(req, res) {
 
 exports.addDeck = function(req, res) {
     var deck = req.body;
-    console.log('Adding deck: ' + JSON.stringify(deck));
+//    console.log('Adding deck: ' + JSON.stringify(deck));
     db.collection('decks', function(err, collection) {
         collection.insert(deck, {
             safe: true
@@ -64,11 +64,42 @@ exports.addDeck = function(req, res) {
                     'error': 'An error has occurred'
                 });
             } else {
-                console.log('Success: ' + JSON.stringify(result[0]));
+                console.log('addDeck Success: ' + JSON.stringify(result[0]._id));
                 res.send(result[0]);
             }
         });
     });
+};
+
+exports.findByName = function(req, res) {
+	 var filename = req.params.filename;
+	    console.log('Retrieving filename:' + filename);
+	    db.collection('decks', function(err, collection) {
+	        collection.find({
+	            'filename': filename
+	        }, function(err, items) {
+	        	if(err){
+	        		 console.log('Error findByName on deck: ' + err);
+	                 res.send({
+	                     'error': 'An error has occurred'
+	                 });
+	        	}else{
+	        		if(items){
+	        			items.toArray(function(err, items) {
+	        				for(var i in items){
+	        					console.log(items[i]._id);
+	        					res.send({id: items[i]._id});
+	        				}
+						})
+//	        			res.send({id: item._id});
+	        		}else{
+	        			res.send({
+		                     'notFind': 'No such this name as god'
+		                 });
+	        		}
+	        	}
+	        });
+	    });
 };
 
 exports.updateDeck = function(req, res) {

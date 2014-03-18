@@ -2,8 +2,9 @@ define(["./ComponentView", "libs/etch",
 	"strut/deck/ComponentCommands",
 	"tantaman/web/widgets/TableAdjust",
 	"tantaman/web/undo_support/CmdListFactory",
-	"tantaman/web/interactions/TouchBridge"],
-	function(ComponentView, etch, ComponentCommands, TableAdjust, CmdListFactory, TouchBridge) {
+	"tantaman/web/interactions/TouchBridge",
+	"tantaman/web/widgets/RightMenu",],
+	function(ComponentView, etch, ComponentCommands, TableAdjust, CmdListFactory, TouchBridge, RightMenu) {
 		'use strict';
 		var undoHistory = CmdListFactory.managedInstance('editor');
 		var styles;
@@ -48,9 +49,14 @@ define(["./ComponentView", "libs/etch",
 				this.model.on("change:table", this._tableChanged, this);
 				this.model.on("change:width", this._widthChanged, this);
 				this.model.on("change:height", this._heightChanged, this);
+				this.model.on("change:background", this._backgroundChanged, this);
+				
 				this._lastDx = 0;
 				this.keydown = this.keydown.bind(this);
-
+				
+				this._rightMenu = this._rightMenu.bind(this);
+				this.$el.on("contextmenu", this._rightMenu);
+				
 				this.dblclicked = this.dblclicked.bind(this);
 				TouchBridge.on.dblclick(this.$el, this.dblclicked);
 
@@ -59,6 +65,22 @@ define(["./ComponentView", "libs/etch",
 				// $(document).bind("keydown", this.keydown);
 
 				this.model.on("edit", this.edit, this);
+			},
+			
+			/**
+			 * right menu function option
+			 * @param nothing
+			 * @private
+			 */
+			_rightMenu: function(e) {
+				var menu = new RightMenu({model: this.model});
+				if(menu){
+					menu.render($(e.target));
+					menu.show(e);
+					return false;
+				}else{
+					return ture;
+				}
 			},
 			
 			tableAdjustInit: function(){
@@ -80,6 +102,10 @@ define(["./ComponentView", "libs/etch",
 				}else{
 					this.dispose = true;
 				}
+			},
+			
+			_backgroundChanged: function() {
+				this.$content.find('table').css('background', this.model.get('background'));
 			},
 			
 			_widthChanged: function() {
@@ -238,7 +264,7 @@ define(["./ComponentView", "libs/etch",
 				var text;
 				text = this.$content.html();
 				this.editing = false;
-				if (text === "") {
+				if (text === "" || $(text).find('td').length < 1) {
 					return this.remove();
 				} else {
 					var cmd = ComponentCommands.Text(this._initialText, this.model);
@@ -307,6 +333,9 @@ define(["./ComponentView", "libs/etch",
 			 * @private
 			 */
 			_tableChanged: function(model, table) {
+				if($(table).find('td').length < 1 || $(table).find('tr').length < 1){
+					return this.remove();
+				}
 				this.$content.html(table);
 			},
 
@@ -341,6 +370,7 @@ define(["./ComponentView", "libs/etch",
 					self._handlePaste(this, e);
 				});
 				this.$content.html(this.model.get("table"));
+				
 				//$('.rightLabel', this.$content.parent().parent()).show();
 				this.$el.css({
 					// color: "#" + this.model.get("color"),

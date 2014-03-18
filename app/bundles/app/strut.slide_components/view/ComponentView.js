@@ -601,6 +601,7 @@ define(["libs/backbone",
 				this.$content = this.$el.find(".content");
 				this.$content.addClass(this.model.customClasses());
 				this.$content.css("width", this.model.get("width"));
+				this.$content.css("height", this.model.get("height"));
 				this.$contentScale = this.$el.find(".content-scale");
 				this._selectionChanged(this.model, this.model.get("selected"));
 				this.$xInput = this.$el.find("[data-option='x']");

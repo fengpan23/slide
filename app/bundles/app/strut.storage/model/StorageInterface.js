@@ -48,12 +48,10 @@ function(StorageProviders) {
 		currentProviderId: function() {
 			return this._providers._currentProviderId;
 		},
-	/*
 		
-			currentDeckId: function(deck_id){
-				this.currentProvider().currentDeckId(deck_id);			
-			},
-	*/
+		currentDeckId: function(deck_id){
+			this.currentProvider().currentDeckId(deck_id);			
+		},
 		
 		
 		on: function() {
@@ -64,7 +62,7 @@ function(StorageProviders) {
 			if (data instanceof Blob) {
 				throw "Use storeAttachment for saving blobs";
 			} else {
-				if (!options || options.json == null)
+				if (!options)
 					options = {json: true};
 				return this.currentProvider().setContents(identifier, data, options);
 			}
@@ -85,26 +83,26 @@ function(StorageProviders) {
 			// for the given identifier
 		},
 
-		storeAttachment: function(docKey, attachKey, blob) {
-			// stores a blob
-			return this.currentProvider().setAttachment(docKey, attachKey, blob);
-		},
-
-		removeAttachment: function(docKey, attachKey) {
-			return this.currentProvider().rmAttachment(docKey, attachKey);
-		},
-
-		getAttachmentURL: function(docKey, attachKey) {
-			return this.currentProvider().getAttachmentURL(docKey, attachKey);
-		},
-
-		revokeAllAttachmentURLs: function() {
-			this.currentProvider().urlCache.revokeAllCachedURLs();
-		},
-
-		revokeAttachmentURL: function(docKey, attachKey) {
-			return this.currentProvider().revokeAttachmentURL(docKey, attachKey);
-		},
+//		storeAttachment: function(docKey, attachKey, blob) {
+//			// stores a blob
+//			return this.currentProvider().setAttachment(docKey, attachKey, blob);
+//		},
+//
+//		removeAttachment: function(docKey, attachKey) {
+//			return this.currentProvider().rmAttachment(docKey, attachKey);
+//		},
+//
+//		getAttachmentURL: function(docKey, attachKey) {
+//			return this.currentProvider().getAttachmentURL(docKey, attachKey);
+//		},
+//
+//		revokeAllAttachmentURLs: function() {
+//			this.currentProvider().urlCache.revokeAllCachedURLs();
+//		},
+//
+//		revokeAttachmentURL: function(docKey, attachKey) {
+//			return this.currentProvider().revokeAttachmentURL(docKey, attachKey);
+//		},
 
 		list: function(path) {
 			return this.currentProvider().ls(path);
@@ -114,13 +112,13 @@ function(StorageProviders) {
 			return this.currentProvider().ls();
 		},
 
-		savePresentation: function(identifier, data) {
+		savePresentation: function(identifier, data, options) {
 			// var idx = identifier.indexOf('.strut');
 			// if (idx == -1 || (idx + '.strut'.length != identifier.length)) {
 			// 	identifier += '.strut';
 			// }
 			window.sessionMeta.lastPresentation = identifier;
-			return this.store(identifier, data)
+			return this.store(identifier, data, options)
 		}
 	};
 

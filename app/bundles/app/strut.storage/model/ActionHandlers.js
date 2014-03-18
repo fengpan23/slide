@@ -4,19 +4,34 @@ function() {
 	function saveCurrentPresentation(storageInterface, model) {
 		return storageInterface
 			.savePresentation(model.fileName(),
-							  model.exportPresentation(model.fileName()));
+							  model.exportPresentation(model.fileName()), model.currentDeckId);
 	}
 
 	return {
-		save_as: function(storageInterface, model, filename, cb) {
-			if (storageInterface.ready())
-				model._manualSaver.save();  //when save as another save current
-				storageInterface.savePresentation(filename, model.exportPresentation(filename));
+		save: function(storageInterface, model, filename, cb) {
+			if (storageInterface.ready()){
+//				model._manualSaver.save();  //when save as another save current
+				storageInterface.currentDeckId(model._deck.get('_id'));
+				storageInterface.savePresentation(filename, model.exportPresentation(filename), model.currentDeckId);
 				if(cb){
 					cb(null);
 				}
+			}
 		},
-
+		
+		save_as: function(storageInterface, model, filename, cb) {
+			if(model._deck.get('_id')){
+				storageInterface.currentDeckId();
+			};
+			if (storageInterface.ready()){
+//				model._manualSaver.save();  //when save as another save current
+				storageInterface.savePresentation(filename, model.exportPresentation(filename), model.currentDeckId);
+				if(cb){
+					cb(null);
+				}
+			}
+		},
+		
 		open: function(storageInterface, model, filename, cb) {
 			// When opening a new presentation:
 

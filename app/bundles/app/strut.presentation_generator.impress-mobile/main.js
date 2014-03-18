@@ -3,7 +3,7 @@ function(ImpressGenerator) {
 	'use strict';
 
 	var service = {
-		displayName: 'Impress (mobile)',
+		displayName: 'Impress(m)',
 		shortname: 'Impress(m)',
 		file: 'impress',
 		id: 'impressm',
