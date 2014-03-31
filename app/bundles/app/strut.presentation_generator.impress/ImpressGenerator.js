@@ -12,8 +12,22 @@ function(Handlebars, Math2, marked, DeckUtils) {
 				result = "";
 				if (ignore && typeof ignore == 'string') {
 					ignore = ignore.split(" ");
-					if (ignore.indexOf(componentModel.get("type")) != -1)
+					if (ignore.indexOf(componentModel.get("type")) != -1){
+//						switch (componentModel.get("type")) {
+//							case "Video":
+//								if (componentModel.get("videoType") === "html5") {
+//									result = JST["strut.presentation_generator.impress/VideoXM"](componentModel);
+//								} else {
+//									result = JST["strut.presentation_generator.impress/YoutubeXM"](componentModel);
+//								}
+//								break;
+//							case "WebFrame":
+//								result = JST["strut.presentation_generator.impress/WebFrameXM"](componentModel);
+//								break;
+//						}
+//						return new Handlebars.SafeString(result);
 						return result;
+					}
 				}
 				switch (componentModel.get("type")) {
 					case "Image":
@@ -82,22 +96,22 @@ function(Handlebars, Math2, marked, DeckUtils) {
 
 			Handlebars.registerHelper("determineBG", function(slide, deck) {
 				var bg = DeckUtils.slideBackground(slide, deck, {surfaceForDefault: true, transparentForSurface: true});
-				if (bg && bg.indexOf('img:') == 0)
+				if (bg && bg.indexOf('data:image') == 0)
 					return '';
 				return bg;
 			});
 
 			Handlebars.registerHelper("determineSurface", function(slide, deck) {
 				var bg = DeckUtils.slideSurface(slide, deck);
-				if (bg && bg != 'bg-default' && bg.indexOf('img:') == -1)
+				if (bg && bg != 'bg-default' && bg.indexOf('data:image') == -1)
 					return ' ' + bg + ' ';
 				return '';
 			});
 
 			Handlebars.registerHelper("slideBGImg", function(slide) {
 				var bg = slide.get('background');
-				if (bg && bg.indexOf('img:') == 0)
-					return 'background-image: url(' + bg.substring(4) + ');';
+				if (bg && bg.indexOf('data:image') == 0)
+					return 'background-image: url(' + bg + ');';
 				return '';
 			});
 
@@ -118,7 +132,7 @@ function(Handlebars, Math2, marked, DeckUtils) {
 			});
 
 			Handlebars.registerHelper("isBGImg", function(string, options) {
-				if (string && string.indexOf("img:") == 0) {
+				if (string && string.indexOf("data:image") == 0) {
 					return options.fn(this);
 				} else {
 					return options.inverse(this);
@@ -126,7 +140,7 @@ function(Handlebars, Math2, marked, DeckUtils) {
 			});
 
 			Handlebars.registerHelper("isBGClass", function(string, options) {
-				if (string && string.indexOf("img:") == 0) {
+				if (string && string.indexOf("data:image") == 0) {
 					return options.inverse(this);
 				} else {
 					return options.fn(this);
@@ -134,7 +148,7 @@ function(Handlebars, Math2, marked, DeckUtils) {
 			});
 
 			Handlebars.registerHelper("getBGImgStyle", function(string) {
-				return 'background-image: url(' + string.substring(4) + ');';
+				return 'background-image: url(' + string + ');';
 			});
 
 			var counters = {};

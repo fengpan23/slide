@@ -98,6 +98,7 @@ function(EditorView, EditorModel, lls, URLCache) {
 				initializeStorage().then(function() {
 					editModel.importPresentation(deck);
 					$(window).unload(function() {
+//						window.location.hash = '';  //Remove the url parameter to prevent refreshed pull database data
 						localStorage.setItem('Strut_sessionMeta', JSON.stringify(window.sessionMeta));
 					});
 				}, function(err) {

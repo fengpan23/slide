@@ -177,7 +177,7 @@ var ready = (function(){
                 String( obj ) :
                 class2type[ Object.prototype.toString.call(obj) ] || "object";
         }
-    }
+    };
     // The DOM ready check for Internet Explorer
     function doScrollCheck() {
         if ( ReadyObj.isReady ) {

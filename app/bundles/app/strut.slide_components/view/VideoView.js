@@ -32,10 +32,60 @@ define(["./ComponentView", "tantaman/web/widgets/VideoControl", './Mixers'],
 					_this._finishRender($(this));
 				});
 				this.$el.find(".content").append($video);
+				
+//				
+//				this._drawImage = this._drawImage.bind(this);
+//				this._drawImageEnd = this._drawImageEnd.bind(this);
+//				
+//				$video.on('play', this._drawImage);
+//				$video.on('pause', this._drawImageEnd);
+//				$video.on('ended', this._drawImageEnd);
+//				
+//				this.video = $video[0];
+////				var $canvas = $('<canvas id="myCanvas" width="270" height="135" style="border:1px solid #d3d3d3;">Your browser does not support the HTML5 canvas tag.</canvas>');
+//				var oCanvas = document.createElement("canvas");
+//				oCanvas.id = 'myoCanvas';
+//				$('body').append(oCanvas);
+				
+//				this.oCanvas = $canvas[0];
+//				this.ctx = oCanvas.getContext('2d');
+				
 				console.time('new VideoControl');
 				var videoControl = new VideoControl({$el: this.$el});
 				console.timeEnd('new VideoControl');
 				return this.$el;
+			},
+			
+			_drawImage: function() {
+//				snapshoot
+				console.log('dddddddddddddd');
+//				var video = this.$el.find('video')[0];
+//				var video = $('video')[0];
+//				var oCanvas = document.createElement("canvas");
+//				oCanvas.height = video.videoHeight;
+//				oCanvas.width = video.videoWidth;
+//				$('body').append(oCanvas);
+//				var ctx = oCanvas.getContext('2d');
+				
+				var self = this;
+				this._draw = setInterval(function() {
+//					console.log(video);
+//					console.log(ctx);
+					self.ctx.drawImage(self.video, 0, 0, 270, 135, 10, 10, 10,10);
+//					var img = oCanvas.toDataURL("image/png");
+//					console.log(oCanvas);
+				}, 200);
+			},
+			
+			_drawImageEnd: function() {
+				console.log('ssss');
+				clearInterval(this._draw);
+				
+				this.ctx.save();
+				
+//				var dataURL = this.oCanvas.toDataURL("image/png");
+				var temp = $('#myoCanvas')[0].toDataURL("image/png");
+//				var temp = this.oCanvas.toDataURL("image/png");
 			},
 
 			/**

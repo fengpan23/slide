@@ -87,12 +87,12 @@ define(['./view/ComponentButton',
 					editorModel: editorModel
 				}));
 
-				buttons.push(new ShapesDropdown(
-					availableShapes,
-					JST['strut.slide_components/ShapesDropdown'],
-					{class: 'group-dropdown hidden-phone',
-						editorModel: editorModel}
-				));
+//				buttons.push(new ShapesDropdown(
+//					availableShapes,
+//					JST['strut.slide_components/ShapesDropdown'],
+//					{class: 'group-dropdown hidden-phone',
+//						editorModel: editorModel}
+//				));
 
 				return buttons;
 			}

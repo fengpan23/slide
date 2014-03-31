@@ -132,7 +132,9 @@ define(["common/Calcium",
 
 				// TODO: go through and dispose of all old slides...?
 				slides.reset(rawObj.slides);
-
+				if(rawObj.slides.length < 1){
+					this.create();
+				}
 				bgs.deck = this;
 				bgs.prune();
 			},

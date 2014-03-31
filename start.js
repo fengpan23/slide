@@ -1,13 +1,16 @@
 var express = require('express'),
     path = require('path'),
-    http = require('http'),
+    http = require('http');
 //	fs = require('fs'),
 //	url = require('url'),
-	deck = require('./server/api/decks');
+
+var foreignAPI = require('./server/api/foreignAPI');
+var internalAPI = require('./server/api/internalAPI');
 
 var app = express();
 
 app.configure(function () {
+	app.set("jsonp callback", true);
     app.set('port', process.env.PORT || 5858);
     app.use(express.logger('dev'));  /* 'default', 'short', 'tiny', 'dev' */
     app.use(express.bodyParser({limit: '50mb'})), // parses request body and populates req.body Request Entity limit 5mb
@@ -17,12 +20,19 @@ app.configure(function () {
     app.use(express.errorHandler({ dumpExceptions:true, showStack:true })); // Show all errors
 });
 
-app.get('/decks', deck.findAll);
-app.get('/decks/:id', deck.findById);
-app.post('/decks', deck.addDeck);
-app.put('/decks/:id', deck.updateDeck);
-app.delete('/decks/:id', deck.deleteDeck);
-app.get('/search/:filename', deck.findByName);
+app.get('/decks/:id', internalAPI.findById);
+app.post('/decks', internalAPI.addDeck);
+app.put('/decks/:id', internalAPI.updateDeck);
+app.delete('/decks/:id', internalAPI.deleteDeck);
+
+app.get('/all', internalAPI.findAllDeck);
+
+app.get('/api/delete/:id', foreignAPI.deleteDeck);
+app.get('/api/search/:searchTag/:skip/:limit', foreignAPI.findByTag);
+app.get('/api/adddeck', foreignAPI.addDeck);
+app.get('/api/all', foreignAPI.findAllDeck);
+//app.get('/api/find/:filename', foreignAPI.findByName);
+
 
 //app.get('/img/*/*.(jpg|png|jpeg){1}', function(req, res, next){
 //	var realpath = __dirname + '/static' + url.parse(req.url).pathname;

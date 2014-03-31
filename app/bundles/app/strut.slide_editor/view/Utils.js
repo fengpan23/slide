@@ -19,13 +19,16 @@ define({
 		}
 
 		var scaledWidth = scale * slideSize.width;
+		var scaledHeight = scale * slideSize.height;
 
 		var remainingWidth = width - scaledWidth;
+//		var remainingHeight = height - scaledHeight;
 
 		return {
 			scale: scale,
+			scaledWidth: scaledWidth,
 			remainingWidth: remainingWidth,
-			scaledWidth: scaledWidth
+//			remainingHeight: remainingHeight
 		}
 	}
 });

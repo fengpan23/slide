@@ -18,6 +18,8 @@ define([
 	'strut/transition_editor/main',
 	'strut/slide_components/main',
 	'strut/well_context_buttons/main',
+	'strut/drawers/main',
+	
 	// 'tantaman/web/local_storage/main', // LLS is being set up in main.
 	'tantaman/web/remote_storage/main',
 	'strut/startup/main'

@@ -64,6 +64,7 @@ define(["./ComponentView", './Mixers'],
 			_finishRender: function($img) {
 				var height, naturalHeight, naturalWidth, scale, width;
 				if(this.model.get("height")){
+					console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
 					naturalHeight = this.model.get("height");
 					if(this.model.get("width")){
 						naturalWidth = this.model.get("width");
@@ -103,6 +104,19 @@ define(["./ComponentView", './Mixers'],
 					};
 					$img[0].width = naturalWidth;
 					$img[0].height = naturalHeight;
+					if(!(this.model.get("scale").width || this.model.get("scale").height)){
+						if(naturalWidth > 768 || naturalHeight > 576){
+							var loxm = (naturalWidth / 768) > (naturalHeight / 576) ? (768 / naturalWidth) : (576 / naturalHeight);
+							var scale = {
+									x: loxm,
+									y: loxm
+							};
+							
+							scale.width = scale.x * naturalWidth;
+							scale.height = scale.y * naturalHeight;
+							this.model.set("scale", scale);
+						}
+					}
 					this._setUpdatedTransform();
 				}
 				$img.bind("dragstart", function(e) {

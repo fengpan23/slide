@@ -305,7 +305,7 @@ define(["./ComponentView", "libs/etch",
 							//Height is just for normal display conversion data
 							if(this.model.get('height')){
 								this.$content.css('height', '');
-								this.model.set('height', null)
+								this.model.set('height', null);
 							}
 							key = "font" + key.substr(0, 1).toUpperCase() + key.substr(1);
 							var _this = this;

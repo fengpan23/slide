@@ -44,7 +44,7 @@ define(["libs/backbone",
 					"deltadragStop span[data-delta='scale']": "scaleStop",
 					'destroyed': 'remove',
 					'click .align': 'center'
-				}
+				};
 			},
 
 			/**
@@ -273,6 +273,8 @@ define(["libs/backbone",
 			 * @param {Event} e
 			 */
 			dragStart: function(e) {
+				console.log(window.browserPrefix);
+				
 				this.dragScale = this.$el.parent().css(window.browserPrefix + "transform");
 				this.dragScale = parseFloat(this.dragScale.substring(7, this.dragScale.indexOf(","))) || 1;
 				this._dragging = true;
@@ -382,7 +384,7 @@ define(["libs/backbone",
 			center: function(e) {
 				var axis = e.target.getAttribute("data-option");
 				getAxis = function(axis, e) {
-					return axis == 'x' ? e.width() : e.height()
+					return axis == 'x' ? e.width() : e.height();
 				};
 				var slideSize = getAxis(axis, this.$el.parent('.slideContainer'));
 				var textSize = getAxis(axis, this.$el);
@@ -581,7 +583,6 @@ define(["libs/backbone",
 			scaleStop: function() {
 				var cmd = new ComponentCommands.Scale(this._initialScale, this.model);
 				undoHistory.push(cmd);
-				
 			},
 
 			/**
@@ -643,6 +644,8 @@ define(["libs/backbone",
 						height: newHeight
 					});
 				}
+				
+				console.log(window.browserPrefix);
 				if (scale != null) {
 					this.$contentScale.css(window.browserPrefix + "transform", "scale(" + scale.x + "," + scale.y + ")");
 				}

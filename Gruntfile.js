@@ -79,8 +79,8 @@ module.exports = function (grunt) {
         },
         connect: {
             options: {
-                port: 9999,
-                // change0 this to '0.0.0.0' to access the server from outside
+                port: 5858,
+                // change this to '0.0.0.0' to access the server from outside
                 hostname: '0.0.0.0'
             },
             livereload: {
@@ -115,6 +115,9 @@ module.exports = function (grunt) {
             }
         },
         open: {
+//        	target: 'http://localhost:8888', // target url to open
+//        	appName: 'open', // name of the app that opens, ie: open, start, xdg-open
+//        	callback: function() {} // called when the app has opened
             server: {
                 path: 'http://localhost:<%= connect.options.port %>'
             }
@@ -288,7 +291,9 @@ module.exports = function (grunt) {
 
     // grunt.renameTask('regarde', 'watch');
 
-    grunt.registerTask('server', function (target) {
+    grunt.registerTask('start', function (target) {
+		console.log("****************** start ***************");
+	
         if (target === 'dist') {
             return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
         }

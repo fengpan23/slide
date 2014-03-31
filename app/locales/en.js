@@ -33,10 +33,18 @@ define({
 		explain: 'This allows you to save a file on your computer that you can import back into Strut later.',
 		click_below: 'Click below to download'
 	},
+	setbgcolor: 'set background',
+	setLineSpacing: 'set line Spacing',
 	background: 'Background',
 	surface: 'Surface',
 	invalid_filename: 'Invalid Filename',
 	new_presentation: 'New Presentation',
+	insert_L: 'insert line left',
+	insert_R: 'insert line right',
+	insert_T: 'insert rows above',
+	insert_U: 'insert rows below',
+	delete_R: 'delete rows',
+	delete_L: 'delete line',
 	name: 'Name',
 	create_presentation: 'Create Presentation'
 });

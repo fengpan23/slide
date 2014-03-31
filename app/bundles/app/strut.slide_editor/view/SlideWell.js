@@ -52,6 +52,14 @@ define(['libs/backbone',
 				GlobalEvents.on('delete', this._delete, this);
 
 				this._clipboard = this._editorModel.clipboard;
+				
+				// size setting
+	            this._resize = this._resize.bind(this);
+	            $(window).resize(this._resize);
+				var self = this;
+				setTimeout(function() {
+					self._resize();
+				}, 50);
 			},
 
 			/**
@@ -63,6 +71,21 @@ define(['libs/backbone',
 			_focused: function(e) {
 				this._editorModel.set('scope', 'slideWell');
 			},
+			
+	        _resize: function() {
+				var height = $('.operatingTable').height();
+				if(!height){
+					var scale = this.__matrixToArray($('.slideContainer').css(window.browserPrefix + 'transform'));
+					height = config.slide.size.height;
+					if (scale) {
+						height *= scale[3];
+					}
+				}
+//				if(height > config.slide.size.height){
+//					height = config.slide.size.height;
+//				}
+				this.$el.css('height', height);
+	        },
 
 			/**
 			 * React on Cut shortcut.
@@ -252,6 +275,7 @@ define(['libs/backbone',
 			 * @returns {*}
 			 */
 			render: function() {
+				this.$el.addClass('hidden-phone');
 				this.$slides.html('');
 				this.$el.html(this.$slides);
 				this._deck.get('slides').forEach(function(slide) {
@@ -271,6 +295,7 @@ define(['libs/backbone',
 			 * Dispose slide well.
 			 */
 			dispose: function() {
+				$(window).unbind('resize', this._resize);
 				this._deck.off(null, null, this);
 				this._contextMenu.dispose();
 				GlobalEvents.off(null, null, this);

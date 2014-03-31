@@ -1,0 +1,10 @@
+<div class="container">
+    <ul class="footer-title unstyled">
+        {{!--<li>课件名： <strong>{{filename}}</strong></li>--}}
+        <li>课件名：<strong>这里显示文件名</strong></li>
+    </ul>
+    <ul class="footer-links unstyled inline">
+        {{!--<li class="about-link">上次修改时间： {{last_modified}}</li>--}}
+        <li class="about-link">上次修改时间： 昨天</li>
+    </ul>
+</div>

@@ -20,8 +20,9 @@ function() {
 		},
 		
 		save_as: function(storageInterface, model, filename, cb) {
+			storageInterface.selectProvider("remotestorage");
 			if(model._deck.get('_id')){
-				storageInterface.currentDeckId();
+				storageInterface.currentDeckId(null);
 			};
 			if (storageInterface.ready()){
 //				model._manualSaver.save();  //when save as another save current

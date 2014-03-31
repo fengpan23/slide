@@ -46,6 +46,7 @@ define(["./Menu", "lang"],function(Menu, lang) {
 		for(var li in menulist){
 			this.$el.append(new Menu(menulist[li]));
 		}
+		this.$el.find("li:contains(" + lang.setbgcolor + ")").addClass('dropdown-submenu').append('<ul class="dropdown-menu"><li>aaa</li><li>bbb</li></ul>');
 	}
 
 	TableMenu.prototype = {

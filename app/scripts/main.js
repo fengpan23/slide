@@ -32,6 +32,7 @@ require.config({
 		'strut/exporter' : '../bundles/app/strut.exporter',
 		'strut/exporter/json' : '../bundles/app/strut.exporter.json',
 		'strut/header' : '../bundles/app/strut.header',
+		'strut/footer' : '../bundles/app/strut.footer',
 		'strut/importer' : '../bundles/app/strut.importer',
 		'strut/importer/json' : '../bundles/app/strut.importer.json',
 		'strut/presentation_generator/impress' : '../bundles/app/strut.presentation_generator.impress',
@@ -46,6 +47,7 @@ require.config({
 		'strut/well_context_buttons' : '../bundles/app/strut.well_context_buttons',
 		'strut/config' : '../bundles/app/strut.config',
 		'strut/transition_editor' : '../bundles/app/strut.transition_editor',
+		'strut/drawers' : '../bundles/app/strut.drawers',
 
 		'tantaman/web' : '../bundles/common/tantaman.web',
 		'tantaman/web/local_storage' : '../bundles/common/tantaman.web.local_storage',
@@ -189,9 +191,10 @@ log.err = function(msg) {
 };
 
 log.notice = function(msg) {
-	if (log.enabled.notice)
+	if (log.enabled.notice){
 		console.log(msg);
-}
+	}
+};
 
 window.URL = window.URL || window.webkitURL;
 
@@ -209,14 +212,16 @@ require(['libs/backbone', 'handlebars', 'lang', 'compiled-templates', 'colorpick
 	window._gaq = window._gaq || [];
 
 	var agent = window.navigator.userAgent;
+	console.log(agent);
+	
 	if (agent.indexOf('WebKit') >= 0)
-		window.browserPrefix = "-webkit-"
+		window.browserPrefix = "-webkit-";
 	else if (agent.indexOf('MSIE') >= 0)
-		window.browserPrefix = "-ms-"
+		window.browserPrefix = "-ms-";
 	else if (agent.indexOf('Mozilla') >= 0)
-		window.browserPrefix = "-moz-"
+		window.browserPrefix = "-moz-";
 	else
-		window.browserPrefix = ""
+		window.browserPrefix = "";
 
 	Handlebars.registerHelper("either", function(a, b) {
 		return b != null ? b : a;

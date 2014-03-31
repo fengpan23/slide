@@ -28,7 +28,7 @@ define(['libs/backbone',
 				this._fontState = window.sessionMeta.fontState || {};
 				this._deck = new Deck();
 				this._deck.on('change:customBackgrounds', function(deck, bgs) {
-					this.trigger('change:customBackgrounds', this, bgs)
+					this.trigger('change:customBackgrounds', this, bgs);
 				}, this);
 				this.addSlide();
 
@@ -52,7 +52,7 @@ define(['libs/backbone',
 					this._exitSaver = savers.exitSaver(this.exportable, {
 						identifier: 'strut-exitsave', 
 						cb: function() {
-							window.sessionMeta.lastPresentation = self.exportable.identifier()
+							window.sessionMeta.lastPresentation = self.exportable.identifier();
 						}
 					});
 					this._timedSaver = savers.timedSaver(this.exportable, 20000, storageInterface);
@@ -85,7 +85,7 @@ define(['libs/backbone',
 			},
 
 			dispose: function() {
-				throw "EditorModel can not be disposed yet"
+				throw "EditorModel can not be disposed yet";
 				this._exitSaver.dispose();
 				this._timedSaver.dispose();
 				Backbone.off(null, null, this);
@@ -108,7 +108,7 @@ define(['libs/backbone',
 	        		filename: name,
 	        		slides: []
 	      		});
-				this._deck.create();
+//				this._deck.create();
 			},
 
 			/**
@@ -148,9 +148,37 @@ define(['libs/backbone',
 
 				// Set the generation id for the deck.
 				// A higher genid means its a newer version of the presentation.
+				
+				//TODO Generate active page snapshots
+//				var img = this.mslide(this._deck);
+//				if(img){
+//					var w=window.open('about:blank'); 
+//					w.document.write("<img src='"+img+"' alt='from canvas'/>"); 
+//				}
+				this._deck.set('picture', this.mslide(this._deck));
 				this._deck.set('__genid', genid);
 				var obj = this._deck.toJSON(false, true);
 				return obj;
+			},
+			
+			mslide: function(deck){
+				var oCanvas = document.createElement("canvas");
+					oCanvas.width = 1024;
+					oCanvas.height = 768;
+				var g2d = oCanvas.getContext("2d");
+				var SlideDrawer = this.registry.getBest('strut.SlideDrawer');
+				var draw = new SlideDrawer(deck.get('activeSlide'), g2d, this.registry);
+				
+				var bg = deck.get('activeSlide').get('background') || deck.get('background') || deck.get('surface');
+				if(bg){
+					console.log(bg);
+					bg = bg.split('-')[2] || (deck.get('background') ? deck.get('background') : 'no').split('-')[2];
+				}else{
+					bg = '#F0F0F0';
+				}
+				draw._paint(bg);
+				return draw._toImage(oCanvas, 128, 96);
+//				return oCanvas;
 			},
 			
 			fileName: function() {

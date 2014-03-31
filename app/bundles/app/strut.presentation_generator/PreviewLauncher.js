@@ -21,10 +21,20 @@ define(function() {
 			//use FileSystem Temporarily saved data to support  greater than 5MB
 			this.previewStr = generator.generate(this._editorModel.deck());
 			var self = this;
-			window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;  
+
+			// To access the sandboxed file system (meaning two or more apps canÃ¢t access each others files) you need to initialize the FileSystem object:
+			 
+//			if('webkitRequestFileSystem' in window){
+				window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem || window.moz_requestFileSystem;
+//			}else if('moz_requestFileSystem' in window){
+			    //firefox
+//			    window.requestFileSystem = window.moz_requestFileSystem;
+//			}else{
+			    //this browser is not suported
+//			}
 			window.requestFileSystem(window.TEMPORARY, 5*1024*1024 , function(fs) {
 			
-		      fs.root.getFile('_previousView.txt', {create: true}, function(fileEntry) {
+				fs.root.getFile('_previousView.txt', {create: true}, function(fileEntry) {
 					fileEntry.createWriter(function(fileWriter) {
 				    	fileWriter.onwriteend = function(e) {
 				    		console.log('Write completed.');
@@ -36,7 +46,7 @@ define(function() {
 				    	var blob = new Blob([self.previewStr], {type: 'text/plain'});
 				    	fileWriter.write(blob);
 				    }, errorHandler);
-		      }, errorHandler);
+				}, errorHandler);
 			}, errorHandler);
 			
 			var errorHandler = function(e) {

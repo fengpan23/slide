@@ -1,13 +1,16 @@
 define(['libs/backbone',
 		'strut/header/view/HeaderView',
+		'strut/footer/view/FooterView',
 		'./CustomBgStylesheet',
 		'tantaman/web/widgets/InputRequestModal',
 		'lang'],
-function(Backbone, Header, CustomBgStylesheet, InputRequestModal, lang) {
+function(Backbone, Header, Footer, CustomBgStylesheet, InputRequestModal, lang) {
 	return Backbone.View.extend({
 		className: 'container-fluid',
 		initialize: function() {
 			this._header = new Header({model: this.model.get('header')});
+			
+			this._footer = new Footer({model: this.model._deck});
 
 			this.model.on('change:activeMode', this._modeChanged, this);
 			this.model.on('newPresentationDesired', this._newPresentationDesired, this);
@@ -31,7 +34,7 @@ function(Backbone, Header, CustomBgStylesheet, InputRequestModal, lang) {
 				this.$el.append(activeMode.view.render().$el);
 			else
 				this._renderNoMode();
-
+			this.$el.append(this._footer.render().$el);
 			return this;
 		},
 
@@ -52,7 +55,9 @@ function(Backbone, Header, CustomBgStylesheet, InputRequestModal, lang) {
 		},
 
 		_modeChanged: function(undefined, mode) {
+			this._footer.dispose();
 			this.$el.append(mode.view.render().$el);
+			this.$el.append(this._footer.render().$el);
 		},
 
 		_renderNoMode: function() {

@@ -25,47 +25,47 @@ included for legacy support of old decks with the defaultbg attribute set.
 }
 
 .bg-solid-orange {
-	background-color: #774040;
+	background-color: #FFA500;
 }
 
 .bg-solid-black {
-	background-color: #222;
+	background-color: #000000;
 }
 
-.bg-solid-light {
+.bg-solid-white {
 	background-color: white;
 }
 
-.bg-solid-smoke {
-	background-color: #DDD;
+.bg-solid-WhiteSmoke {
+	background-color: #F5F5F5;
 }
 
 .bg-solid-yellow {
-	background-color: #D1B377;
+	background-color: #FFFF00;
 }
 
-.bg-solid-grass {
-	background-color: #597847;
+.bg-solid-LimeGreen {
+	background-color: #32CD32;
 }
 
 .bg-solid-darkgreen {
-	background-color: #134952;
+	background-color: #006400;
 }
 
-.bg-solid-sky {
-	background-color: #515E99;
+.bg-solid-SkyBlue {
+	background-color: #87CEEB;
 }
 
 .bg-solid-lavender {
-	background-color: #443C4D;
+	background-color: #E6E6FA;
 }
 
 .bg-solid-purple {
-	background-color: #6C478F;
+	background-color: #800080;
 }
 
 .bg-solid-salmon {
-	background-color: #C98D8D;
+	background-color: #FA8072;
 }
 
 .nobg {

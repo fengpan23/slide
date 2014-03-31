@@ -73,13 +73,13 @@ define(["Q",
         },
 
         setContents: function(fname, data, cb) {
+        	
 //            if (data.id) {
 //                this.deck.set('_id', data.id);
 //            } else {
 //                this.deck.set('_id', null);
 ////                this.deck.set('_id', this.deck.get('_id'));
 //            }
-            this.deck.set('_id', data._id);
             this.deck.set('filename', fname);
             this.deck.set('slides', data.slides);
             this.deck.set('activeSlide', data.activeSlide);
@@ -88,13 +88,29 @@ define(["Q",
             var self = this;
             this.deck.save(null, {
                 success: function(deck) {
+                	console.log(deck);
                 	var XMLHttp = new XMLHttpRequest();
-                	var url = "http://3a.sc.lxpt.cn/index.php?option=com_lxedu&task=api.getSlideShowId&format=json&id=" +deck.id;
+                	
+                	var picture = deck.get('picture').replace(/\+/g,"%2B");
+                	
+                	var url = "http://3a.sc.lxpt.cn/index.php?option=com_lxedu&task=api.getSlideShowId&format=json&filename=" + deck.get('filename') + "&id=" +deck.id + "&picture=" + picture;
+                	
+//                	XMLHttp.setRequestHeader("POWERED-BY-MENGXIANHUI", "Approve");  
+//                	XMLHttp.setRequestHeader("Content-Type", "application/xml"); 
+                	
                 	XMLHttp.open('get', url);  
+                	XMLHttp.onreadystatechange = function() {
+                		  if (XMLHttp.readyState === 4) {
+                		   console.log(XMLHttp);
+                		  }else{
+                			  console.log('XMLHttp open error: ' + XMLHttp.readyState);
+                		  }
+                	}
                 	XMLHttp.send(null);
                 	self.deck.set('_id',deck.id);
                 	cb(deck.id);
-                	alert("保存成功！");
+//                	console.log(parent);
+                	alert(deck.get('filename') + "--- 保存成功！");
                 },
                 error: function(err) {
                     cb(err);

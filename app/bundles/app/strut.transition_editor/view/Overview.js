@@ -5,6 +5,8 @@ function(Backbone, Utils, css) {
 	 * Renders the set of active transition editors
 	 */
 	return Backbone.View.extend({
+		className: 'overView',
+		
 		initialize: function() {
 			this.model.on('change:transitionEditors',
 							this.render,

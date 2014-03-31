@@ -5,8 +5,14 @@ var loadPresentation = function(cb) {
 //		document.body.innerHTML = presentation;
 //	//	document.body.className = config.surface + " " + document.body.className;
 //	}
-	
-	window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;  
+	if('webkitRequestFileSystem' in window){
+		window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
+	}else if('moz_requestFileSystem' in window){
+	    //firefox
+	    window.requestFileSystem = window.moz_requestFileSystem;
+	}else{
+	    //this browser is not suported
+	}
 	window.requestFileSystem(window.TEMPORARY, 5*1024*1024, function(fs) {
 		fs.root.getFile('_presentView.txt', {}, function(fileEntry) {
 		    fileEntry.file(function(file) {

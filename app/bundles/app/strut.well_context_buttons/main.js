@@ -20,5 +20,5 @@ function(AddSlideButton, lang) {
 				interfaces: ['strut.WellContextButtonProvider']
 			}, service);
 		}
-	}
+	};
 });

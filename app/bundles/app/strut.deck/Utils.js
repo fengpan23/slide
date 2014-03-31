@@ -33,7 +33,7 @@ define(function() {
 		},
 
 		getImgUrl: function(bg) {
-			return 'url(' + bg.substring(4) + ')';
+			return 'url(' + bg + ')';
 		},
 
 		/**

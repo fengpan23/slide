@@ -16,7 +16,7 @@ function(Backbone, ActionHandlers, ErrorModal, lang) {
 		save: function() {
 			this.storageInterface.selectProvider("remotestorage");
 			var fileName = this.model.fileName();
-			if (fileName == null) {
+			if (fileName == null || fileName.length < 1) {
 				this.saveAsModal.show(ActionHandlers.save, lang.save_as);
 			} else {
 //				this.model._manualSaver.save();

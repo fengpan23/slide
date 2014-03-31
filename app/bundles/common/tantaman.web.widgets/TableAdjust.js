@@ -67,7 +67,7 @@ function(Backbone, DeltaDragControl, ComponentCommands, CmdListFactory) {
 					this.index += 1;
 					continue;
 				}
-				return this._initialWidth = currentId - parseInt(divs[k-1].id.split("_"))[1];
+				return this._initialWidth = currentId - parseInt(divs[k-1].id.split("_")[1]);
 			}
 		},
 
@@ -85,8 +85,8 @@ function(Backbone, DeltaDragControl, ComponentCommands, CmdListFactory) {
 						continue;
 					}
 					this.table.rows[i].cells[this.index - 1].style.width = currentWidth + "px";
-					console.log(this.index - 1);
-					console.log(this.table.rows[i].cells[this.index - 1].style.width);
+//					console.log(this.index - 1);
+//					console.log(this.table.rows[i].cells[this.index - 1].style.width);
 				}
 			}else{
 				for ( var i = 0; i < this.table.rows.length - 1; i++) {

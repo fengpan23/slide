@@ -13,7 +13,7 @@ define([
 
     it('Allows putAlls', function() {
       map.putAll('key1', [2,3,4,5]);
-      map.putAll('cookies', ['oreo', 'peanut', 'sugar'])
+      map.putAll('cookies', ['oreo', 'peanut', 'sugar']);
     });
 
     it('Allows gets', function() {

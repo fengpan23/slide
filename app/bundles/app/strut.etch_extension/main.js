@@ -47,7 +47,7 @@ function(etch) {
     };
 
     etch.groupElFactory = function() {
-        return $('<div class="btn-group">')
+        return $('<div class="btn-group">');
     };
 
     return {
