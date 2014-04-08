@@ -74,7 +74,7 @@ define(function() {
 				  };
 
 				  console.log('Error: ' + msg);
-			}
+			};
 			
 			localStorage.setItem('preview-config', JSON.stringify({
 				surface: this._editorModel.deck().get('surface')

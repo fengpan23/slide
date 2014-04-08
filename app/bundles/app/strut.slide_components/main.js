@@ -84,7 +84,8 @@ define(['./view/ComponentButton',
 					tag: 'iframe',
 					title: lang.insert_website,
 					componentClass: 'hidden-phone',
-					editorModel: editorModel
+					editorModel: editorModel,
+					ignoreErrors: true
 				}));
 
 //				buttons.push(new ShapesDropdown(

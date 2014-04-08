@@ -6,17 +6,17 @@ define(['strut/deck/Component'],
 			if (!attrs)
 				return 'Text';
 			else {
-				var text = '<div style="text-align: center;"><font';
-				for (var style in attrs) {
-					if (style == 'size'){
-						text += ' style="font-size:'+ 72 + 'px;"';
-						continue;
-					}else{
-						text += " ";
-					}
-					text += style + '="' + attrs[style] + '"';
-				}
-				return text + '>双击添加文本</font></div>'
+				var text = '<div style="text-align: center;"><font style="font-size:72px;"';
+//				for (var style in attrs) {
+//					if (style == 'size'){
+//						text += ' style="font-size:'+ 72 + 'px;"';
+//						continue;
+//					}else{
+//						text += " ";
+//					}
+//					text += style + '="' + attrs[style] + '"';
+//				}
+				return text + '>双击添加文本</font></div>';
 			}
 		}
 
@@ -38,6 +38,8 @@ define(['strut/deck/Component'],
 						this.set('size', 72);
 					}
 					this.set('width', 730);
+//					this.set('height', 80);
+					this.set('new', true);
 				}
 			},
 

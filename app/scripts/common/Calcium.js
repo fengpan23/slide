@@ -25,9 +25,9 @@ function(Backbone) {
 						result[attr] = resArr;
 						obj.forEach(function(elem, idx) {
 							if (isModelish(elem))
-								resArr.push(elem.toJSON(dontRecurse, inspectArrays))
+								resArr.push(elem.toJSON(dontRecurse, inspectArrays));
 							else
-								resArr.push(elem)
+								resArr.push(elem);
 						});
 					} else {
 						result[attr] = obj;
@@ -46,7 +46,7 @@ function(Backbone) {
 			} else {
 				var resArr = [];
 				this.models.forEach(function(model, idx) {
-					resArr.push(model.toJSON(dontRecurse, inspectArrays))
+					resArr.push(model.toJSON(dontRecurse, inspectArrays));
 				});
 				return resArr;
 			}

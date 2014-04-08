@@ -125,6 +125,7 @@ define(["common/Calcium",
 				this.set('surface', rawObj.surface);
 				this.set('customStylesheet', rawObj.customStylesheet);
 				this.set('deckVersion', rawObj.deckVersion);
+				this.set('last_modified', rawObj.last_modified);
 				this.set('cannedTransition', rawObj.cannedTransition);
 				var bgs = new CustomBackgrounds(rawObj.customBackgrounds);
 				this.set('customBackgrounds', bgs);
@@ -137,6 +138,13 @@ define(["common/Calcium",
 				}
 				bgs.deck = this;
 				bgs.prune();
+				
+//				setInterval(function() {
+////					console.log(window.document.referrer + "ddddddddd");
+//					var hashVal = window.location.hash;
+//					console.log(hashVal + 'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+////					document.body.style.backgroundColor = hashVal;
+//				}, 3000); 
 			},
 
 			/**

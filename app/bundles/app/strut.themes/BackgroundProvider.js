@@ -111,7 +111,14 @@ function(View, DeckUtils, ItemImportModal, ColorChooserModal, lang) {
 		},
 
 		_pickObj: function(allSlides) {
+			
 			if (allSlides) {
+				//TODO if allSlides reset all slides 
+				var attr = this._attr.substring(0,1).toLowerCase() + this._attr.substring(1);
+				
+				this._editorModel.deck().get('slides').models.forEach(function(slide) {
+					slide.set(attr, null);
+				});
 				return this._editorModel.deck();
 			} else {
 				return this._editorModel.activeSlide();

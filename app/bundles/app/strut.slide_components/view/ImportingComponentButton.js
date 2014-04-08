@@ -40,4 +40,4 @@ define(['./ComponentButton', 'tantaman/web/widgets/ItemImportModal'],
 				ComponentButton.prototype.constructor.apply(this, arguments);
 			}
 		});
-	})
+	});

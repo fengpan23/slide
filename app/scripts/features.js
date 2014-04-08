@@ -7,6 +7,7 @@ define([
 	'strut/editor/main',
 	'strut/exporter/json/main',
 //	'strut/exporter/zip/browser/main',
+	'strut/importer/ppt/main',
 	'strut/importer/json/main',
 	'strut/importer/main',
 	'strut/exporter/main',

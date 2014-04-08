@@ -1,6 +1,8 @@
 // Generated on 2013-02-27 using generator-webapp 0.1.5
 'use strict';
 var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
+console.log();
+
 var mountFolder = function (connect, dir) {
     return connect.static(require('path').resolve(dir));
 };
@@ -18,7 +20,7 @@ module.exports = function (grunt) {
     // configurable paths
     var yeomanConfig = {
         app: 'app',
-        dist: 'dist'
+        dist: '../test/dist'
     };
 
     var barstaskdef = {
@@ -65,7 +67,7 @@ module.exports = function (grunt) {
                 files: [
                     "app/bundles/**/templates/*.bars"
                 ],
-                tasks: ['handlebars', 'livereload']
+                tasks: ['handlebars', 'livereload-start']
             },
             livereload: {
                 files: [
@@ -77,43 +79,43 @@ module.exports = function (grunt) {
                 tasks: ['livereload']
             }
         },
-        connect: {
-            options: {
-                port: 5858,
-                // change this to '0.0.0.0' to access the server from outside
-                hostname: '0.0.0.0'
-            },
-            livereload: {
-                options: {
-                    middleware: function (connect) {
-                        return [
-                            lrSnippet,
-                            mountFolder(connect, '.tmp'),
-                            mountFolder(connect, 'app')
-                        ];
-                    }
-                }
-            },
-            test: {
-                options: {
-                    middleware: function (connect) {
-                        return [
-                            mountFolder(connect, '.tmp'),
-                            mountFolder(connect, 'test')
-                        ];
-                    }
-                }
-            },
-            dist: {
-                options: {
-                    middleware: function (connect) {
-                        return [
-                            mountFolder(connect, 'dist')
-                        ];
-                    }
-                }
-            }
-        },
+//        connect: {
+//            options: {
+//                port: 5656,
+//                // change this to '0.0.0.0' to access the server from outside
+//                hostname: '0.0.0.0'
+//            },
+//            livereload: {
+//                options: {
+//                    middleware: function (connect) {
+//                        return [
+//                            lrSnippet,
+//                            mountFolder(connect, '.tmp'),
+//                            mountFolder(connect, 'app')
+//                        ];
+//                    }
+//                }
+//            },
+//            test: {
+//                options: {
+//                    middleware: function (connect) {
+//                        return [
+//                            mountFolder(connect, '.tmp'),
+//                            mountFolder(connect, 'test')
+//                        ];
+//                    }
+//                }
+//            },
+//            dist: {
+//                options: {
+//                    middleware: function (connect) {
+//                        return [
+//                            mountFolder(connect, 'dist')
+//                        ];
+//                    }
+//                }
+//            }
+//        },
         open: {
 //        	target: 'http://localhost:8888', // target url to open
 //        	appName: 'open', // name of the app that opens, ie: open, start, xdg-open
@@ -175,7 +177,6 @@ module.exports = function (grunt) {
                           grunt.log.warn(duplicates);
                           done(new Error('r.js built duplicate modules, please check the excludes option.'));
                         }
-
                         done();
                     }
                     //uglify2: {} // https://github.com/mishoo/UglifyJS2
@@ -289,11 +290,7 @@ module.exports = function (grunt) {
         }
     });
 
-    // grunt.renameTask('regarde', 'watch');
-
     grunt.registerTask('start', function (target) {
-		console.log("****************** start ***************");
-	
         if (target === 'dist') {
             return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
         }
@@ -302,10 +299,14 @@ module.exports = function (grunt) {
             'clean:server',
             'handlebars',
             'livereload-start',
-            'connect:livereload',
+//            'connect:livereload',
             'watch'
         ]);
     });
+    
+    grunt.registerTask('develop', [
+             'connect:dist:keepalive'
+    ]);
 
     grunt.registerTask('test', [
         'clean:server',
@@ -314,7 +315,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('build', [
-        'clean:dist',
+//        'clean:dist',
         'handlebars',
         'useminPrepare',
         'requirejs',

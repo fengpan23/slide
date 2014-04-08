@@ -80,11 +80,16 @@ function(Backbone, Imgup) {
 			f = e.target.files[0];
 
 			this._fileChosen(f);
+			//Solve the repeated select files onchang event is invalid
+			this.$el.find('input[type="file"]').replaceWith('<input type="file" style="display:none"></input>');
 		},
 
 		_fileChosen: function(f) {
-			if (!f.type.match('image.*'))
+			if (!f.type.match('image.*')){
+				this.item.src = '';
+				this._itemLoadError();
 				return;
+			}
 			
 			this.item.src = '';
 			var _this = this;
@@ -92,6 +97,7 @@ function(Backbone, Imgup) {
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				_this.src = e.target.result; // reader's return value after read.
+				_this._itemLoaded();
             };
             // run after file selected, because e.target block thread
             reader.readAsDataURL(f);
@@ -136,7 +142,7 @@ function(Backbone, Imgup) {
 		urlChanged: function(e) {
 			if (e.which === 13) {
 				this.src = this.$input.val();
-				return this.okClicked();
+				return this.okClicked(e);
 			} else {
 				this.loadItem();
 			}
@@ -155,6 +161,15 @@ function(Backbone, Imgup) {
 
 			if (this.item.src != val)
 				this.item.src = val;
+			
+			var _this = this;
+			this.item.onerror = function() {
+				return _this._itemLoadError();
+			};
+			this.item.onload = function() {
+				return _this._itemLoaded();
+			};
+			
 			return this.src = this.item.src;
 		},
 		_itemLoadError: function() {
@@ -183,23 +198,24 @@ function(Backbone, Imgup) {
 			this.$el.modal();
 			this.$el.modal("hide");
 			this.item = this.$el.find(this.options.tag)[0];
+			
 			if (this.options.tag === "video") {
 				this.$el.find(".modal-body").prepend("<div class='alert alert-success'>Supports <strong>webm & YouTube</strong>.<br/>Try out: http://www.youtube.com/watch?v=vHUsdkmr-SM</div>");
 			}
-			if (!this.options.ignoreErrors) {
-				this.item.onerror = function() {
-					return _this._itemLoadError();
-				};
-				this.item.onload = function() {
-					return _this._itemLoaded();
-				};
-			}
+//			if (!this.options.ignoreErrors ) {
+//				this.item.onerror = function() {
+//					return _this._itemLoadError();
+//				};
+//				this.item.onload = function() {
+//					return _this._itemLoaded();
+//				};
+//			}
 			this.$input = this.$el.find("input[name='itemUrl']");
 			this.$progress = this.$el.find('.progress');
 			this.$progressBar = this.$progress.find('.bar');
 			this.$thumbnail = this.$el.find('.thumbnail');
 			this.$droparea = this.$el.find('.droparea');
-
+			this.$el.find(".ok").addClass("disabled");
 			return this.$el;
 		},
 		constructor: function ItemImportModal() {

@@ -27,8 +27,8 @@ define({
 		return {
 			scale: scale,
 			scaledWidth: scaledWidth,
-			remainingWidth: remainingWidth,
-//			remainingHeight: remainingHeight
+//			remainingHeight: remainingHeight,
+			remainingWidth: remainingWidth
 		}
 	}
 });

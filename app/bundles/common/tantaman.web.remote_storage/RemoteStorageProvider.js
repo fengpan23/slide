@@ -85,6 +85,8 @@ define(["Q",
             this.deck.set('activeSlide', data.activeSlide);
             this.deck.set('background', data.background);
             this.deck.set('picture', data.picture);
+            this.deck.set('surface', data.surface);
+            this.deck.set('last_modified', data.last_modified);
             var self = this;
             this.deck.save(null, {
                 success: function(deck) {
@@ -94,6 +96,7 @@ define(["Q",
                 	var picture = deck.get('picture').replace(/\+/g,"%2B");
                 	
                 	var url = "http://3a.sc.lxpt.cn/index.php?option=com_lxedu&task=api.getSlideShowId&format=json&filename=" + deck.get('filename') + "&id=" +deck.id + "&picture=" + picture;
+//                	var url = "http://192.168.2.76:8080/HelloWorldServlet/HelloWorld1?id=100"
                 	
 //                	XMLHttp.setRequestHeader("POWERED-BY-MENGXIANHUI", "Approve");  
 //                	XMLHttp.setRequestHeader("Content-Type", "application/xml"); 
@@ -105,7 +108,7 @@ define(["Q",
                 		  }else{
                 			  console.log('XMLHttp open error: ' + XMLHttp.readyState);
                 		  }
-                	}
+                	};
                 	XMLHttp.send(null);
                 	self.deck.set('_id',deck.id);
                 	cb(deck.id);

@@ -150,6 +150,9 @@ define(["./ComponentView", "libs/etch",
 			 * @param {Event} e
 			 */
 			dblclicked: function(e) {
+				if(this.model.get('new')){
+					this.model.unset('new');
+				}
 				this.$el.addClass("editable");
 				this.$textEl.attr("contenteditable", true);
 				if (e != null) {

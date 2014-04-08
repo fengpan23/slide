@@ -224,9 +224,9 @@
 }*/
 
 .strut-surface, .innerBg {
-	background-size: cover;
-	background-position: center;
-  	background-repeat: no-repeat;
+	background-size: cover !important;
+  	background-repeat: no-repeat !important;
+	background-position: center !important;
 }
 
 .slideContainer {

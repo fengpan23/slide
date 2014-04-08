@@ -31,7 +31,7 @@ define(['tantaman/web/widgets/Dropdown',
 				markup: this._shapes[e.currentTarget.dataset.index].markup,
 				type: 'Shape'
 			});
-		}
+		};
 
 		return ShapesDropdown;
 	});

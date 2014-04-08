@@ -57,8 +57,23 @@ function(StorageProviders) {
 		on: function() {
 			return this._providers.on.apply(this._providers, arguments);
 		},
+		
+		currentTime: function() {
+			var dateTime = new Date();
+			var hh = dateTime.getHours();
+			var mm = dateTime.getMinutes();
+//			var ss = dateTime.getSeconds();
+			
+//			var week = dateTime.getDay();
+			
+//			var time4 = dateTime.toLocaleDateString(); 
+//			var time5 = dateTime.toLocaleTimeString(); 
+
+			return dateTime.getFullYear() + "-" + (dateTime.getMonth() + 1) + "-" + dateTime.getDate() + "   " + hh + ":" + mm;
+		},
 
 		store: function(identifier, data, options) {
+			data.last_modified = this.currentTime();
 			if (data instanceof Blob) {
 				throw "Use storeAttachment for saving blobs";
 			} else {
@@ -118,7 +133,7 @@ function(StorageProviders) {
 			// 	identifier += '.strut';
 			// }
 			window.sessionMeta.lastPresentation = identifier;
-			return this.store(identifier, data, options)
+			return this.store(identifier, data, options);
 		}
 	};
 

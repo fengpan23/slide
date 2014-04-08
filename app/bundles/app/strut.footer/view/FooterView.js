@@ -13,13 +13,12 @@ define([ 'libs/backbone',
 
         initialize: function() {
         	this._template = JST['strut.footer/Footer'];
+        	this.model.on("change:filename", this.render, this);
+        	this.model.on("change:last_modified", this.render, this);
         },
 
         render: function() {
-//        	console.log(this._template);
-//        	var currentPage = this.mode.a
-        	
-            this.$el.html(this._template());
+            this.$el.html(this._template(this.options.model.attributes));
             return this;
         },
 

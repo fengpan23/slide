@@ -35,6 +35,7 @@ require.config({
 		'strut/footer' : '../bundles/app/strut.footer',
 		'strut/importer' : '../bundles/app/strut.importer',
 		'strut/importer/json' : '../bundles/app/strut.importer.json',
+		'strut/importer/ppt' : '../bundles/app/strut.importer.ppt',
 		'strut/presentation_generator/impress' : '../bundles/app/strut.presentation_generator.impress',
 		'strut/presentation_generator/impress-mobile' : '../bundles/app/strut.presentation_generator.impress-mobile',
 		'strut/logo_button' : '../bundles/app/strut.logo_button',

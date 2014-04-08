@@ -5,7 +5,7 @@ define(['strut/deck/Component'],
 		function getInitialTable(attrs) {
 			if (!attrs)
 				//TODO default table
-				return '<table border="1" height="180px" width="300px" ><tbody><tr><td>Input Text</td><td>Input Text</td></tr><tr><td>Input Text</td><td>Input Text</td></tr><tr><td>Input Text</td><td>Input Text</td></tr><tr><td>Input Text</td><td>Input Text</td></tr></tbody></table>';
+				return '<table border="1" height="180px" width="300px" ><tbody><tr><td></td><td></td></tr><tr><td></td><td></td></tr></tbody></table>';
 			else {
 				var text = '<table>';
 				for (var row in attrs.row) {

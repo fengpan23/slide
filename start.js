@@ -7,18 +7,24 @@ var express = require('express'),
 var foreignAPI = require('./server/api/foreignAPI');
 var internalAPI = require('./server/api/internalAPI');
 
+var fileAPI = require('./server/api/fileAPI');
+
+var testAPI = require('./server/api/test');
+
 var app = express();
 
 app.configure(function () {
 	app.set("jsonp callback", true);
-    app.set('port', process.env.PORT || 5858);
+    app.set('port', process.env.PORT || 5959);
     app.use(express.logger('dev'));  /* 'default', 'short', 'tiny', 'dev' */
-    app.use(express.bodyParser({limit: '50mb'})), // parses request body and populates req.body Request Entity limit 5mb
+    app.use(express.bodyParser({uploadDir: "../upload/ppt", limit: '50mb'})), // parses request body and populates req.body Request Entity limit 5mb
     app.use(express.methodOverride()); // checks req.body for HTTP method overrides
     app.use(app.router); // perform route lookup based on url and HTTP method
     app.use(express.static(path.join(__dirname, 'app'))); // root path folder
     app.use(express.errorHandler({ dumpExceptions:true, showStack:true })); // Show all errors
 });
+
+app.get('/test', testAPI.test);
 
 app.get('/decks/:id', internalAPI.findById);
 app.post('/decks', internalAPI.addDeck);
@@ -30,8 +36,11 @@ app.get('/all', internalAPI.findAllDeck);
 app.get('/api/delete/:id', foreignAPI.deleteDeck);
 app.get('/api/search/:searchTag/:skip/:limit', foreignAPI.findByTag);
 app.get('/api/adddeck', foreignAPI.addDeck);
-app.get('/api/all', foreignAPI.findAllDeck);
+//app.get('/api/all', foreignAPI.findAllDeck);
 //app.get('/api/find/:filename', foreignAPI.findByName);
+
+//app.post('/ppt', fileAPI.putFile);
+app.get('/ppt/:filename', fileAPI.getFile);
 
 
 //app.get('/img/*/*.(jpg|png|jpeg){1}', function(req, res, next){

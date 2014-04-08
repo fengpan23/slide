@@ -1,9 +1,12 @@
 {
   "name": "Strut",
-  "version": "0.6.3",
+  "version": "usr0.6.3",
   "dependencies": {
     "express": "3.x",
     "mongodb": "1.x"
+  },
+  "scripts": {
+       "start": "node start.js"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -26,7 +29,7 @@
     "grunt-open": "~0.2.0",
     "matchdep": "~0.1.2",
     "grunt-text-replace": "~0.3.2",
-    "rjs-build-analysis": "0.0.3"
+    "rjs-build-analysis": "~0.0.3"
   },
   "engines": {
     "node": ">=0.8.0"
