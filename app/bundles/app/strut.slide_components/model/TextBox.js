@@ -6,7 +6,11 @@ define(['strut/deck/Component'],
 			if (!attrs)
 				return 'Text';
 			else {
-				var text = '<div style="text-align: center;"><font style="font-size:72px;"';
+				
+				var text = '<div style="text-align: center;"><font style=';
+				if(attrs.size){
+					text += '"font-size:' + attrs.size + 'px;"';
+				}
 //				for (var style in attrs) {
 //					if (style == 'size'){
 //						text += ' style="font-size:'+ 72 + 'px;"';

@@ -36,6 +36,7 @@ function(ComponentView, Mixers, ManagedColorChooser) {
 			this.$object = $(obj);
 
 			var scale = this.model.get('scale');
+			scale.width = 2;
 
 			var $content = this.$el.find('.content');
 			$content.append(this.$object);

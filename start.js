@@ -8,6 +8,7 @@ var foreignAPI = require('./server/api/foreignAPI');
 var internalAPI = require('./server/api/internalAPI');
 
 var fileAPI = require('./server/api/fileAPI');
+var transpond = require('./server/api/transpond');
 
 var testAPI = require('./server/api/test');
 
@@ -39,10 +40,10 @@ app.get('/api/adddeck', foreignAPI.addDeck);
 //app.get('/api/all', foreignAPI.findAllDeck);
 //app.get('/api/find/:filename', foreignAPI.findByName);
 
-//app.post('/ppt', fileAPI.putFile);
+app.post('/ppt', fileAPI.putFile);
 app.get('/ppt/:filename', fileAPI.getFile);
 
-
+app.post('/transpond', transpond.transpond);
 //app.get('/img/*/*.(jpg|png|jpeg){1}', function(req, res, next){
 //	var realpath = __dirname + '/static' + url.parse(req.url).pathname;
 //	if(path.existsSync(realpath)){

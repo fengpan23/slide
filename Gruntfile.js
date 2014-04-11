@@ -53,7 +53,7 @@ module.exports = function (grunt) {
 
         replace: {
             compile: {
-                src: ['dist/index.html'],
+                src: ['<%= yeoman.dist %>/index.html'],
                 overwrite: true,                 // overwrite matched source files
                 replacements: [{ 
                     from: "window.isOptimized = false;",
@@ -79,43 +79,43 @@ module.exports = function (grunt) {
                 tasks: ['livereload']
             }
         },
-//        connect: {
-//            options: {
-//                port: 5656,
-//                // change this to '0.0.0.0' to access the server from outside
-//                hostname: '0.0.0.0'
-//            },
-//            livereload: {
-//                options: {
-//                    middleware: function (connect) {
-//                        return [
-//                            lrSnippet,
-//                            mountFolder(connect, '.tmp'),
-//                            mountFolder(connect, 'app')
-//                        ];
-//                    }
-//                }
-//            },
-//            test: {
-//                options: {
-//                    middleware: function (connect) {
-//                        return [
-//                            mountFolder(connect, '.tmp'),
-//                            mountFolder(connect, 'test')
-//                        ];
-//                    }
-//                }
-//            },
-//            dist: {
-//                options: {
-//                    middleware: function (connect) {
-//                        return [
-//                            mountFolder(connect, 'dist')
-//                        ];
-//                    }
-//                }
-//            }
-//        },
+        connect: {
+            options: {
+                port: 5656,
+                // change this to '0.0.0.0' to access the server from outside
+                hostname: '0.0.0.0'
+            },
+            livereload: {
+                options: {
+                    middleware: function (connect) {
+                        return [
+                            lrSnippet,
+                            mountFolder(connect, '.tmp'),
+                            mountFolder(connect, 'app')
+                        ];
+                    }
+                }
+            },
+            test: {
+                options: {
+                    middleware: function (connect) {
+                        return [
+                            mountFolder(connect, '.tmp'),
+                            mountFolder(connect, 'test')
+                        ];
+                    }
+                }
+            },
+            dist: {
+                options: {
+                    middleware: function (connect) {
+                        return [
+                            mountFolder(connect, 'dist')
+                        ];
+                    }
+                }
+            }
+        },
         open: {
 //        	target: 'http://localhost:8888', // target url to open
 //        	appName: 'open', // name of the app that opens, ie: open, start, xdg-open

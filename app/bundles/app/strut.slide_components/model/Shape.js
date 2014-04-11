@@ -13,7 +13,7 @@ function(Component) {
 					+ ' stroke-width="' + 3
 					+ '" x1="' + (markup.x1 - this.get('x'))
 					+ '" y1="' + (markup.y1 - this.get('y'))
-					+ '" x2="'	+ (markup.x2 - this.get('x'))
+					+ '" x2="' + (markup.x2 - this.get('x'))
 					+ '" y2="' + (markup.y2 - this.get('y'));
 					
 				if(markup.Arrow1){
@@ -22,7 +22,11 @@ function(Component) {
 				if(markup.Arrow2){
 					mark += '" marker-end="url(#endArrow)"';
 				}
-					mark += '></line></svg>'; 
+				if(markup.dashing){
+					mark += '" stroke-dasharray="3 2';
+				}
+				
+				mark += '"></line></svg>'; 
 				this.set('markup', mark);
 			}
 		},

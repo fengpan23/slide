@@ -46,7 +46,6 @@ define(["Q",
 					// fnames.push(fname.substring(prefix.length));
 				// }
 			// }
-
 			return Q(fnames);
 		},
 
@@ -90,29 +89,31 @@ define(["Q",
             var self = this;
             this.deck.save(null, {
                 success: function(deck) {
-                	console.log(deck);
-                	var XMLHttp = new XMLHttpRequest();
+                	var referrer = window.document.referrer;
+                	var domain = referrer.substring(0, referrer.indexOf('?'));
+//                	var domain = "http://build.sc.lxpt.cn/139/index.php";
+                	if(domain){
+		            	var data = {
+		            		domain: domain,
+		            		filename: deck.get('filename'),
+		            		deckId: deck.id,
+		            		picture: deck.get('picture').replace(/\+/g,"%2B")
+		            	};
+		            	
+		            	var XMLHttp = new XMLHttpRequest();
+		            	XMLHttp.open('post', 'transpond');  
+		            	XMLHttp.onreadystatechange = function() {
+		            		  if (XMLHttp.readyState === 4) {
+		            			  console.log(XMLHttp);
+		            		  }else{
+		            			  console.log('XMLHttp open error: ' + XMLHttp.readyState);
+		            		  }
+		            	};
+		            	XMLHttp.send(JSON.stringify(data));
+                	}
                 	
-                	var picture = deck.get('picture').replace(/\+/g,"%2B");
-                	
-                	var url = "http://3a.sc.lxpt.cn/index.php?option=com_lxedu&task=api.getSlideShowId&format=json&filename=" + deck.get('filename') + "&id=" +deck.id + "&picture=" + picture;
-//                	var url = "http://192.168.2.76:8080/HelloWorldServlet/HelloWorld1?id=100"
-                	
-//                	XMLHttp.setRequestHeader("POWERED-BY-MENGXIANHUI", "Approve");  
-//                	XMLHttp.setRequestHeader("Content-Type", "application/xml"); 
-                	
-                	XMLHttp.open('get', url);  
-                	XMLHttp.onreadystatechange = function() {
-                		  if (XMLHttp.readyState === 4) {
-                		   console.log(XMLHttp);
-                		  }else{
-                			  console.log('XMLHttp open error: ' + XMLHttp.readyState);
-                		  }
-                	};
-                	XMLHttp.send(null);
                 	self.deck.set('_id',deck.id);
                 	cb(deck.id);
-//                	console.log(parent);
                 	alert(deck.get('filename') + "--- 保存成功！");
                 },
                 error: function(err) {
@@ -121,7 +122,6 @@ define(["Q",
             });
             return Q(this.deck.get('_id'));
         }
-
     };
 
     return RemoteStorageProvider;

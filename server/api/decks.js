@@ -144,7 +144,7 @@ exports.fileAPI = {
 		
 		
 	},
-	putFile: function(data, callback) {
+	putFile: function(path, callback) {
 		gridFs.put(buffer, {}, function(err, fileInfo) {
 			if(!err) {
 				callback(fileInfo);

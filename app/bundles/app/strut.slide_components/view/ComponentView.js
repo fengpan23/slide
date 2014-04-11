@@ -644,8 +644,6 @@ define(["libs/backbone",
 						height: newHeight
 					});
 				}
-				
-				console.log(window.browserPrefix);
 				if (scale != null) {
 					this.$contentScale.css(window.browserPrefix + "transform", "scale(" + scale.x + "," + scale.y + ")");
 				}

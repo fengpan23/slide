@@ -138,13 +138,6 @@ define(["common/Calcium",
 				}
 				bgs.deck = this;
 				bgs.prune();
-				
-//				setInterval(function() {
-////					console.log(window.document.referrer + "ddddddddd");
-//					var hashVal = window.location.hash;
-//					console.log(hashVal + 'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
-////					document.body.style.backgroundColor = hashVal;
-//				}, 3000); 
 			},
 
 			/**

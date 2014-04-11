@@ -9,6 +9,8 @@ define(["./ComponentView", "libs/etch",
 		var undoHistory = CmdListFactory.managedInstance('editor');
 		var styles;
 		styles = ["background", "family", "size", "weight", "style", "color", "decoration", "align"];
+		
+		var textMinSize = 8;
 
 		/**
 		 * @class TextBoxView
@@ -120,6 +122,12 @@ define(["./ComponentView", "libs/etch",
 				}
 				sign = deltas.dx - this._lastDx > 0 ? 1 : -1;
 				this._increment = Math.round(sign * Math.sqrt(Math.abs(deltas.dx - this._lastDx)));
+				
+				console.log(this._increment + parseInt(currSize));
+				if(this._increment + parseInt(currSize) < textMinSize){
+					this.model.set("size", textMinSize);
+					return;
+				}
 				this.model.set("size", this._increment + parseInt(currSize));
 				return this._lastDx = deltas.dx;
 			},
@@ -312,10 +320,14 @@ define(["./ComponentView", "libs/etch",
 							}
 							key = "font" + key.substr(0, 1).toUpperCase() + key.substr(1);
 							var _this = this;
-							$("font,span", this.$content).each(function(i,n){
+							$("div,font,span", this.$content).each(function(i,n){
 								var currentsize =  $(n).css("font-size");
 								var temp= currentsize.substring(0, currentsize.length-2);
-								$(n).css("font-size", parseInt(temp) + _this._increment);
+								var _size = parseInt(temp) + _this._increment;
+								if(_size < textMinSize){
+									_size = textMinSize;
+								}
+								$(n).css("font-size", _size);
 							});
 							
 						}else if(key === "background"){

@@ -502,7 +502,7 @@ define(['libs/backbone'], function(Backbone) {
       var settings = {
         el: this,
         attrs: {}
-      }
+      };
 
       _.extend(settings, options);
 
@@ -521,7 +521,7 @@ define(['libs/backbone'], function(Backbone) {
         cb({model: model, view: view});
       }
     });
-  }
+  };
 
   // TODO: how do we really want to do this?
   // Allow a template to be provided?
