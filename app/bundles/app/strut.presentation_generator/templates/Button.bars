@@ -1,10 +1,11 @@
-<button class="btn btn-success act"><i class="icon-play icon-white"/><span class="chosen">
+<button class="btn btn-plast act"><i class="icon-play icon-black"/><span class="chosen">
 {{#if chosen.shortname}}
 	{{chosen.shortname}}
 {{else}}
 	{{chosen.displayName}}
 {{/if}}
 </span></button>
+{{!--
 <button class="btn dropdown-toggle btn-success iconBtnsSplit" data-toggle="dropdown">
   <span class="caret whiteCaret"></span>
 </button>
@@ -16,3 +17,4 @@
     </a></li>
     {{/each}}
 </ul>
+--}}

@@ -14,17 +14,17 @@
 			</li>
 		</ul>
 		<ul class="nav">
-			<li class="create-comp-buttons">
-				<div class="btn-group iconBtns">
-				</div>
+			<li class="mode-buttons">
+			</li>
+			<li class="divider-vertical">
 			</li>
 		</ul>
 		<ul class="nav theme-buttons">
 		</ul>
 		<ul class="nav pull-right">
-			<li class="divider-vertical">
-			</li>
-			<li class="mode-buttons">
+			<li class="create-comp-buttons">
+				<div class="btn-group iconBtns">
+				</div>
 			</li>
 		</ul>
 	</div>

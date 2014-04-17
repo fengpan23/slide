@@ -12,7 +12,7 @@ define([
 	'strut/importer/main',
 	'strut/exporter/main',
 	'strut/presentation_generator/impress/main',
-	 'strut/presentation_generator/impress-mobile/main',
+//	 'strut/presentation_generator/impress-mobile/main',
 	'strut/presentation_generator/main',
 	'tantaman/web/saver/main',
 	'strut/slide_editor/main',

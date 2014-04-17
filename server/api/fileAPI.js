@@ -29,6 +29,7 @@ exports.deleteFile = function(req, res) {
 	
 };
 exports.putFile = function(req, resXM) {
+	
 	var paths = req.files.file.path.split("/");
 	var filename = paths[paths.length - 1];
 	
@@ -41,6 +42,7 @@ exports.putFile = function(req, resXM) {
 		 }).on('end', function() {
 			 	var fileId = null;
 				fileId = JSON.parse(infos).id;
+				console.log(fileId);
 				deck.deckAPI.findById(fileId, function(data) {
 					resXM.send(data);
 				});

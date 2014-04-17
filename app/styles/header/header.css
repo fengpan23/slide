@@ -1,5 +1,6 @@
 .header .divider-vertical {
-	height: 54px;
+	height: 52px;
+	border-left : none;
 }
 
 .header .navbar-inner {

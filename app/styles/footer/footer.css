@@ -1,9 +1,10 @@
 .footer {
 	text-align: center;
-    margin-top: 5px;
+    margin-top: -2px;
     padding-top: 10px;
-    color: #CCC;
+    /*color: #CCC;*/
     border-top: solid 1px #ddd;
-    background-image: -webkit-linear-gradient(top, #494852, #2A2A30);
+    background-image: url('../img/head-bg.png');
+    /*background-image: -webkit-linear-gradient(top, #494852, #2A2A30);*/
     font-weight: bold;
 }

@@ -97,13 +97,16 @@ define(['libs/backbone'], function(Backbone) {
       var $container = $(getSelectionBoundaryElement(window));
       var color = $container.attr('color');
       var face = $container.attr('face');
+      var size = $container.css('fontSize').replace('px', '');
 
       color = color || $container.parents('font').attr('color') || '#333';
       face = face || $container.parents('font').attr('face') || 'Lato';
+      size = size || $container.parents('font,div').css('fontSize').replace('px', '') || 24;
 
-      if (face)
-        face = face.split(',')[0]
-
+      if (face){
+        face = face.split(',')[0];
+      }
+      this.$fontSizeReadout.text(size);
       this.$fontFamilyReadout.html(face);
       this.$colorChooser.spectrum('set', color);
     },
@@ -482,7 +485,7 @@ define(['libs/backbone'], function(Backbone) {
         }
       });
 
-      this.model.trigger('change:size', this.model, this.model.get('size'), {});
+//      this.model.trigger('change:size', this.model, this.model.get('size'), {});
       //make sure Tool in a row  
       if($editor[0].offsetWidth === 3){
       	e.pageX = innerWidth -520;

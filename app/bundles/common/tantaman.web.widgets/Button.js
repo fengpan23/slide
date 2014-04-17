@@ -22,7 +22,7 @@ function(Backbone) {
 		},
 
 		render: function() {
-			this.$el.html('<i class="' + this.options.icon + ' icon-white"></i>' + this.options.name);
+			this.$el.html('<i class="' + this.options.icon + ' icon-black"></i>' + this.options.name);
 			return this;
 		},
 

@@ -123,7 +123,6 @@ define(["./ComponentView", "libs/etch",
 				sign = deltas.dx - this._lastDx > 0 ? 1 : -1;
 				this._increment = Math.round(sign * Math.sqrt(Math.abs(deltas.dx - this._lastDx)));
 				
-				console.log(this._increment + parseInt(currSize));
 				if(this._increment + parseInt(currSize) < textMinSize){
 					this.model.set("size", textMinSize);
 					return;

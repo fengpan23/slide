@@ -39,7 +39,7 @@ exports.deleteDeck = function(req, res) {
 
 exports.addDeck = function(req, res) {
 	 var data = req.body;
-	 
+	 console.log(data);
 	 deck.deckAPI.addDeck(data, function(result) {
 			res.send(result);
 	 });

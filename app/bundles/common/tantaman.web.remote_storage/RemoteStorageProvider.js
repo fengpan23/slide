@@ -3,7 +3,9 @@ define(["Q",
     "model/DeckCollectionModel"
 ], function(Q, DeckModel, DeckCollection) {
     "use strict";
-
+    
+    var reg = /http:\/\/([^\/]+)\//i;
+    
     function RemoteStorageProvider() {
         this.name = "Remote Storage";
         this.id = "remotestorage";
@@ -90,21 +92,27 @@ define(["Q",
             this.deck.save(null, {
                 success: function(deck) {
                 	var referrer = window.document.referrer;
-                	var domain = referrer.substring(0, referrer.indexOf('?'));
-//                	var domain = "http://build.sc.lxpt.cn/139/index.php";
+//                	var domain = referrer.substring(0, referrer.indexOf('?'));
+//                	var referrer = "http://3a.sc.lxpt.cn/139/index.php";
+//                	var domain = "mlyu.lxpt.cn";
+                	var  domain = referrer.match(reg);
+                	
                 	if(domain){
+                		domain = domain[1]
+                		console.log(domain);
 		            	var data = {
 		            		domain: domain,
 		            		filename: deck.get('filename'),
 		            		deckId: deck.id,
-		            		picture: deck.get('picture').replace(/\+/g,"%2B")
+		            		picture: deck.get('picture')
+		            		//.replace(/\+/g,"%2B")
 		            	};
 		            	
 		            	var XMLHttp = new XMLHttpRequest();
 		            	XMLHttp.open('post', 'transpond');  
 		            	XMLHttp.onreadystatechange = function() {
 		            		  if (XMLHttp.readyState === 4) {
-		            			  console.log(XMLHttp);
+		            			  console.log(XMLHttp.responseText);
 		            		  }else{
 		            			  console.log('XMLHttp open error: ' + XMLHttp.readyState);
 		            		  }

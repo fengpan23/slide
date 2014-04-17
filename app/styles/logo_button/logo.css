@@ -1,19 +1,21 @@
 .logo {
 	width: 100px;
-	height: 32px;
+	height: 44px;
 	margin-left: 5px;
 	padding: 0px 20px 0px 5px;
 }
 
 .logo-bg {
-	background-image: url('img/strut-logo-32-light.png');
+	background-image: url('img/strut-logo-32-black.png');
+	background-position:center center;
+	background-repeat:no-repeat;
 	display: inline-block;
 	width: 100px;
-	height: 32px;
+	height: 44px;
 }
 
 .logo-holder {
-	margin-top: 5px;
+	/*margin-top: 5px;*/
 	margin-left: -8px;
 }
 
@@ -25,8 +27,6 @@
 	position: absolute;
 	right: 6px;
 	top: 5px;
-	border-top-color: #FFF;
-	border-bottom-color: #FFF;
 }
 
 .logo-holder .dropdown-menu .label {

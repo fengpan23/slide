@@ -1,9 +1,9 @@
-define(['./ImpressGenerator'],
-function(ImpressGenerator) {
+define(['./ImpressGenerator', 'lang'],
+function(ImpressGenerator, lang) {
 	'use strict';
 
 	var service = {
-		displayName: 'Impress',
+		displayName: lang.display,
 		id: 'impress',
 		capabilities: {
 			freeformStepping: true

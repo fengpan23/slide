@@ -2,8 +2,8 @@ var deck = require('./decks');
 
 exports.findByTag = function(req, res) {
 	var searchTag = req.params.searchTag;
-	var skip = parseInt(req.params.skip);
-	var limit = parseInt(req.params.limit);
+	var skip = parseInt(req.params.skip) || 0;
+	var limit = parseInt(req.params.limit) || 5;
 	
 	if(searchTag.length === 24){
 		var isId = true;
@@ -49,7 +49,8 @@ exports.deleteDeck = function(req, res) {
 
 exports.addDeck = function(req, res) {
 	 var data = req.body;
-	 
+//	 console.log(data);
+//	 console.log(req.query);
 	 deck.deckAPI.addDeck(data, function(result) {
 			res.jsonp(result);
 	 });

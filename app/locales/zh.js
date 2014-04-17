@@ -46,5 +46,6 @@
 	delete_R: '删除此行',
 	delete_L: '删除此列',
 	name: '课件名',
+	display: '放映',
 	create_presentation: '创建演示'
 });

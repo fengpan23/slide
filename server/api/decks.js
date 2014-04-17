@@ -118,7 +118,7 @@ exports.deckAPI = {
 	                return callback(err);
 	            } else {
 	            	console.log(result + " delete deck success ");
-	                return callback(true);
+	            	return callback(result);
 	            }
 	        });
 		});
