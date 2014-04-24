@@ -35,6 +35,13 @@
 	left: 13px;
 }
 
+.slideEditor .slideWellSwitch{
+	position:absolute;
+	top:53px;
+    left:135px;
+	z-index: 10;
+}
+
 .slideWell {
 	overflow: auto;
 	border-right: 1px solid black;

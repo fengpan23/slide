@@ -98,14 +98,13 @@ define(["Q",
                 	var  domain = referrer.match(reg);
                 	
                 	if(domain){
-                		domain = domain[1]
+                		domain = domain[1];
                 		console.log(domain);
 		            	var data = {
 		            		domain: domain,
 		            		filename: deck.get('filename'),
 		            		deckId: deck.id,
 		            		picture: deck.get('picture')
-		            		//.replace(/\+/g,"%2B")
 		            	};
 		            	
 		            	var XMLHttp = new XMLHttpRequest();

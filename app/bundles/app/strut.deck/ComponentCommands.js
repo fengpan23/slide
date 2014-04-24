@@ -32,7 +32,8 @@ define(function() {
 			}
 			this.component.set(this.attr, this.start);
 			this.component.set('selected', true);
-		}
+		},
+		name: this.name
 	};
 
 
@@ -151,7 +152,7 @@ define(function() {
 			this.component.set(this.startLoc);
 			this.component.set('selected', true);
 		},
-		name: "TableAdjust"
+		name: "Table Adjust"
 	};
 
 	return {
@@ -180,8 +181,20 @@ define(function() {
 			return new BaseCommand(initial, component, 'size', 'Scale');
 		},
 		TableAdjust: TableAdjust,
+		Background: function(initial, component) {
+			return new BaseCommand(initial, component, 'background', 'Background');
+		},
 		Text: function(initial, component) {
 			return new BaseCommand(initial, component, 'text', 'Text');
+		},
+		TableText: function(initial, component) {
+			return new BaseCommand(initial, component, 'table', 'TableText');
+		},
+		LineSpaceing: function(initial, component) {
+			return new BaseCommand(initial, component, 'lineSpacing', 'LineSpacing');
+		},
+		Opacity: function(initial, component) {
+			return new BaseCommand(initial, component, 'opacity', 'Opacity');
 		}
 	};
 });

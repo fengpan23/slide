@@ -36,6 +36,12 @@ function(Backbone, Imgup) {
 			this.cb = cb;
 			this.$el.modal('show');
 			this.$input.focus();
+			this.$el.find(".ok").addClass("disabled");
+			if(this.options.tag === 'iframe'){
+				$(window).bind('beforeunload', function(){
+					return '您嵌入的iframe会使网页跳转严重影响您的体验'; 
+				}); 
+			}
 		},
 		okClicked: function(e) {
 			e.stopPropagation();
@@ -133,6 +139,8 @@ function(Backbone, Imgup) {
 			return this.$el.find('input[type="file"]').click();
 		},
 		hidden: function() {
+			$(window).unbind('beforeunload');
+			this.$el.find(".ok").addClass("disabled");
 			if (this.$input != null) {
 				this.item.src = '';
 				this.file = null;
@@ -169,6 +177,9 @@ function(Backbone, Imgup) {
 			this.item.onload = function() {
 				return _this._itemLoaded();
 			};
+			this.item.onloadstart = function() {
+				return _this._itemLoaded();
+			};
 			
 			return this.src = this.item.src;
 		},
@@ -200,7 +211,7 @@ function(Backbone, Imgup) {
 			this.item = this.$el.find(this.options.tag)[0];
 			
 			if (this.options.tag === "video") {
-				this.$el.find(".modal-body").prepend("<div class='alert alert-success'>Supports <strong>webm & YouTube</strong>.<br/>Try out: http://www.youtube.com/watch?v=vHUsdkmr-SM</div>");
+				this.$el.find(".modal-body").prepend("<div class='alert alert-success'>支持 Ogg， MPEG4，WebM格式（http://vjs.zencdn.net/v/oceans.mp4）</div>");
 			}
 //			if (!this.options.ignoreErrors ) {
 //				this.item.onerror = function() {

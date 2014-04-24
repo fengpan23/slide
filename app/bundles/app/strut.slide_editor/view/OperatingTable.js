@@ -40,6 +40,15 @@ function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
 			GlobalEvents.on('delete', this._delete, this);
 
 			this._clipboard = this._editorModel.clipboard;
+			
+//			var _this =this;
+//			 $('body').bind('mousedown.slideEditor', function(e) {
+//		        var target = e.target || e.srcElement;
+//		        console.log($(target));
+//		        if ($(target).not('.slideEditor *').size()) {
+//		        	_this.$el.trigger("click");
+//		        }
+//			 });
 
 			// ContextMenu.setModel(this._menuModel);
 		},
@@ -155,9 +164,9 @@ function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
 		},
 
 		_dragover: function(e) {
-			e.stopPropagation()
-			e.preventDefault()
-			e.originalEvent.dataTransfer.dropEffect = 'copy'
+			e.stopPropagation();
+			e.preventDefault();
+			e.originalEvent.dataTransfer.dropEffect = 'copy';
 		},
 
 		_drop: function(e) {

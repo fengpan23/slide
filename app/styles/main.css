@@ -1,3 +1,4 @@
+@import url(./jquery-ui.css);
 html, body {
   height: 100%;
 }
@@ -76,6 +77,24 @@ a {
   position: absolute;
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(0,0,0,0.1);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255,0,0,0.4);
+}
+
 .overlay {
   width: 100%;
   height: 100%;
@@ -106,7 +125,16 @@ a {
   /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff444444', endColorstr='#ff222222', GradientType=0);*/
   /*filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);*/
 }
-
+.footer {
+	text-align: center;
+    margin-top: -2px;
+    padding-top: 10px;
+    /*color: #CCC;*/
+    border-top: solid 1px #ddd;
+    background-image: url('img/head-bg.png');
+    /*background-image: -webkit-linear-gradient(top, #494852, #2A2A30);*/
+    font-weight: bold;
+}
 .btn {
   -webkit-touch-callout: none;
   -webkit-user-select: none;

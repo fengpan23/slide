@@ -49,7 +49,8 @@ exports.deleteDeck = function(req, res) {
 
 exports.addDeck = function(req, res) {
 	 var data = req.body;
-//	 console.log(data);
+//	 console.log(req);
+	 console.log(data);
 //	 console.log(req.query);
 	 deck.deckAPI.addDeck(data, function(result) {
 			res.jsonp(result);

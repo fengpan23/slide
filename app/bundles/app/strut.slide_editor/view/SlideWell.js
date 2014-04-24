@@ -35,7 +35,7 @@ define(['libs/backbone',
 				this._throttler = new Throttler(100);
 				this._contextMenu = new WellContextMenu(this._editorModel);
 				this._contextMenu.render();
-
+				
 				this.$slides = $('<div class="' + this.className + 'List">');
 				this.$slides.multisortable({
 					items: "div.slideSnapshot",
@@ -117,6 +117,12 @@ define(['libs/backbone',
 			_paste: function() {
 				var slides = this._clipboard.getItems();
 				if (slides != null && slides.length && slides[0].type != undefined && slides[0].type == 'slide') {
+					slides.forEach(function(slide) {
+						if(slide.get('x')){
+							slide.set("x", slide.get('x') + 50);
+							slide.set("y", slide.get('y') + 20);
+						}
+					});
 					this._deck.add(slides);
 				}
 				// TODO: scroll to the new item...
@@ -282,6 +288,7 @@ define(['libs/backbone',
 				this.$el.addClass('hidden-phone');
 				this.$slides.html('');
 				this.$el.html(this.$slides);
+				
 				this._deck.get('slides').forEach(function(slide) {
 					var snapshot = new SlideSnapshot({model: slide, deck: this._deck, registry: this._registry});
 					this.$slides.append(snapshot.render().$el);
@@ -294,7 +301,7 @@ define(['libs/backbone',
 				}, 0);
 				return this;
 			},
-
+			
 			/**
 			 * Dispose slide well.
 			 */

@@ -1,8 +1,19 @@
 <div class="container">
-    <ul class="footer-title unstyled">
-        <li>课件名： <strong>{{filename}}</strong></li>
-    </ul>
+	<div style="float:left" class="inline">
+		{{#if avatar}}
+			<img src="http://{{domain}}{{avatar}}"/>
+		{{/if}}
+	</div>
     <ul class="footer-links unstyled inline">
-        <li class="about-link">上次修改时间： {{last_modified}}</li>
+        <li class="about-link">创建者： {{name}}</li>
+        {{#if email}}
+    		<li class="about-link">email： {{email}}</li>
+    	{{/if}}
+    </ul>
+    <ul class="footer-title unstyled inline">
+        <li>课件名： <strong>{{filename}}</strong></li>
+        {{#if last_modified}}
+        	<li class="about-link">上次修改时间： {{last_modified}}</li>
+        {{/if}}
     </ul>
 </div>

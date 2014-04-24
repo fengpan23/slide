@@ -9,11 +9,11 @@ define(['strut/deck/Component'],
 			else {
 				var text = '<table>';
 				for (var row in attrs.row) {
-					text += '<tr>'
+					text += '<tr>';
 					for(var line in attrs.line){
-						text += '<td>Input Text</td>'
+						text += '<td>Input Text</td>';
 					}
-					text += '</tr>'
+					text += '</tr>';
 				}
 				return text + '</table>';
 			}

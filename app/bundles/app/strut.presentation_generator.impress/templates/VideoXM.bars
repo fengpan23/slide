@@ -1,0 +1,6 @@
+{{#attributes}}
+{{> ComponentContainer}}
+<img src="../img/video_snapshoot.png" width="{{scale.width}}" height="{{scale.height}}"></img>
+</div>
+</div>
+{{/attributes}}

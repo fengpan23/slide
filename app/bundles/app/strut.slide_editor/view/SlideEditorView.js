@@ -1,8 +1,9 @@
 define(['libs/backbone',
 		'./SlideWell',
 		'./OperatingTable',
+		'./SlideWellSwitch',
 		'./MarkdownEditor'],
-function(Backbone, SlideWell, OperatingTable, MarkdownEditor) {
+function(Backbone, SlideWell, OperatingTable, SlideWellSwitch, MarkdownEditor) {
 	'use stict';
 	return Backbone.View.extend({
 		className: 'slideEditor',
@@ -32,6 +33,7 @@ function(Backbone, SlideWell, OperatingTable, MarkdownEditor) {
 		render: function() {
 			this.$el.html();
 			this.$el.append(this._well.render().$el);
+			this.$el.append(new SlideWellSwitch(this._well).render().$el);
 			this.$el.append(this._opTable.render().$el);
 			return this;
 		},

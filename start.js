@@ -36,7 +36,7 @@ app.get('/all', internalAPI.findAllDeck);
 
 app.get('/api/delete/:id', foreignAPI.deleteDeck);
 app.get('/api/search/:searchTag/:skip/:limit', foreignAPI.findByTag);
-app.get('/api/adddeck', foreignAPI.addDeck);
+app.put('/api/adddeck', foreignAPI.addDeck);
 //app.get('/api/all', foreignAPI.findAllDeck);
 //app.get('/api/find/:filename', foreignAPI.findByName);
 
@@ -44,6 +44,7 @@ app.post('/ppt', fileAPI.putFile);
 app.get('/ppt/:filename', fileAPI.getFile);
 
 app.post('/transpond', transpond.transpond);
+app.post('/transpond/lxUser', transpond.lxUser);
 //app.get('/img/*/*.(jpg|png|jpeg){1}', function(req, res, next){
 //	var realpath = __dirname + '/static' + url.parse(req.url).pathname;
 //	if(path.existsSync(realpath)){

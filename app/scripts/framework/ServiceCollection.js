@@ -19,7 +19,7 @@ function (EventEmitter, _) {
 
 	ServiceCollection.toServiceConverter = function(entry) {
 		return entry.service();
-	}
+	};
 
 	var proto = ServiceCollection.prototype = Object.create(Array.prototype);
 
@@ -59,7 +59,7 @@ function (EventEmitter, _) {
 		entries.forEach(function(entry) {
 			var item = this._converter(entry);
 			this._handleAddition(item, entry);
-		}, this)
+		}, this);
 	};
 
 	proto._handleAddition = function(item, entry) {
@@ -73,7 +73,7 @@ function (EventEmitter, _) {
 			this.push(item);
 			this.emit('registered', item, entry, this.length - 1);
 		}
-	}
+	};
 
 	proto.dispose = function() {
 		this._registry.off(null, null, this);

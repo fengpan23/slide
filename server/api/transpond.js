@@ -1,6 +1,35 @@
 var http = require('http');
 var config = require('./config.json');
 
+exports.lxUser = function(req, resXM) {
+	var info = '';
+	
+	req.addListener('data', function(chunk){
+		info += chunk;  
+	}).addListener('end', function(){
+	  	var data = JSON.parse(info);
+	  	console.log(data);
+	  	var url = "http://" + data.domain + "/index.php?option=com_lxedu&task=api.profileDisplay&format=json&id=" + data.lxid;
+    	
+	  	console.log(url);
+    	http.get(url, function(res) {
+    		var info = ''
+			res.on('data', function (chunk) {
+				info += chunk
+			}).on('end', function() {
+				console.log('end:' + info);
+				resXM.send(info);
+			}).on('error', function(e) {
+				console.log("Got error: " + e.message);
+				resXM.send(e.message);
+			});
+    	}).on('error', function(e) {
+    		console.log("Got error: " + e.message);
+    		resXM.send(e.message);
+    	});
+	});
+}
+
 exports.transpond = function(req, resXM) {
 	var info = '';
 	
@@ -12,7 +41,7 @@ exports.transpond = function(req, resXM) {
 	  	console.log(data.domain);
 	  	if(config.CN_Domain.indexOf(data.domain) >= 0){
 	  		console.log(config.CN_Domain + " config.CN_Domain");
-			var path = config.CN + '&id=' + data.deckId + '&filename=' + data.filename + '&picture=' + data.picture;
+			var path = config.CN + '&id=' + data.deckId + '&filename=' + data.filename + '&picture=' + data.picture.replace(/\+/g,"%2B");
 	    	
 			var url = "http://" + data.domain + path;
 	    	

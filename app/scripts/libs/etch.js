@@ -97,15 +97,19 @@ define(['libs/backbone'], function(Backbone) {
       var $container = $(getSelectionBoundaryElement(window));
       var color = $container.attr('color');
       var face = $container.attr('face');
-      var size = $container.css('fontSize').replace('px', '');
+      var size = $container.css('fontSize');
 
       color = color || $container.parents('font').attr('color') || '#333';
       face = face || $container.parents('font').attr('face') || 'Lato';
-      size = size || $container.parents('font,div').css('fontSize').replace('px', '') || 24;
+      size = size || $container.parents('font,div').css('fontSize') || 24;
 
       if (face){
         face = face.split(',')[0];
       }
+      if(typeof size === 'string'){
+    	  size = size.replace('px', '');
+      }
+      
       this.$fontSizeReadout.text(size);
       this.$fontFamilyReadout.html(face);
       this.$colorChooser.spectrum('set', color);
@@ -207,17 +211,23 @@ define(['libs/backbone'], function(Backbone) {
       var el = document.createElement(elString);
       range.surroundContents(el);
     },
-        
+    
+    // TODO: sometime need clear more than once
     clearFormatting: function(e) {
       e.preventDefault();
       document.execCommand('removeFormat', false, null);
+      var currentText = document.all ? document.selection.createRange().text : window.getSelection();
+      var $changeStyleNode = $(currentText.focusNode.parentNode).parents(".content").find("font, span");
+      if($changeStyleNode[0]){
+    	  this.clearFormatting(e);
+      }
     },
 
     setFontFamily: function(e) {
       e.preventDefault();
       var value = extractValue(e);
       document.execCommand('fontName', false, value);
-      value = value.substr(value.indexOf("'")+1, value.lastIndexOf("'")-1)
+      value = value.substr(value.indexOf("'")+1, value.lastIndexOf("'")-1);
       this.$el.find(".fontFamilyBtn .text").text(value);
       Backbone.trigger('etch:state', {
         face: value
@@ -244,8 +254,15 @@ define(['libs/backbone'], function(Backbone) {
     	  $(currentText.focusNode.parentNode).css("font-size",value);
       }else{
     	  document.execCommand('fontSize', false, value);
+    	  var $changeStyleNode = $(currentText.focusNode.parentNode).parents(".content").find("font, td");
+    	  $changeStyleNode.each(function() {
+				if($(this).attr('size')){
+					$(this).css("font-size",value);
+					$(this).removeAttr("size");
+				}
+    	  });
     	  $(currentText.focusNode.parentNode).css("font-size",value);
-    	  $(currentText.focusNode.parentNode).removeAttr("size");
+//    	  $(currentText.focusNode.parentNode).removeAttr("size");
       }
       
       this.$el.find(".fontSizeBtn .text").text(value);
@@ -272,9 +289,9 @@ define(['libs/backbone'], function(Backbone) {
     toggleHeading: function(e) {
       e.preventDefault();
       var range = window.getSelection().getRangeAt(0);
-      var wrapper = range.commonAncestorContainer.parentElement
+      var wrapper = range.commonAncestorContainer.parentElement;
       if ($(wrapper).is('h3')) {
-        $(wrapper).replaceWith(wrapper.textContent)
+        $(wrapper).replaceWith(wrapper.textContent);
         return;
       }
       var h3 = document.createElement('h3');

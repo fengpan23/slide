@@ -1,0 +1,6 @@
+{{#attributes}}
+{{> ComponentContainer}}
+<img width="960" height="768" src="../img/iframe_snapshoot.png"></img>
+</div>
+</div>
+{{/attributes}}

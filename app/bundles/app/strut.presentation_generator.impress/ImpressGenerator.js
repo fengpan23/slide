@@ -13,20 +13,20 @@ function(Handlebars, Math2, marked, DeckUtils) {
 				if (ignore && typeof ignore == 'string') {
 					ignore = ignore.split(" ");
 					if (ignore.indexOf(componentModel.get("type")) != -1){
-//						switch (componentModel.get("type")) {
-//							case "Video":
-//								if (componentModel.get("videoType") === "html5") {
-//									result = JST["strut.presentation_generator.impress/VideoXM"](componentModel);
-//								} else {
-//									result = JST["strut.presentation_generator.impress/YoutubeXM"](componentModel);
-//								}
-//								break;
-//							case "WebFrame":
-//								result = JST["strut.presentation_generator.impress/WebFrameXM"](componentModel);
-//								break;
-//						}
-//						return new Handlebars.SafeString(result);
-						return result;
+						switch (componentModel.get("type")) {
+							case "Video":
+								if (componentModel.get("videoType") === "html5") {
+									result = JST["strut.presentation_generator.impress/VideoXM"](componentModel);
+								} else {
+									result = JST["strut.presentation_generator.impress/YoutubeXM"](componentModel);
+								}
+								break;
+							case "WebFrame":
+								result = JST["strut.presentation_generator.impress/WebFrameXM"](componentModel);
+								break;
+						}
+						return new Handlebars.SafeString(result);
+//						return result;
 					}
 				}
 				switch (componentModel.get("type")) {

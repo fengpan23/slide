@@ -45,6 +45,12 @@
 	insert_U: '下方插入行',
 	delete_R: '删除此行',
 	delete_L: '删除此列',
+	cell_color: '单元格应用',
+	line_color: '当前列应用',
+	row_color: '当前行应用',
+	table_color: '整个表格应用',
+	t_color_reset: '重置背景',
+	bgOpacity: '透明度',
 	name: '课件名',
 	display: '放映',
 	create_presentation: '创建演示'

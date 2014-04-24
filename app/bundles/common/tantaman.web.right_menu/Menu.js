@@ -2,7 +2,11 @@ define(function() {
 	function Menu(options) {
 		this.$el = $('<li><a>' + options.title + '</a></li>');
 		this.$el.click(function(e) {
-			options.hander(e);
+			if(options.hander){
+				options.hander(e);
+			}else{
+				return;
+			}
 		});
 		
 		return this.$el;

@@ -47,8 +47,6 @@ define(["./ComponentView", "libs/etch",
 					this.model.on("change:" + style, this._styleChanged, this);
 				}
 				this.model.on("change:table", this._tableChanged, this);
-				this.model.on("change:width", this._widthChanged, this);
-				this.model.on("change:height", this._heightChanged, this);
 				this.model.on("change:background", this._backgroundChanged, this);
 				
 				this._lastDx = 0;
@@ -108,14 +106,6 @@ define(["./ComponentView", "libs/etch",
 				this.$content.find('table').css('background', this.model.get('background'));
 			},
 			
-			_widthChanged: function() {
-				this.$content.css('width', this.model.get('width'));
-			},
-			
-			_heightChanged: function() {
-				this.$content.css('height', this.model.get('height'));
-			},
-
 			/**
 			 * Event: scale started.
 			 */
@@ -175,19 +165,20 @@ define(["./ComponentView", "libs/etch",
 			 */
 			dblclicked: function(e) {
 				this.$el.addClass("editable");
-				this.$content.attr("contenteditable", true);
+				this.$content.find('table').attr("contenteditable", true);
 				if (e != null) {
 					this._initialText = this.$content.html();
 					etch.editableInit.call(this, e, this.model.get("y") * this.dragScale + 35);
 
 					if (!this.editing) {
-						this.$content.get(0).focus();
+//						TODO: The page elements get focus  Unlike input
+						this.$content.find('tr').find('td').get(0).focus();
 						try {
 							etch.triggerCaret();
 						} catch (e) {
 							// firefox failboats on this command
 							// for some reason.  hence the try/catch
-							// console.log(e);
+							 console.log(e);
 						}
 					}
 				}
@@ -366,6 +357,7 @@ define(["./ComponentView", "libs/etch",
 				ComponentView.prototype.render.call(this);
 				this.$el.find("span[data-delta='scale']").hide()
 				this.$content = this.$el.find(".content");
+				this.$content.css({'height': '100%', 'width': '100%'});  
 				var self = this;
 				this.$content.bind('paste', function(e) {
 					self._handlePaste(this, e);

@@ -619,6 +619,7 @@ define(["libs/backbone",
 					this.origSize = size;
 				}
 				this._setUpdatedTransform();
+				
 				return this.$el;
 			},
 

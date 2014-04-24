@@ -169,10 +169,10 @@ define(['libs/backbone',
 				var SlideDrawer = this.registry.getBest('strut.SlideDrawer');
 				var draw = new SlideDrawer(deck.get('activeSlide'), g2d, this.registry);
 				
-				var bg = deck.get('activeSlide').get('background') || deck.get('background') || deck.get('surface');
+				var bg = deck.get('activeSlide').get('background') || deck.get('background');
 				if(bg){
 					console.log(bg);
-					bg = bg.split('-')[2] || (deck.get('background') ? deck.get('background') : 'no').split('-')[2];
+					bg = bg.split('-')[2] || (deck.get('background') ? deck.get('background') : 'no').split('-')[2] || '#F0F0F0';
 				}else{
 					bg = '#F0F0F0';
 				}

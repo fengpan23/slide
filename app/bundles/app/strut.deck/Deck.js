@@ -119,6 +119,7 @@ define(["common/Calcium",
 					activeSlide.unselectComponents();
 				}
 				this.set("_id", rawObj._id);
+				this.set("lxid", rawObj.lxid);
 				this.set("activeSlide", undefined);
 				this.set("background", rawObj.background);
 				this.set("filename", rawObj.filename);
@@ -138,6 +139,10 @@ define(["common/Calcium",
 				}
 				bgs.deck = this;
 				bgs.prune();
+				window.onbeforeunload = function(event) {
+					event.preventDefault();
+					(event || window.event).returnValue = "是否放弃编辑退出此页面吗？"; 
+				} 
 			},
 
 			/**

@@ -49,6 +49,10 @@
 	visibility: visible;
 }
 
+.component tr{
+    !important min-height: 15px;
+}
+
 .component .removeBtn {
 	z-index: 100;
 }
@@ -175,7 +179,7 @@
 .component.editable .content {
 	cursor: auto;
   	outline: 0px;
-  	outline: 2px solid red;
+  	outline: 2px solid rgb(245, 186, 62);
 	-moz-user-select: text;
 	-webkit-user-select: text;
 }

@@ -1,6 +1,6 @@
 {
 	"CN": "/index.php?option=com_entity&task=api.getSlideShowId&format=json",
 	"BN": "/interface/thumbnail/upload",
-	"CN_Domain": "3a.sc.lxpt.cn,built.sc.lxpt.cn",
+	"CN_Domain": "3a.sc.lxpt.cn,3b.sc.lxpt.cn,3c.sc.lxpt.cn,built.sc.lxpt.cn",
 	"BN_Domain": "mlyu.lxpt.cn,lxpt.mlyu.lxpt.cn"
 }

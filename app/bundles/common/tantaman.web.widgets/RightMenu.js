@@ -53,9 +53,10 @@ function(Backbone, TextBoxMenu,	TableMenu, empty) {
 			var _this = this;
 			$('body').bind('mousedown #rightMenu', function(e) {
 				var target = e.target || e.srcElement;
-				if ($(target).not('.rightColorPicker *, #rightMenu *, .sp-container *, .lineSpacing *').size()) {
+				if ($(target).not('.rightColorPicker *, #rightMenu *, .sp-container *, .lineSpacing *, .adjustOpacity *').size()) {
 					_this.model.trigger('spectrum:hide', null);
 					_this.model.trigger('lineSpacing:hide', null);
+					_this.model.trigger('adjustOpacity:hide', null);
 					_this.dispose();
 					$(this).unbind('mousedown #rightMenu');
 				}

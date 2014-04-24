@@ -50,8 +50,10 @@ define(["./ComponentView", "libs/etch",
 				}
 				this._rightMenu = this._rightMenu.bind(this);
 				
+				this.model.on("contentChange", this.editCompleted, this);
 				this.model.on("change:text", this._textChanged, this);
 				this.model.on('change:width', this._setcontentWidth, this);
+				this.model.on('change:opacity', this._opacityChanged, this);
 				this.model.on('change:lineSpacing', this._lineSpacingChanged, this);
 				this.$el.on("contextmenu", this._rightMenu);
 				this._lastDx = 0;
@@ -64,6 +66,24 @@ define(["./ComponentView", "libs/etch",
 				// $(document).bind("keydown", this.keydown);
 
 				this.model.on("edit", this.edit, this);
+			},
+			
+			_opacityChanged: function() {
+				var bg = this.model.get('background');
+				if(!bg || bg.indexOf('#') !== 0)
+					return;
+				var rgb = this._hexToRgb(bg);
+				var rgba = "rgba(" + rgb.r + "," + rgb.g + "," + rgb.b + "," + (this.model.get('opacity') || 1) + ")";
+				this.$content.css("background", rgba);
+			},
+			
+			_hexToRgb: function(hex) {
+				  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+				    return result ? {
+				        r: parseInt(result[1], 16),
+				        g: parseInt(result[2], 16),
+				        b: parseInt(result[3], 16)
+				    } : null;
 			},
 			
 			_lineSpacingChanged: function() {
@@ -330,7 +350,7 @@ define(["./ComponentView", "libs/etch",
 							});
 							
 						}else if(key === "background"){
-							this.$content.css('background',this.model.get("background"));
+							this.$content.css('background', this.model.get("background"));
 						}
 						//this.$el.css(key, style);
 					}

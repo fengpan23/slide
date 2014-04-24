@@ -11,3 +11,10 @@
 		<li><a>normal</a></li>
 	</ul>
 </div>
+<div class="adjustOpacity" style="display: none;">
+	<p>
+		<label for="amount">Opacity:</label>
+		<input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">
+	</p> 
+	<div id="slider-range-min"></div>
+</div>

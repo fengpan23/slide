@@ -95,13 +95,13 @@ exports.deckAPI = {
 	    db.collection('decks', function(err, collection) {
 	        collection.insert(deck, {
 	            safe: true
-	        }, function(err, result) {
+	        }, function(err, data) {
 	            if (err) {
 	            	console.log("add Deck error: " + err);
 	                return callback(err);
 	            } else {
-	                console.log('addDeck Success: ' + JSON.stringify(result[0]._id));
-	                return callback(result[0]);
+	                console.log('addDeck Success: ' + JSON.stringify(data[0]._id));
+	                return callback(data[0]);
 	            }
 	        });
 	    });

@@ -100,15 +100,16 @@ define(['libs/backbone',
 				this.$el.html('');
 				var deck = this.model.deck();
 				this._surfaceChanged(deck, deck.get('surface'));
-
-				var colCnt = 6;
+				
+				var colCnt = (document.body.clientWidth / 280) | 0;
 				var cnt = 0;
+				
 				deck.get('slides').forEach(function(slide) {
 					var x = slide.get('x');
-
+					
 					if (x == null) {
-						slide.set('x', cnt * 280 + 180);
-						slide.set('y', ((cnt / colCnt) | 0) * 280 + 180);
+						slide.set('x', ((cnt % colCnt) * 280 + 180));
+						slide.set('y', ((cnt / colCnt) | 0) * 200 + 130);
 					}
 					++cnt;
 
