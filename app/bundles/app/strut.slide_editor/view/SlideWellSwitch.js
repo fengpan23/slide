@@ -1,7 +1,7 @@
 define(['libs/backbone'],
 function(Backbone) {
 	return Backbone.View.extend({
-		className: 'slideWellSwitch',
+		className: 'slideWellSwitch hidden-phone',
 		events: {
 			click: "_switchSlideWell"
 		},

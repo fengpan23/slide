@@ -1,9 +1,13 @@
 define(['tantaman/web/widgets/Dropdown',
 		'strut/deck/Utils',
+		'strut/deck/BackgroundCommands',
+		'tantaman/web/undo_support/CmdListFactory',
 		'tantaman/web/widgets/ItemImportModal',
 		'./ColorChooserModal',
 		'lang'],
-function(View, DeckUtils, ItemImportModal, ColorChooserModal, lang) {
+function(View, DeckUtils, BackgroundCommands, CmdListFactory, ItemImportModal, ColorChooserModal, lang) {
+	var undoHistory = CmdListFactory.managedInstance('editor');
+	
 	function BackgroundProvider(opts) {
 		var backgrounds = opts.backgrounds;
 		var editorModel = opts.editorModel;
@@ -106,8 +110,12 @@ function(View, DeckUtils, ItemImportModal, ColorChooserModal, lang) {
 
 			if (bg == '')
 				bg = undefined;
-
+			
+			var initTheme = obj.get(attr);
 			obj.set(attr, bg);
+			//record Command
+			var cmd = new BackgroundCommands.Theme(initTheme, obj, attr);
+			undoHistory.push(cmd);
 		},
 
 		_pickObj: function(allSlides) {

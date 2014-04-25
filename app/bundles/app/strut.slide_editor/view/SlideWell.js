@@ -36,6 +36,8 @@ define(['libs/backbone',
 				this._contextMenu = new WellContextMenu(this._editorModel);
 				this._contextMenu.render();
 				
+				this.$el.on("contextmenu", this._rightMenu);
+				
 				this.$slides = $('<div class="' + this.className + 'List">');
 				this.$slides.multisortable({
 					items: "div.slideSnapshot",
@@ -60,6 +62,11 @@ define(['libs/backbone',
 				setTimeout(function() {
 					self._resize();
 				}, 50);
+			},
+			
+			_rightMenu: function() {
+				alert("客官，别急~~！\n在建...")
+				return false;
 			},
 
 			/**

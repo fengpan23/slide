@@ -5,6 +5,8 @@ require.config({
 
 		jquery : "../scripts/libs/jQuery",
 		jqueryui : "../scripts/libs/jquery-ui",
+		j_qrcode : "../scripts/libs/jquery.qrcode",
+		qrcode: "../scripts/libs/qrcode",
 		touchpunch : "../scripts/libs/jquery-ui-touch-punch",
 		"jquery.multisortable" : "../scripts/libs/jquery.multisortable",
 		position : "../components/jq-contextmenu/jquery.ui.position",
@@ -78,6 +80,10 @@ require.config({
 
 		jqueryui : {
 			deps : ["jquery"]
+		},
+		
+		j_qrcode : {
+			deps : ["jquery", "qrcode"]
 		},
 
 		colorpicker : {
@@ -205,7 +211,20 @@ window.URL = window.URL || window.webkitURL;
 // TODO: move this stuff into index.html
 // so we don't have to include the actual amd-app when
 // we go to present.
-require(['libs/backbone', 'handlebars', 'lang', 'compiled-templates', 'colorpicker', 'strut/config/config', 'features', './StrutLoader', 'bootstrap', 'jqContextMenu', 'css!components/jq-contextmenu/jquery.contextMenu.css', 'touchpunch', 'preview_export/scripts/dataset-shim', './route/router'], 
+require(['libs/backbone',
+         'handlebars',
+         'lang',
+         'compiled-templates',
+         'colorpicker',
+         'strut/config/config',
+         'features',
+         './StrutLoader',
+         'bootstrap',
+         'jqContextMenu',
+         'css!components/jq-contextmenu/jquery.contextMenu.css',
+         'touchpunch',
+         'preview_export/scripts/dataset-shim',
+         './route/router'], 
 	function(Backbone, Handlebars, lang, empt, empty, 
 			config, registry, StrutLoader, bootstrap, 
 				ContextMenu, css, tp, dss, Router) {

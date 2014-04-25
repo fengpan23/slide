@@ -14,4 +14,4 @@ function(GlobalEvents) {
 			GlobalEvents.off(null, null, obj);
 		}
 	};
-})
+});

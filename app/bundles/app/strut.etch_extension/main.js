@@ -27,7 +27,7 @@ function(etch) {
         };
 
         if (noText.indexOf(button) > -1)
-            viewData.display = ''
+            viewData.display = '';
 
         switch (button) {
             case 'font-size':

@@ -16,7 +16,7 @@ function() {
 				xhr.setRequestHeader('Authorization', 'Client-ID ' + this.clientId);
 				xhr.onreadystatechange = function() {
           		  	if (xhr.readyState === 4) {
-          		  		console.log(xhr.responseText);
+          		  		console.log(xhr);
           		  		if(xhr.responseText){
           		  			editorModel.importPresentation(JSON.parse(xhr.responseText));
           		  		}else{

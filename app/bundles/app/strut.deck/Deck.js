@@ -357,7 +357,7 @@ define(["common/Calcium",
 			 * @param index If passed, slide will be added at given index. If not, it will be added as the last slide in the deck.
 			 */
 			create: function(index) {
-				this.undoHistory.pushdo(new SlideCommands.Add(this, null, index));
+				this.undoHistory.pushdo(new SlideCommands.Add(this, [new Slide()], index));
 			},
 
 			/**

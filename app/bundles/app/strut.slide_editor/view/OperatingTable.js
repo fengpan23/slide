@@ -5,13 +5,13 @@ define(['libs/backbone',
 		'strut/deck/Component',
 		'strut/deck/Utils',
 		'./Utils',
+		'./TdimensionCode',
 		'marked'],
 function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
-	DeckUtils,
-	Utils,
-	marked) {
+	DeckUtils,	Utils, TdimensionCode, marked) {
+	
 	'use strict';
-
+	
 	return Backbone.View.extend({
 		className: 'operatingTable strut-surface',
 		events: {
@@ -33,6 +33,8 @@ function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
 			this._deck.on('change:background', this._updateBg, this);
 			this._deck.on('change:surface', this._updateSurface, this);
 			this.setModel(this._deck.get('activeSlide'));
+			
+//			this.$el.on("contextmenu", this._rightMenu);
 
 			GlobalEvents.on('cut', this._cut, this);
 			GlobalEvents.on('copy', this._copy, this);
@@ -52,15 +54,22 @@ function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
 
 			// ContextMenu.setModel(this._menuModel);
 		},
+		
+		_rightMenu: function() {
+			return false;
+		},
 
 		render: function() {
-			this._$slideContainer = $('<div class="slideContainer"></div>')
+			this._$slideContainer = $('<div class="slideContainer"></div>');
 			this.$el.html(this._$slideContainer);
 			this._$slideContainer.css(config.slide.size);
 
 			DeckUtils.applyBackground(this._$slideContainer, this.model, this._deck, {transparentForSurface: true, surfaceForDefault: true, transparentForDeckSurface: true});
 			this._$markdownContent = $('<div class="markdownArea themedArea"></div>');
 			this._$slideContainer.append(this._$markdownContent);
+			
+			//tow dimension code at heae
+//			this._$slideContainer.append(new TdimensionCode().render().$el);
 
 			this._$slideContainer.selectable({
 				filter: ".component",

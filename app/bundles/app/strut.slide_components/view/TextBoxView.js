@@ -3,7 +3,7 @@ define(["./ComponentView", "libs/etch",
 	"tantaman/web/undo_support/CmdListFactory",
 	"tantaman/web/interactions/TouchBridge",
 	"tantaman/web/widgets/RightMenu",
-	'lang'],
+	"lang"],
 	function(ComponentView, etch, ComponentCommands, CmdListFactory, TouchBridge, RightMenu, lang) {
 		'use strict';
 		var undoHistory = CmdListFactory.managedInstance('editor');
